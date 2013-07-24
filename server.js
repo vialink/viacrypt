@@ -2,23 +2,39 @@ var connect = require('connect'),
     http = require('http'),
 	express = require('express');
 
+// --------------
 // --- config ---
+// --------------
 var app = express();
-app.set('keys_path', 'keys/');
+app.set('messages_path', 'messages/');
 
-var re_uuid = /^[0-9A-Za-z]+$/;
-
+// -----------
 // --- app ---
-app.get('/keys/:uuid', function(req, res) {
+// -----------
+
+var re_uuid = /^[0-9A-Za-z-]+$/;
+
+// return message and delete it
+app.get('/m/:uuid', function(req, res) {
 	var uuid = req.params.uuid;
 	if (re_uuid.test(uuid) === false) {
+		res.statusCode = 404;
 		res.send('invalid uuid');
+
 	} else {
 		res.send('uuid='+uuid);
+
 	}
 });
 
+// store new message
+app.put('/m/', function(req, res) {
+	res.send('ae');
+});
+
+// ------------------
 // --- web server ---
+// ------------------
 connect()
 	.use(connect.logger())
 	.use(connect.responseTime())
