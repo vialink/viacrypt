@@ -11,7 +11,8 @@ var connect = require('connect'),
 var app = express();
 app.set('messages_path', 'messages/');
 
-var template = '-----BEGIN USER MESSAGE-----\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{ data }}\n-----END USER MESSAGE-----\n';
+var version = '0.0.1beta'
+var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
 
 // -----------
 // --- app ---
@@ -27,7 +28,6 @@ var re_userdata = /^[A-Za-z0-9+/=]+$/;
 // return message and delete it
 app.get('/m/:id', function(req, res) {
 	var id = req.params.id;
-	console.log('"' + id + '"');
 	if (re_uuid.test(id) === false) {
 		res.statusCode = 404;
 		res.send('invalid id');
@@ -40,7 +40,7 @@ app.get('/m/:id', function(req, res) {
 				res.send('id not found');
 			} else {
 				res.send(data);
-				fs.unlink(path);
+				//fs.unlink(path);
 			}
 		});
 
@@ -63,6 +63,7 @@ app.post('/m/', function(req, res) {
 			res.send('error due to duplicated id');
 		} else {
 			var content = {
+				version: version,
 				ip: req.connection.remoteAddress,
 	   			date: new Date().toString(),
 				data: userdata.match(/.{1,64}/g).join('\n')
