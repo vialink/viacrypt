@@ -5,9 +5,30 @@
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
+function generate_passphrase() {
+	var choices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	var ret = [];
+	for (var i=0; i<24; i++) {
+		var idx = Math.floor(Math.random() * choices.length);
+		ret.push(choices[idx]);
+	}
+	return ret.join('');
+}
 $(function() {
-	$("#save").click(function() {
-		var message = $("#message").val();
+	$('#save').click(function() {
+		var message = $('#message').val();
+		var passphrase = generate_passphrase();
+		var data = CryptoJS.AES.encrypt(message, passphrase);
+		var content = {
+			data: data.toString()
+		};
+		$.post('/m/', content, function(res) {
+			var data = $.parseJSON(res);
+			var id = data.id;
+			var baseurl = 'http://localhost:8000';
+			var url = baseurl + '/m/' + id + '#' + passphrase;
+			console.log(url);
+		});
 	});
 });
 </script>
