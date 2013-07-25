@@ -63,7 +63,11 @@ $(function() {
 			var data = $.parseJSON(res);
 			var id = data.id;
 			var url = baseurl + '#' + id + ';' + passphrase;
-			console.log(url);
+			//console.log(url);
+
+			var div = $('#showUrl');
+			div.find('.url').html('<a href="'+url+'" target="_blank">'+url+'</a>');
+			div.show();
 		});
 	});
 });
@@ -93,6 +97,9 @@ Linha 2
 			</div>
 		</div>
 	</form>
+	<div id="showUrl" class="well hide">
+		URL of this message: <span class="url"></span>
+	</div>
 </div>
 
 <div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">
