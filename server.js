@@ -21,7 +21,8 @@ var make_path = function(id) {
 	return app.get('messages_path') + id;
 }
 
-var re_uuid = /^[0-9A-Za-z-]+$/;
+var re_uuid = /^[A-Za-z0-9-]+$/;
+var re_userdata = /^[A-Za-z0-9+/=]+$/;
 
 // return message and delete it
 app.get('/m/:id', function(req, res) {
@@ -48,6 +49,12 @@ app.get('/m/:id', function(req, res) {
 
 // store new message
 app.post('/m/', function(req, res) {
+	var userdata = req.body.data;
+	if (re_userdata.test(userdata) === false) {
+		res.statusCode = 400;
+		res.send('invalid data');
+		return;
+	}
 	var id = uuid.v4();
 	var path = make_path(id);
 	if (fs.exists(path, function(exists) {
@@ -58,7 +65,7 @@ app.post('/m/', function(req, res) {
 			var content = {
 				ip: req.connection.remoteAddress,
 	   			date: new Date().toString(),
-				data: req.body.data
+				data: userdata.match(/.{1,64}/g).join('\n')
 			};
 			var data = mustache.render(template, content);
 			fs.writeFile(path, data, function(err) {
