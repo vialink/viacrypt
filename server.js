@@ -40,7 +40,7 @@ app.get('/m/:id', function(req, res) {
 				res.send('id not found');
 			} else {
 				res.send(data);
-				//fs.unlink(path);
+				fs.unlink(path);
 			}
 		});
 
