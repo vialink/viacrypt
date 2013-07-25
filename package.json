@@ -2,6 +2,8 @@
 	"name": "ViaCRYPT",
 	"dependencies": {
 		"connect": "",
-		"express": ""
+		"express": "",
+		"node-uuid": "",
+		"mustache": ""
 	}
 }
