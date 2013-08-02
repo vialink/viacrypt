@@ -1,5 +1,4 @@
-ViaCRYPT
-========
+# ![ViaCRYPT](http://viacry.pt/img/logo.png)
 
 One time message system.
 
