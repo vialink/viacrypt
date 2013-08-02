@@ -1,5 +1,5 @@
 {
-	"baseurl": "http://localhost:8001",
-	"enable_ga": true,
+	"baseurl": "http://viacry.pt",
+	"enable_ga": false,
 	"ga_tracking_code": "UA-XXXXX-Y"
 }
