@@ -10,3 +10,9 @@ Supervisor
     command=/path/to/viacrypt/server.js
     stdout_logfile=/path/to/viacrypt/logs/viacrypt.log
 
+Install
+-------
+
+Dependencies are handled by npm and installed like this:
+
+    npm install
