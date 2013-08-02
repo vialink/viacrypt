@@ -69,7 +69,7 @@ app.post('/m/', function(req, res) {
 			var content = {
 				version: version,
 				ip: req.connection.remoteAddress,
-	   			date: new Date().toString(),
+				date: new Date().toString(),
 				data: userdata.match(/.{1,64}/g).join('\n')
 			};
 			var data = mustache.render(template, content);
