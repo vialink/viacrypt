@@ -16,3 +16,13 @@ Install
 Dependencies are handled by npm and installed like this:
 
     npm install
+
+Running
+-------
+
+Should be as simple as
+
+    ./server.js
+
+Note that static/index.html is not served by nodejs, and
+it cannot be served through `file://`, i.e. opening the file.
