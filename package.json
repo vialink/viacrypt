@@ -1,5 +1,6 @@
 {
 	"name": "ViaCRYPT",
+	"version": "0.0.1b",
 	"dependencies": {
 		"connect": "",
 		"express": "",

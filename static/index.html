@@ -16,7 +16,7 @@ function generate_passphrase() {
 	return ret.join('');
 }
 $(function() {
-	var baseurl = 'http://localhost:8000';
+	var baseurl = 'http://viacry.pt';
 	var hash = window.location.hash;
 	if (hash) {
 		var items = hash.split(';');
@@ -62,7 +62,7 @@ $(function() {
 		$.post('/m/', content, function(res) {
 			var data = $.parseJSON(res);
 			var id = data.id;
-			var url = baseurl + '#' + id + ';' + passphrase;
+			var url = baseurl + '/#' + id + ';' + passphrase;
 			//console.log(url);
 
 			var div = $('#showUrl');
@@ -84,9 +84,7 @@ $(function() {
 		<div class="control-group">
 			<label class="control-label" for="message">Message</label>
 			<div class="controls">
-				<textarea id="message" class="input-xxlarge" rows="15">Testando :)
-Linha 1
-Linha 2</textarea>
+				<textarea id="message" class="input-xxlarge" rows="15" placeholder="Type here your secret message..."></textarea>
 			</div>
 		</div>
 		<div class="control-group">
@@ -98,6 +96,14 @@ Linha 2</textarea>
 	<div id="showUrl" class="well hide">
 		URL of this message: <span class="url"></span>
 	</div>
+
+	<hr>
+	<footer>
+		Developed by Marcelo Salhab Brogliato at <a href="http://www.vialink.com.br/" target="_blank">Vialink</a>.
+		<div class="pull-right">
+			<a href="http://www.vialink.com.br/"><img src="http://www.vialink.com.br/_logos/vialink.png" alt="Vialink"></a>
+		</div>
+	</footer>
 </div>
 
 <div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">

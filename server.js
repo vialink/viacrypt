@@ -1,3 +1,5 @@
+#!/usr/bin/nodejs
+
 var connect = require('connect'),
     http = require('http'),
 	express = require('express'),
@@ -8,8 +10,10 @@ var connect = require('connect'),
 // --------------
 // --- config ---
 // --------------
+var basedir = '/var/www/node-projects/viacrypt/';
+
 var app = express();
-app.set('messages_path', 'messages/');
+app.set('messages_path', basedir + 'messages/');
 
 var version = '0.0.1beta'
 var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
@@ -87,9 +91,9 @@ app.post('/m/', function(req, res) {
 connect()
 	.use(connect.logger())
 	.use(connect.responseTime())
-    .use(connect.static('static'))
+    .use(connect.static(basedir + 'static'))
 	.use(connect.bodyParser())
 	.use(app)
-    .listen(8000);
+    .listen(8001, '127.0.0.1');
 
-console.log('Server running at 0.0.0.0:8000');
+console.log('Server running at 0.0.0.0:8001');
