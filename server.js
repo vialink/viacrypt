@@ -10,7 +10,8 @@ var connect = require('connect'),
 // --------------
 // --- config ---
 // --------------
-var basedir = '/var/www/node-projects/viacrypt/';
+//var basedir = '/var/www/node-projects/viacrypt/';
+var basedir = __dirname + '/';
 
 var app = express();
 app.set('messages_path', basedir + 'messages/');
@@ -76,7 +77,7 @@ app.post('/m/', function(req, res) {
 			fs.writeFile(path, data, function(err) {
 				if (err) {
 					res.statusCode = 500;
-					res.send('something wrong happened');
+					res.send('something wrong happened: ' + err);
 				} else {
 					res.send(JSON.stringify({ id: id }));
 				}
