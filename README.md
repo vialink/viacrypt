@@ -27,8 +27,7 @@ Should be as simple as
 
     ./server.js
 
-Note that static/index.html is not served by nodejs, and
-it cannot be served through `file://`, i.e. opening the file.
+Then checkout `localhost:8001` to see the app.
 
 Supervisor
 ----------
