@@ -6,7 +6,8 @@ config = require('./config')
 var output_dir = 'static/';
 var input_dir = 'template/';
 var files = [
-	'index.html'
+	'index.html',
+	'viacrypt.js'
 ];
 
 function compileTemplate(filepath) {

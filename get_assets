@@ -1,0 +1,7 @@
+#!/bin/bash
+
+assets='netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js code.jquery.com/jquery-1.10.2.min.js netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js'
+cd static
+for asset in $assets; do
+	wget -N "$asset"
+done
