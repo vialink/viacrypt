@@ -1,85 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>ViaCRYPT</title>
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
+
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="css/vialink.css" rel="stylesheet">
+
+<!-- Favicons-->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" type="image/x-icon" href="ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon"  type="image/x-icon" href="ico/favicon.png">
+<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico"><![endif]-->
+<!-- or, set /ico/favicon.ico for IE10 win -->
+<meta name="msapplication-TileColor" content="#fff" />
+<meta name="msapplication-TileImage" content="ico/tileicon.png" /><!--144x144px -->
+
+<!--[if !IE 7]>
+	<style type="text/css">
+		#wrap {display:table;height:100%}
+	</style>
+<![endif]-->
+
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script>
-function generate_passphrase() {
-	var choices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	var ret = [];
-	for (var i=0; i<24; i++) {
-		var idx = Math.floor(Math.random() * choices.length);
-		ret.push(choices[idx]);
-	}
-	return ret.join('');
-}
-$(function() {
-	var baseurl = 'http://viacry.pt';
-	var hash = window.location.hash;
-	if (hash) {
-		var items = hash.split(';');
-		var id = items[0];
-		if (id[0] == '#') {
-			id = id.slice(1);
-		}
-		var passphrase = items[1];
-		//console.log(id, passphrase);
-
-		var url = baseurl + '/m/' + id;
-		$.get(url, function(res) {
-			var lines = res.split('\n');
-			var data = lines.slice(5, lines.length-2).join('');
-			//console.log(data);
-
-			var decrypted = CryptoJS.AES.decrypt(data, passphrase);
-			var message = decrypted.toString(CryptoJS.enc.Utf8);
-			//console.log(decrypted);
-			//console.log(message);
-
-			var modal = $('#messageModal');
-			modal.find('.message').text(message);
-			modal.modal();
-		});
-	}
-	$('#save').click(function() {
-		var message = $('#message').val();
-		var passphrase = generate_passphrase();
-		//console.log('message', message);
-		//console.log('passphrase', passphrase);
-
-		var data = CryptoJS.AES.encrypt(message, passphrase);
-		console.log(data.toString());
-		//console.log('data', data);
-		//var decrypt = CryptoJS.AES.decrypt(data.toString(), passphrase);
-		//console.log('decrypt_test', decrypt.toString(CryptoJS.enc.Utf8));
-		//return;
-
-		var content = {
-			data: data.toString()
-		};
-		$.post('/m/', content, function(res) {
-			var data = $.parseJSON(res);
-			var id = data.id;
-			var url = baseurl + '/#' + id + ';' + passphrase;
-			//console.log(url);
-
-			var div = $('#showUrl');
-			div.find('.url').html('<a href="'+url+'" target="_blank">'+url+'</a>');
-			div.show();
-		});
-	});
-});
-</script>
+<script src="js/viacrypt.js"></script>
 </head>
 
-<body>
+<body style="padding-top: 115px">
 
 <div class="container">
-	<h1>ViaCRYPT
-		<small>One time read messaging system</small>
-	</h1>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<a class="brand" href="/" title="ViaCRYPT">ViaCRYPT</a>
+			<ul class="nav pull-right-nav">
+				<li><a href="#">
+					<span class="menu-hover menu-hover-top"></span>
+					Como funciona?
+					<span class="menu-hover"></span>
+				</a></li>
+				<li><a href="#">
+					<span class="menu-hover menu-hover-top"></span>
+					Dê sua sugestão!
+					<span class="menu-hover"></span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
 	<form class="form-horizontal">
 		<div class="control-group">
 			<label class="control-label" for="message">Message</label>
@@ -97,13 +68,13 @@ $(function() {
 		URL of this message: <span class="url"></span>
 	</div>
 
-	<hr>
-	<footer>
-		Developed by Marcelo Salhab Brogliato at <a href="http://www.vialink.com.br/" target="_blank">Vialink</a>.
-		<div class="pull-right">
-			<a href="http://www.vialink.com.br/"><img src="http://www.vialink.com.br/_logos/vialink.png" alt="Vialink"></a>
-		</div>
-	</footer>
+	<div id="footer">
+		<div class="container">
+			<div class="desenv">
+				<span>Desenvolvido por</span> <a href="http://www.vialink.com.br" target="_blank" title="Vialink" class="logo-vialink">VIALINK</a>
+			</div>
+		</div>    
+    </div>
 </div>
 
 <div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">
