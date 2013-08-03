@@ -1,5 +1,7 @@
 node_modules/
 messages/
 logs/
+static/
+config.json
 
 *.swp
