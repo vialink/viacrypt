@@ -58,7 +58,7 @@ $(function() {
 			//console.log(url);
 
 			var div = $('#showUrl');
-			div.find('.url').html('<input type="text" onClick="this.select();" style="width: 600px" value="'+url+'" readonly="readonly">');
+			div.find('.url').html('<input type="text" onClick="this.select();" style="width: 600px; cursor: pointer;" value="'+url+'" readonly="readonly">');
 			div.show();
 		});
 	});
