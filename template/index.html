@@ -1,21 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
 <title>ViaCRYPT</title>
-<link href="bootstrap-combined.min.css" rel="stylesheet">
-<script src="aes.js"></script>
-<script src="jquery-1.10.2.min.js"></script>
-<script src="bootstrap.min.js"></script>
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
+
+<link href="lib/bootstrap-combined.min.css" rel="stylesheet">
+<link href="vialink.css" rel="stylesheet">
+
+<!-- Favicons-->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" type="image/x-icon" href="ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon"  type="image/x-icon" href="ico/favicon.png">
+<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico"><![endif]-->
+<!-- or, set /ico/favicon.ico for IE10 win -->
+<meta name="msapplication-TileColor" content="#fff" />
+<meta name="msapplication-TileImage" content="ico/tileicon.png" /><!--144x144px -->
+
+<!--[if !IE 7]>
+	<style type="text/css">
+		#wrap {display:table;height:100%}
+	</style>
+<![endif]-->
+
+<script src="lib/aes.js"></script>
+<script src="lib/jquery-1.10.2.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
 <script src="viacrypt.js"></script>
 </head>
 
-<body>
+<body style="padding-top: 115px">
+
+<a href="https://github.com/vialink/viacrypt" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 9999" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
 <div class="container">
-	<h1>ViaCRYPT
-		<small>One time read messaging system</small>
-	</h1>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<a class="brand" href="/" title="ViaCRYPT">ViaCRYPT</a>
+			<!--
+			<ul class="nav pull-right-nav">
+				<li><a href="#">
+					<span class="menu-hover menu-hover-top"></span>
+					Como funciona?
+					<span class="menu-hover"></span>
+				</a></li>
+				<li><a href="#">
+					<span class="menu-hover menu-hover-top"></span>
+					Dê sua sugestão!
+					<span class="menu-hover"></span>
+				</a></li>
+			</ul>
+			-->
+		</div>
+	</div>
 	<form class="form-horizontal">
 		<div class="control-group">
 			<label class="control-label" for="message">Message</label>
@@ -33,13 +72,13 @@
 		URL of this message: <span class="url"></span>
 	</div>
 
-	<hr>
-	<footer>
-		Developed by Marcelo Salhab Brogliato at <a href="http://www.vialink.com.br/" target="_blank">Vialink</a>.
-		<div class="pull-right">
-			<a href="http://www.vialink.com.br/"><img src="http://www.vialink.com.br/_logos/vialink.png" alt="Vialink"></a>
-		</div>
-	</footer>
+	<div id="footer">
+		<div class="container">
+			<div class="desenv">
+				<span>Developed by</span> <a href="http://www.vialink.com.br" target="_blank" title="Vialink" class="logo-vialink">VIALINK</a>
+			</div>
+		</div>    
+    </div>
 </div>
 
 <div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">
@@ -57,19 +96,17 @@
 </div>
 
 {{#enable_ga}}
-<script type="text/javascript">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '{{ga_tracking_code}}']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+  ga('create', '{{ga_tracking_code}}', 'viacry.pt');
+  ga('send', 'pageview');
 
 </script>
 {{/enable_ga}}
+
 </body>
 </html>

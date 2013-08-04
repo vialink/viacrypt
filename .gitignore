@@ -4,4 +4,10 @@ logs/
 static/
 config.json
 
+static/index.html
+static/viacrypt.js
+static/lib/
+
+config.json
+
 *.swp
