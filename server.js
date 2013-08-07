@@ -98,8 +98,11 @@ app.post('/m/', function(req, res) {
 // ------------------
 // --- web server ---
 // ------------------
+
+log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+
 connect()
-	.use(connect.logger())
+	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
     .use(connect.static(basedir + 'static', { maxAge: 10000 }))
 	.use(connect.bodyParser())
