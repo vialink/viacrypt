@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// TODO Send cache headers for static files;
+// TODO Send no-cache headers for message content.
+
 var connect = require('connect'),
     http = require('http'),
 	express = require('express'),
