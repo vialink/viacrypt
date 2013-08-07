@@ -39,25 +39,23 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<a class="brand" href="/" title="ViaCRYPT">ViaCRYPT</a>
-			<!--
 			<ul class="nav pull-right-nav">
-				<li><a href="#">
+				<li><a href="#whatIsIt" role="button" data-toggle="modal">
 					<span class="menu-hover menu-hover-top"></span>
-					Como funciona?
+					What is it and how does it work?
 					<span class="menu-hover"></span>
 				</a></li>
-				<li><a href="#">
+				<li><a href="#forNerds" role="button" data-toggle="modal">
 					<span class="menu-hover menu-hover-top"></span>
-					Dê sua sugestão!
+					Explanation for nerds
 					<span class="menu-hover"></span>
 				</a></li>
 			</ul>
-			-->
 		</div>
 	</div>
 	<form class="form-horizontal">
 		<div class="control-group">
-			<textarea id="message" style="font-size: 16px; font-family: monospace; width: 100%;" class="input-xxlarge" rows="20" placeholder="Type here your secret message..."></textarea>
+			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%;" class="input-xxlarge" rows="20" placeholder="Type here your secret message..."></textarea>
 		</div>
 		<div class="control-group">
 			<button id="save" type="button" class="btn btn-primary">Save it</button>
@@ -74,6 +72,38 @@
 			</div>
 		</div>    
     </div>
+</div>
+
+<div id="whatIsIt" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>What is it and how does it work?</h3>
+	</div>
+	<div class="modal-body">
+		<p>This app is an encrypted messaging system where the recipient can read the message only once. After the read, the message is deleted and cannot be retrieved anymore.</p>
+		<p>The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or the government to read the content of your message.</p>
+		<p>The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">here</a>.</p>
+		<p>If you want to check if the above is true or want to run it home, the code is available at <a href="https://github.com/vialink/viacrypt" target="_blank">Github</a>.</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>
+
+<div id="forNerds" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>For nerds..</h3>
+	</div>
+	<div class="modal-body">
+		<p>The message is encrypted using AES and has a 256-bit key with passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened.</p>
+		<p>When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers returns the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists.</p>
+		<p>One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.</p>
+		<p>If you want to check if the above is true or want to run it home, the code is available at <a href="https://github.com/vialink/viacrypt" target="_blank">Github</a>.</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
 </div>
 
 <div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">

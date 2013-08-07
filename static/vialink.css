@@ -12,9 +12,7 @@
 body {
 	background:url(../img/bg-geral.png) no-repeat 50% 100px;
 	font-family:Tahoma, Geneva, sans-serif;
-	font-size: 12px;
 	line-height: 20px;
-	color: #a7a7a7;
 }
 ::selection {
 	background-color:#f2652a;
@@ -257,6 +255,9 @@ body {
 */
 
 /* /////////////////////////   INICIO FOOTER      */
+#footer {
+	color: #a7a7a7;
+}
 #footer .container{
 	border-top:1px solid #dddddd;
 	margin-top: 15px;
