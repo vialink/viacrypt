@@ -101,7 +101,7 @@ app.post('/m/', function(req, res) {
 connect()
 	.use(connect.logger())
 	.use(connect.responseTime())
-    .use(connect.static(basedir + 'static'))
+    .use(connect.static(basedir + 'static', { maxAge: 10000 }))
 	.use(connect.bodyParser())
 	.use(app)
     .listen(8001, '127.0.0.1');
