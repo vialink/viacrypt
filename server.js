@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 // TODO Send cache headers for static files;
-// TODO Send no-cache headers for message content.
 
 var connect = require('connect'),
     http = require('http'),
@@ -36,6 +35,7 @@ var re_userdata = /^[A-Za-z0-9+/=]+$/;
 // return message and delete it
 app.get('/m/:id', function(req, res) {
 	var id = req.params.id;
+	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 	if (re_uuid.test(id) === false) {
 		res.statusCode = 404;
 		res.send('invalid id');
