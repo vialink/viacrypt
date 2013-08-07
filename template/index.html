@@ -60,7 +60,7 @@
 	</div>
 	<form class="form-horizontal">
 		<div class="control-group">
-			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%;" class="input-xxlarge" rows="20" placeholder="Type here your secret message..."></textarea>
+			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%;" class="input-xxlarge" rows="20" placeholder="Type your secret message here..."></textarea>
 		</div>
 		<div class="control-group">
 			<button id="save" type="button" class="btn btn-primary">Save it</button>
@@ -68,7 +68,7 @@
 	</form>
 	<div id="showUrl" class="well hide">
 		<p>Single-use URL: <span class="url"></span></p>
-		<p><span class="label label-important">IMPORTANT</span> This message can be read one time and will be deleted at once after its first read.</p>
+		<p><span class="label label-important">IMPORTANT</span> This message can be read only once and will be deleted on the first read.</p>
 	</div>
 
 	<div id="footer">
@@ -86,8 +86,8 @@
 		<h3>What is it and how does it work?</h3>
 	</div>
 	<div class="modal-body">
-		<p>This app is an encrypted messaging system where the recipient can read the message only once. After the read, the message is deleted and cannot be retrieved anymore.</p>
-		<p>The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or the government to read the content of your message.</p>
+		<p>This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore.</p>
+		<p>The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message.</p>
 		<p>The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">here</a>.</p>
 		<p>You can check the code yourself whether you're curious or just want to run it at home, it's available at <a href="https://github.com/vialink/viacrypt" target="_blank">Github</a>.</p>
 	</div>
@@ -104,7 +104,7 @@
 	<div class="modal-body">
 		<ol>
 			<li>When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases.</li>
-			<li>You can create a message with a single word and send the URL to many friends. The first to open the message get the word and wins some prize.</li>
+			<li>You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize.</li>
 		</ol>
 		<strong>Be creative!</strong> You can use it in many ways. Don't forget to let us know how you are using it :)
 	</div>
@@ -120,7 +120,7 @@
 	</div>
 	<div class="modal-body">
 		<p>The message is encrypted using AES and has a 256-bit key with passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened.</p>
-		<p>When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers returns the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists.</p>
+		<p>When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists.</p>
 		<p>One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.</p>
 		<p>You can check the code yourself whether you're curious or just want to run it at home, it's available at <a href="https://github.com/vialink/viacrypt" target="_blank">Github</a>.</p>
 	</div>
@@ -136,7 +136,7 @@
 	</div>
 	<div class="modal-body">
 		<pre class="message"></pre>
-		<span class="label label-important">REMEMBER</span> This message was deleted and you cannot read it again.
+		<span class="label label-important">REMEMBER</span> This message has been deleted and cannot be read again.
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
