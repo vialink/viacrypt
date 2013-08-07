@@ -67,9 +67,15 @@ app.post('/m/', function(req, res) {
 			res.statusCode = 500;
 			res.send('error due to duplicated id');
 		} else {
+			var ip = req.get('X-Forwarded-For');
+			if (ip === undefined) {
+				ip = req.connection.remoteAddress;
+			} else {
+				ip += ' (via ' + req.connection.remoteAddress + ')';
+			}
 			var content = {
 				version: version,
-				ip: req.connection.remoteAddress,
+				ip: ip,
 				date: new Date().toString(),
 				data: userdata.match(/.{1,64}/g).join('\n')
 			};
