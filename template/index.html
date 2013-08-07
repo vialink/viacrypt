@@ -45,6 +45,11 @@
 					What is it and how does it work?
 					<span class="menu-hover"></span>
 				</a></li>
+				<li><a href="#examplesOfUse" role="button" data-toggle="modal">
+					<span class="menu-hover menu-hover-top"></span>
+					Examples of use
+					<span class="menu-hover"></span>
+				</a></li>
 				<li><a href="#forNerds" role="button" data-toggle="modal">
 					<span class="menu-hover menu-hover-top"></span>
 					Explanation for nerds
@@ -62,7 +67,8 @@
 		</div>
 	</form>
 	<div id="showUrl" class="well hide">
-		URL of this message: <span class="url"></span>
+		<p>Single-use URL: <span class="url"></span></p>
+		<p><span class="label label-important">IMPORTANT</span> This message can be read one time and will be deleted at once after its first read.</p>
 	</div>
 
 	<div id="footer">
@@ -84,6 +90,23 @@
 		<p>The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or the government to read the content of your message.</p>
 		<p>The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">here</a>.</p>
 		<p>You can check the code yourself whether you're curious or just want to run it at home, it's available at <a href="https://github.com/vialink/viacrypt" target="_blank">Github</a>.</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>
+
+<div id="examplesOfUse" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Examples of use</h3>
+	</div>
+	<div class="modal-body">
+		<ol>
+			<li>When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases.</li>
+			<li>You can create a message with a single word and send the URL to many friends. The first to open the message get the word and wins some prize.</li>
+		</ol>
+		<strong>Be creative!</strong> You can use it in many ways. Don't forget to let us know how you are using it :)
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
