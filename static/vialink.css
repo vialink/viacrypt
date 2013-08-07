@@ -1,11 +1,11 @@
 /* /////////////////////////   INICIO COMUNS      */
 @font-face {
     font-family: 'teuton23pro';
-    src: url('font/teuton23pro-webfont.eot');
-    src: url('font/teuton23pro-webfont.eot?#iefix') format('embedded-opentype'),
-         url('font/teuton23pro-webfont.woff') format('woff'),
-         url('font/teuton23pro-webfont.ttf') format('truetype'),
-         url('font/teuton23pro-webfont.svg#teuton23pro') format('svg');
+    src: url('fonts/teuton23pro-webfont.eot');
+    src: url('fonts/teuton23pro-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/teuton23pro-webfont.woff') format('woff'),
+         url('fonts/teuton23pro-webfont.ttf') format('truetype'),
+         url('fonts/teuton23pro-webfont.svg#teuton23pro') format('svg');
     font-weight: normal;
     font-style: normal;
 } 
