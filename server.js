@@ -19,7 +19,7 @@ var basedir = __dirname + '/';
 var app = express();
 app.set('messages_path', basedir + 'messages/');
 
-var version = '0.0.1beta'
+var version = '0.0.2beta'
 var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
 
 // -----------
