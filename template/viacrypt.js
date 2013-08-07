@@ -32,13 +32,18 @@ $(function() {
 				//console.log(decrypted);
 				//console.log(message);
 
+				ga('send', 'event', 'view message', 'view', 'success');
+
 				var modal = $('#messageModal');
 				modal.find('.message').text(message);
 				modal.modal();
 			},
 			error: function(xhr, status, error) {
 				if (xhr.status == 404) {
+					ga('send', 'event', 'message not found', 'view', 'not found');
 					$('#messageNotFound').modal();
+				} else {
+					ga('send', 'event', 'message error', 'view', 'error');
 				}
 			}
 		});

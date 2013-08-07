@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no">
 
-<meta property="og:image" content="http://viacry.pt/img/logo.png">
+<meta property="og:image" content="http://viacry.pt/img/logo-big.jpg">
 <meta property='og:type' content='website'>
 <meta property="og:url" content="http://viacry.pt/">
 <meta property="og:site_name" content="ViaCRYPT">
@@ -47,22 +47,22 @@
 		<div class="navbar-inner">
 			<a class="brand" href="/" title="ViaCRYPT">ViaCRYPT</a>
 			<ul class="nav pull-right-nav">
-				<li><a href="#whatIsIt" role="button" data-toggle="modal">
+				<li><a href="#whatIsIt" role="button" data-toggle="modal" onclick="ga('send', 'event', 'what it is', 'click', 'modal', 1);">
 					<span class="menu-hover menu-hover-top"></span>
 					What is it and how does it work?
 					<span class="menu-hover"></span>
 				</a></li>
-				<li><a href="#examplesOfUse" role="button" data-toggle="modal">
+				<li><a href="#examplesOfUse" role="button" data-toggle="modal" onclick="ga('send', 'event', 'examples', 'click', 'modal', 1);">
 					<span class="menu-hover menu-hover-top"></span>
 					Examples of use
 					<span class="menu-hover"></span>
 				</a></li>
-				<li><a href="#forNerds" role="button" data-toggle="modal">
+				<li><a href="#forNerds" role="button" data-toggle="modal" onclick="ga('send', 'event', 'for nerds', 'click', 'modal', 1);">
 					<span class="menu-hover menu-hover-top"></span>
 					Explanation for nerds
 					<span class="menu-hover"></span>
 				</a></li>
-				<li><a href="#contactUs" role="button" data-toggle="modal">
+				<li><a href="#contactUs" role="button" data-toggle="modal" onclick="ga('send', 'event', 'contact us', 'click', 'modal', 1);">
 					<span class="menu-hover menu-hover-top"></span>
 					Contact Us
 					<span class="menu-hover"></span>
@@ -75,7 +75,7 @@
 			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%;" class="input-xxlarge" rows="20" placeholder="Type your secret message here..."></textarea>
 		</div>
 		<div class="control-group">
-			<button id="save" type="button" class="btn btn-primary">Save it</button>
+			<button id="save" type="button" class="btn btn-primary" onclick="ga('send', 'event', 'save it', 'click', 'generate url', 1);">Save it</button>
 		</div>
 	</form>
 	<div id="showUrl" class="well hide">
