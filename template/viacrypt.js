@@ -26,6 +26,12 @@ function generate_passphrase() {
 	}
 	return ret.join('');
 }
+function show_message(title, message) {
+	var m = $('#messageBox');
+	m.find('.modal-header h3').html(title);
+	m.find('.modal-body').html(message);
+	m.modal();
+}
 $(function() {
 	var baseurl = '{{{baseurl}}}';
 	var hash = window.location.hash;
@@ -74,7 +80,7 @@ $(function() {
 		//console.log('passphrase', passphrase);
 
 		var data = CryptoJS.AES.encrypt(message, passphrase);
-		console.log(data.toString());
+		//console.log(data.toString());
 		//console.log('data', data);
 		//var decrypt = CryptoJS.AES.decrypt(data.toString(), passphrase);
 		//console.log('decrypt_test', decrypt.toString(CryptoJS.enc.Utf8));
@@ -83,16 +89,36 @@ $(function() {
 		var content = {
 			data: data.toString()
 		};
-		$.post('/m/', content, function(res) {
-			var data = $.parseJSON(res);
-			var id = data.id;
-			var url = baseurl + '/#' + id + ';' + passphrase;
-			//console.log(url);
+		$.ajax({
+			url: '/m/',
+			method: 'POST',
+			data: content, 
+			success: function(res) {
+				var data = $.parseJSON(res);
+				var id = data.id;
+				var url = baseurl + '/#' + id + ';' + passphrase;
+				//console.log(url);
 
-			var div = $('#showUrl');
-			div.find('.url').html('<input type="text" onClick="this.select();" style="width: 600px; cursor: pointer;" value="'+url+'" readonly="readonly">');
-			div.show();
-			div.find('input').focus();
+				var div = $('#showUrl');
+				div.find('.url').html('<input type="text" onClick="this.select();" style="width: 600px; cursor: pointer;" value="'+url+'" readonly="readonly">');
+				div.show();
+				div.find('input').focus();
+			},
+			error: function(xhr, status, error) {
+				if (xhr.status == 429) {
+					var current = xhr.getResponseHeader('X-RateLimit-CurrentTime');
+					var reset = xhr.getResponseHeader('X-RateLimit-Reset');
+					var tryagain = Math.ceil((reset - current) / 1000 / 60);
+					var plural = '';
+					if (tryagain > 1) {
+						plural = 's';
+					}
+					show_message('Rate limit exceeded', 'Too many messages. Try again in '+tryagain+' minute'+plural+'.');
+					ga('send', 'event', 'post message ratelimit exceeded', 'post', 'exceeded');
+				} else {
+					ga('send', 'event', 'post message error', 'post', 'unknown error');
+				}
+			}
 		});
 	});
 });

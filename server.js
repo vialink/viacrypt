@@ -25,7 +25,9 @@ var connect = require('connect'),
 	express = require('express'),
 	fs = require('fs'),
 	uuid = require('node-uuid'),
-	mustache = require('mustache');
+	mustache = require('mustache'),
+	ratelimit = require('express-rate'),
+	config = require('./config');
 
 // --------------
 // --- config ---
@@ -74,7 +76,47 @@ app.get('/m/:id', function(req, res) {
 });
 
 // store new message
-app.post('/m/', function(req, res) {
+var middleware = [];
+if (config.ratelimit) {
+	if (config.ratelimit.redis) {
+		var redis = require('redis');
+		var rediscfg = config.ratelimit.redis;
+		var client = redis.createClient(rediscfg.port, rediscfg.host, rediscfg.options);
+		var handler = new ratelimit.Redis.RedisRateHandler({client: client});
+	} else {
+		var handler = new ratelimit.Memory.MemoryRateHandler();
+	}
+	var rate_middleware = ratelimit.middleware({
+		handler: handler, 
+		limit: config.ratelimit.limit, 
+		interval: config.ratelimit.interval,
+		getRemoteKey: function(req) {
+			return req.get('X-Forwarded-For') || req.connection.remoteAddress
+		},
+		onLimitReached: function(req, res, rate, limit, resetTime, next) {
+			res.statusCode = 429;
+			res.send('Rate limit exceeded. Check headers for limit information.');
+		},
+		setHeadersHandler: function(req, res, rate, limit, resetTime) {
+			var remaining = limit - rate;
+			if (remaining < 0) {
+				remaining = 0;
+			}
+
+			// follows Twitter's rate limiting scheme and header notation
+			// https://dev.twitter.com/docs/rate-limiting/faq#info
+			res.setHeader('X-RateLimit-Limit', limit);
+			res.setHeader('X-RateLimit-Remaining', remaining);
+			res.setHeader('X-RateLimit-Reset', resetTime);
+			
+			// This header allows the client to calculate the time they must 
+			// wait to save another message.
+			res.setHeader('X-RateLimit-CurrentTime', (new Date()).getTime());
+		}
+	});
+	middleware.push(rate_middleware);
+}
+app.post('/m/', middleware, function(req, res) {
 	var userdata = req.body.data;
 	if (re_userdata.test(userdata) === false) {
 		res.statusCode = 400;
@@ -125,6 +167,6 @@ connect()
     .use(connect.static(basedir + 'static', { maxAge: 10000 }))
 	.use(connect.bodyParser())
 	.use(app)
-    .listen(8001, '127.0.0.1');
+    .listen(config.port, config.listen);
 
-console.log('Server running at 0.0.0.0:8001');
+console.log('Server running at ' + config.listen + ':' + config.port);

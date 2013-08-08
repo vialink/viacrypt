@@ -1,6 +1,25 @@
 var cfg = {};
 
+cfg.listen = '127.0.0.1';
+cfg.port = 8001;
 cfg.baseurl = 'http://viacry.pt';
+
+// Rate limit (requires a redis server)
+// The interval must be in seconds.
+// Defaults to 75 messages every 30 minutes.
+// Uncomment to enable.
+//cfg.ratelimit = {};
+//cfg.ratelimit.limit = 75
+//cfg.ratelimit.interval = 60 * 30
+
+// You can use redis to rate limit.
+// Uncomment the follow lines to enable it.
+//cfg.ratelimit.redis = {}
+//cfg.ratelimit.redis.port = 6379;
+//cfg.ratelimit.redis.host = '127.0.0.1'
+//cfg.ratelimit.redis.options = {};
+
+// Google Analytics
 cfg.enable_ga = false;
 cfg.ga_tracking_code = 'UA-XXXXX-Y';
 

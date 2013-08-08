@@ -5,6 +5,8 @@
 		"connect": "",
 		"express": "",
 		"node-uuid": "",
-		"mustache": ""
+		"mustache": "",
+		"express-rate": "",
+		"redis": ""
 	}
 }
