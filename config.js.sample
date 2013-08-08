@@ -4,6 +4,9 @@ cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 cfg.baseurl = 'http://viacry.pt';
 
+// curently only 'fs' is available
+cfg.message_store = 'fs';
+
 // Rate limit
 // The interval must be in seconds.
 // Defaults to 75 messages every 30 minutes.
