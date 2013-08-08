@@ -94,6 +94,7 @@ if (config.ratelimit) {
 			return req.get('X-Forwarded-For') || req.connection.remoteAddress
 		},
 		onLimitReached: function(req, res, rate, limit, resetTime, next) {
+			console.log('rate limit exceeded');
 			res.statusCode = 429;
 			res.send('Rate limit exceeded. Check headers for limit information.');
 		},
