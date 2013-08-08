@@ -20,8 +20,8 @@ are gotten with get\_assets:
     ./compile.js
     ./get_assets
 
-Configurations are found on config.json, copy yours from
-the config.json.sample
+Configurations are found on config.js, copy and adapt yours from
+the config.js.sample
 
 Running
 -------
