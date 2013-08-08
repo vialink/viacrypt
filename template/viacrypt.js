@@ -45,6 +45,7 @@ $(function() {
 		//console.log(id, passphrase);
 
 		var url = baseurl + '/m/' + id;
+		url = url.substring(url.indexOf(':') + 1); // prevent cross-origin request
 		$.ajax({
 			url: url,
 			success: function(res) {
