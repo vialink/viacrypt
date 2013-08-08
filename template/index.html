@@ -36,10 +36,6 @@
 <script src="lib/jquery-1.10.2.min.js"></script>
 <script src="lib/bootstrap.min.js"></script>
 <script src="viacrypt.js"></script>
-<script>
-	// Prevents error if Google Analytics is disabled.
-	ga = function() {}
-</script>
 </head>
 
 <body style="padding-top: 115px">
@@ -207,6 +203,12 @@
   ga('create', '{{ga_tracking_code}}', 'viacry.pt');
   ga('send', 'pageview');
 
+</script>
+{{/enable_ga}}
+{{^enable_ga}}
+<script>
+	// Prevents error if Google Analytics is disabled.
+	ga = function() {}
 </script>
 {{/enable_ga}}
 
