@@ -1,0 +1,7 @@
+var cfg = {};
+
+cfg.baseurl = 'http://viacry.pt';
+cfg.enable_ga = false;
+cfg.ga_tracking_code = 'UA-XXXXX-Y';
+
+module.exports = cfg;
