@@ -166,6 +166,7 @@ connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
     .use(connect.static(basedir + 'static', { maxAge: 10000 }))
+	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)
     .listen(config.port, config.listen);
