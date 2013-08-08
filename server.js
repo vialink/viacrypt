@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// TODO Send cache headers for static files;
+
 var connect = require('connect'),
     http = require('http'),
 	express = require('express'),
@@ -16,7 +18,7 @@ var basedir = __dirname + '/';
 var app = express();
 app.set('messages_path', basedir + 'messages/');
 
-var version = '0.0.1beta'
+var version = '0.0.2beta'
 var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
 
 // -----------
@@ -33,6 +35,7 @@ var re_userdata = /^[A-Za-z0-9+/=]+$/;
 // return message and delete it
 app.get('/m/:id', function(req, res) {
 	var id = req.params.id;
+	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 	if (re_uuid.test(id) === false) {
 		res.statusCode = 404;
 		res.send('invalid id');
@@ -67,9 +70,15 @@ app.post('/m/', function(req, res) {
 			res.statusCode = 500;
 			res.send('error due to duplicated id');
 		} else {
+			var ip = req.get('X-Forwarded-For');
+			if (ip === undefined) {
+				ip = req.connection.remoteAddress;
+			} else {
+				ip += ' (via ' + req.connection.remoteAddress + ')';
+			}
 			var content = {
 				version: version,
-				ip: req.connection.remoteAddress,
+				ip: ip,
 				date: new Date().toString(),
 				data: userdata.match(/.{1,64}/g).join('\n')
 			};
@@ -89,10 +98,13 @@ app.post('/m/', function(req, res) {
 // ------------------
 // --- web server ---
 // ------------------
+
+log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+
 connect()
-	.use(connect.logger())
+	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-    .use(connect.static(basedir + 'static'))
+    .use(connect.static(basedir + 'static', { maxAge: 10000 }))
 	.use(connect.bodyParser())
 	.use(app)
     .listen(8001, '127.0.0.1');

@@ -20,19 +20,32 @@ $(function() {
 		//console.log(id, passphrase);
 
 		var url = baseurl + '/m/' + id;
-		$.get(url, function(res) {
-			var lines = res.split('\n');
-			var data = lines.slice(5, lines.length-2).join('');
-			//console.log(data);
+		$.ajax({
+			url: url,
+			success: function(res) {
+				var lines = res.split('\n');
+				var data = lines.slice(5, lines.length-2).join('');
+				//console.log(data);
 
-			var decrypted = CryptoJS.AES.decrypt(data, passphrase);
-			var message = decrypted.toString(CryptoJS.enc.Utf8);
-			//console.log(decrypted);
-			//console.log(message);
+				var decrypted = CryptoJS.AES.decrypt(data, passphrase);
+				var message = decrypted.toString(CryptoJS.enc.Utf8);
+				//console.log(decrypted);
+				//console.log(message);
 
-			var modal = $('#messageModal');
-			modal.find('.message').text(message);
-			modal.modal();
+				ga('send', 'event', 'view message', 'view', 'success');
+
+				var modal = $('#messageModal');
+				modal.find('.message').text(message);
+				modal.modal();
+			},
+			error: function(xhr, status, error) {
+				if (xhr.status == 404) {
+					ga('send', 'event', 'message not found', 'view', 'not found');
+					$('#messageNotFound').modal();
+				} else {
+					ga('send', 'event', 'message error', 'view', 'error');
+				}
+			}
 		});
 	}
 	$('#save').click(function() {

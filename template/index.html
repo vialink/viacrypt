@@ -3,7 +3,14 @@
 <head>
 <title>ViaCRYPT</title>
 
-<meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no">
+
+<meta property="og:image" content="http://viacry.pt/img/logo-big.jpg">
+<meta property='og:type' content='website'>
+<meta property="og:url" content="http://viacry.pt/">
+<meta property="og:site_name" content="ViaCRYPT">
+<meta property="og:title" content="ViaCRYPT">
+<meta property="og:description" content="This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never more share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype.">
 
 <link href="lib/bootstrap-combined.min.css" rel="stylesheet">
 <link href="vialink.css" rel="stylesheet">
@@ -33,52 +40,105 @@
 
 <body style="padding-top: 115px">
 
-<a href="https://github.com/vialink/viacrypt" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 9999" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'banner');"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1031" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
 <div class="container">
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<a class="brand" href="/" title="ViaCRYPT">ViaCRYPT</a>
-			<!--
 			<ul class="nav pull-right-nav">
-				<li><a href="#">
+				<li><a href="#whatIsIt" role="button" data-toggle="modal" onclick="ga('send', 'event', 'what it is', 'click', 'modal', 1);">
 					<span class="menu-hover menu-hover-top"></span>
-					Como funciona?
+					What is it and how does it work?
 					<span class="menu-hover"></span>
 				</a></li>
-				<li><a href="#">
+				<li><a href="#examplesOfUse" role="button" data-toggle="modal" onclick="ga('send', 'event', 'examples', 'click', 'modal', 1);">
 					<span class="menu-hover menu-hover-top"></span>
-					Dê sua sugestão!
+					Examples of use
+					<span class="menu-hover"></span>
+				</a></li>
+				<li><a href="#forNerds" role="button" data-toggle="modal" onclick="ga('send', 'event', 'for nerds', 'click', 'modal', 1);">
+					<span class="menu-hover menu-hover-top"></span>
+					Explanation for nerds
+					<span class="menu-hover"></span>
+				</a></li>
+				<li><a href="#contactUs" role="button" data-toggle="modal" onclick="ga('send', 'event', 'contact us', 'click', 'modal', 1);">
+					<span class="menu-hover menu-hover-top"></span>
+					Contact Us
 					<span class="menu-hover"></span>
 				</a></li>
 			</ul>
-			-->
 		</div>
 	</div>
 	<form class="form-horizontal">
 		<div class="control-group">
-			<label class="control-label" for="message">Message</label>
-			<div class="controls">
-				<textarea id="message" class="input-xxlarge" rows="15" placeholder="Type here your secret message..."></textarea>
-			</div>
+			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%;" class="input-xxlarge" rows="20" placeholder="Type your secret message here..."></textarea>
 		</div>
 		<div class="control-group">
-			<div class="controls">
-				<button id="save" type="button" class="btn btn-primary">Save it</button>
-			</div>
+			<button id="save" type="button" class="btn btn-primary" onclick="ga('send', 'event', 'save it', 'click', 'generate url', 1);">Save it</button>
 		</div>
 	</form>
 	<div id="showUrl" class="well hide">
-		URL of this message: <span class="url"></span>
+		<p>Single-use URL: <span class="url"></span></p>
+		<p><span class="label label-important">IMPORTANT</span> This message can be read only once and will be deleted on the first read.</p>
 	</div>
 
 	<div id="footer">
 		<div class="container">
 			<div class="desenv">
-				<span>Developed by</span> <a href="http://www.vialink.com.br" target="_blank" title="Vialink" class="logo-vialink">VIALINK</a>
+				<span>Developed by</span> <a href="http://www.vialink.com.br" target="_blank" title="Vialink" class="logo-vialink" onclick="ga('send', 'event', 'vialink', 'click', 'footer');">VIALINK</a>
 			</div>
 		</div>    
     </div>
+</div>
+
+<div id="whatIsIt" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>What is it and how does it work?</h3>
+	</div>
+	<div class="modal-body">
+		<p>This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore.</p>
+		<p>The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message.</p>
+		<p>The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">here</a>.</p>
+		<p>You can check the code yourself whether you're curious or just want to run it at home, it's available at <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'what it is');">Github</a>.</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>
+
+<div id="examplesOfUse" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Examples of use</h3>
+	</div>
+	<div class="modal-body">
+		<ol>
+			<li>When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases.</li>
+			<li>You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize.</li>
+		</ol>
+		<strong>Be creative!</strong> You can use it in many ways. Don't forget to let us know how you are using it :)
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>
+
+<div id="forNerds" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>For nerds..</h3>
+	</div>
+	<div class="modal-body">
+		<p>The message is encrypted using AES and has a 256-bit key with passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened.</p>
+		<p>When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists.</p>
+		<p>One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.</p>
+		<p>You can check the code yourself whether you're curious or just want to run it at home, it's available at <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'for nerds');">Github</a>.</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
 </div>
 
 <div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">
@@ -88,7 +148,34 @@
 	</div>
 	<div class="modal-body">
 		<pre class="message"></pre>
-		<span class="label label-important">REMEMBER</span> This message was deleted and you cannot read it again.
+		<span class="label label-important">REMEMBER</span> This message has been deleted and cannot be read again.
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>
+
+<div id="messageNotFound" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Message not found</h3>
+	</div>
+	<div class="modal-body">
+		<p>This message has already been read or has never been existed.</p>
+		<p>You should ask the sender to send it again.</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>
+
+<div id="contactUs" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Contact Information</h3>
+	</div>
+	<div class="modal-body">
+		<p>You can contact us by e-mail <a href="&#109;&#97;&#105;l&#116;&#111;&#58;&#118;&#105;&#97;&#99;&#114;&#121;&#112;t&#64;&#118;ialin&#107;&#46;c&#111;&#109;.b&#114;" onclick="ga('send', 'event', 'send mail', 'click', 'contact us');">&#118;iac&#114;&#121;&#112;&#116;&#64;&#118;ial&#105;&#110;k.co&#109;.&#98;r</a>.</p>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
