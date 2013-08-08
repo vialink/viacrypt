@@ -4,7 +4,7 @@ cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 cfg.baseurl = 'http://viacry.pt';
 
-// Rate limit (requires a redis server)
+// Rate limit
 // The interval must be in seconds.
 // Defaults to 75 messages every 30 minutes.
 // Uncomment to enable.
