@@ -6,6 +6,6 @@ static/index.html
 static/viacrypt.js
 static/lib/
 
-config.json
+config.js
 
 *.swp
