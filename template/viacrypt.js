@@ -37,6 +37,10 @@ $(function() {
 	if (baseurl.indexOf('http:') === 0 || baseurl.indexOf('https:') === 0) {
 		baseurl = baseurl.substring(baseurl.indexOf(':') + 1);
 	}
+
+	//---------------------------------------------------------------------------------
+	// Load message if has hash.
+	//
 	var hash = window.location.hash;
 	if (hash) {
 		var items = hash.split(';');
@@ -76,11 +80,17 @@ $(function() {
 			}
 		});
 	}
+
+	//---------------------------------------------------------------------------------
+	// Save it!
+	//
 	$('#save').click(function() {
 		var message = $('#message').val();
 		var passphrase = generate_passphrase();
 		//console.log('message', message);
 		//console.log('passphrase', passphrase);
+
+		console.log($('form').serializeArray());
 
 		var data = CryptoJS.AES.encrypt(message, passphrase);
 		//console.log(data.toString());
@@ -123,5 +133,31 @@ $(function() {
 				}
 			}
 		});
+	});
+
+	//---------------------------------------------------------------------------------
+	// Notify by e-mail.
+	//
+	var re_email = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+	var checkEmail = function() {
+		var email = notifyByEmailInput.val();
+		if (re_email.test(email)) {
+			notifyByEmail.parent().removeClass('error').addClass('success');
+		} else {
+			notifyByEmail.parent().removeClass('success').addClass('error');
+		}
+	};
+	var notifyByEmail = $('.notifyByEmail');
+	var notifyByEmailInput = notifyByEmail.find('input').keyup(checkEmail);
+	var notifyByEmailCheckbox = $('.notifyByEmailCheckbox').click(function() {
+		if (notifyByEmailCheckbox.is(':checked')) {
+			notifyByEmailInput.removeAttr('disabled');
+			notifyByEmail.show();
+			checkEmail();
+		} else {
+			notifyByEmail.parent().removeClass('error success');
+			notifyByEmailInput.attr('disabled', 'disabled');
+			notifyByEmail.hide();
+		}
 	});
 });
