@@ -1,0 +1,311 @@
+/* /////////////////////////   INICIO COMUNS      */
+@font-face {
+    font-family: 'teuton23pro';
+    src: url('fonts/teuton23pro-webfont.eot');
+    src: url('fonts/teuton23pro-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/teuton23pro-webfont.woff') format('woff'),
+         url('fonts/teuton23pro-webfont.ttf') format('truetype'),
+         url('fonts/teuton23pro-webfont.svg#teuton23pro') format('svg');
+    font-weight: normal;
+    font-style: normal;
+} 
+body {
+	background:url(../img/bg-geral.png) no-repeat 50% 100px;
+	font-family:Tahoma, Geneva, sans-serif;
+	line-height: 20px;
+}
+::selection {
+	background-color:#f2652a;
+	color:#fff;
+}
+a{
+	outline:none;
+	cursor:pointer;
+}
+[class*="span"]{
+	margin-left:10px;
+	margin-right:10px;
+}
+.container, .navbar-inner{
+	margin-left: auto;
+	margin-right: auto;
+	width: 940px;
+}
+/* /////////////////////////   FIM COMUNS      */
+
+/* /////////////////////////   INICIO HEADER      */
+.navbar{
+	background:#fff;
+	height:95px;
+	border-top: #f2652a 5px solid;
+	-webkit-box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.75);
+	   -moz-box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.75);
+	    -ms-box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.75);
+	     -o-box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.75);
+	        box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.75);
+}
+.navbar .pull-right-nav{
+	float: right;
+	margin-right: 0;
+}
+.dropdown-menu{
+	left:30px;
+	margin-top:8px;
+}
+.navbar .navbar-inner{
+	background:none;
+	box-shadow:none;
+	border:none;
+}
+.navbar .brand{
+	text-indent:-9999px;
+	overflow:hidden;
+	width:240px;
+	height:50px;
+	margin-top:20px;
+	margin-left:0;
+	padding:0;
+	background:url(../img/logo.png) no-repeat top left;
+}
+.navbar .nav{
+	margin-top:32px;
+}
+.navbar .nav>li>a{
+	padding:5px 3px;
+	color: #a7a7a7;
+	margin-left:30px;
+	position:relative;
+	text-shadow:none;
+}
+.navbar .nav>li>a:focus, .navbar .nav>li>a:hover {
+	background-color:#fff;
+	color: #a7a7a7;
+}
+.nav .menu-hover{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #f2652a;
+	height: 2px;
+	width: 100%;
+	display:none\9;
+	
+	-webkit-transform: scale(0,1);
+	   -moz-transform: scale(0,1);
+	    -ms-transform: scale(0,1);
+	     -o-transform: scale(0,1);
+	        transform: scale(0,1);
+	
+	-webkit-transition: all 0.2s ease-in-out;
+	   -moz-transition: all 0.2s ease-in-out;
+	    -ms-transition: all 0.2s ease-in-out;
+	     -o-transition: all 0.2s ease-in-out;
+	        transition: all 0.2s ease-in-out;
+}
+.nav .menu-hover-top{
+	bottom:none;
+	top:0
+}
+.nav a:hover .menu-hover, .nav a.active .menu-hover{
+	-webkit-transform: scale(1,1);
+	   -moz-transform: scale(1,1);
+	    -ms-transform: scale(1,1);
+	     -o-transform: scale(1,1);
+	        transform: scale(1,1);
+}
+.navbar .nav li.dropdown>.dropdown-toggle .caret, .navbar .nav li.dropdown>a:hover .caret, .navbar .nav li.dropdown.open>.dropdown-toggle .caret, .navbar .nav li.dropdown.active>.dropdown-toggle .caret, .navbar .nav li.dropdown.open.active>.dropdown-toggle .caret {
+	border-top-color: #a7a7a7;
+	border-bottom-color: #a7a7a7;
+}
+.navbar .nav li.dropdown.open>.dropdown-toggle:hover, .navbar .nav li.dropdown.active>.dropdown-toggle:hover, .navbar .nav li.dropdown.open.active>.dropdown-toggle:hover, .navbar .nav li.dropdown.open>.dropdown-toggle, .navbar .nav li.dropdown.active>.dropdown-toggle, .navbar .nav li.dropdown.open.active>.dropdown-toggle{
+	color: #a7a7a7;	
+}
+.dropdown-menu li>a:hover, .dropdown-menu li>a:focus, .dropdown-submenu:hover>a {
+	text-decoration: none;
+	color: #ffffff;
+	background: #f2652a;
+}
+.dropdown-menu {
+	-webkit-box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+	   -moz-box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+	    -ms-box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+	     -o-box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+	        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+}
+/* /////////////////////////   FIM HEADER      */
+
+/* /////////////////////////   INICIO CONTENT      */
+.page-title{
+	margin:50px auto 35px;
+}
+.page-title h1{
+	font-size:30px;
+	color:#b6b6b6;
+	font-family: 'teuton23pro';
+	text-align:center;
+}
+.page-title h2{
+	text-align: center;
+	font-size: 16px;
+	line-height: 16px;
+	margin: -10px 0 -16px;
+	color: #b6b6b6;
+}
+/* /////////////////////////   FIM CONTENT      */
+
+/* /////////////////////////   INICIO FORM      */
+form{
+	margin:0;
+}
+label, input, button, select, textarea{
+	font-size:12px;
+}
+input, button, select, textarea{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+}
+textarea{
+	resize:none;
+}
+.input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input, .input-append .dropdown-menu, .input-prepend .dropdown-menu{
+	font-size:12px;
+}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+border-color: rgba(242, 101, 42, 0.8);
+outline: 0;
+outline: thin dotted \9;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(242,101,42,.6);
+-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(242,101,42,.6);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(242,101,42,.6);
+}
+.btn {
+	border-radius: 0;
+	background-image: inherit;
+	text-shadow: none;
+	background-color: #f2652a;
+	color:#fff;
+	font-size:12px;
+}
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
+	background-color: #bd4715;
+	color: #fff;
+}
+.btn-gray{
+	background-color: #a7a7a7;
+}
+.btn-gray:hover, .btn-gray:active, .btn-gray.active, .btn-gray.disabled, .btn-gray[disabled] {
+	background-color: #7b7b7b;
+}
+.input-append .add-on, .input-prepend .add-on{
+	background-color: #f2652a;
+	border: 1px solid #f2652a;
+	text-shadow: none;
+	color:#ffffff;
+	padding-right:5px;
+	font-size:12px;
+}
+.form-horizontal .control-group{
+	margin-bottom:15px;
+}
+.form-horizontal .filtrar{
+	margin-bottom:5px;
+}
+#multifilter{
+	border-left:none;
+}
+.wrap-btn{
+	margin-right:-10px;
+}
+.wrap-btn > a, .wrap-btn > form{
+	float:right;
+	margin-left:20px;	
+}
+/* /////////////////////////   FIM FORM      */
+
+/* /////////////////////////   INICIO TABLE      */
+.table th{
+	padding:8px 6px;
+}
+.table td{
+	padding:6px;
+}
+.table-bordered td{
+	background-color: #f9f9f9;	
+}
+.table-bordered th{
+	background-color: #f2652a;
+	color:#fff;
+	font-weight:normal;
+	text-align:center;	
+}
+.table-striped tbody>tr:nth-child(odd)>td, .table-striped tbody>tr:nth-child(odd)>th{
+	background-color: #fff;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th{
+	background-color: #eaeaea;
+	color:#888888;
+}
+/* /////////////////////////   FIM TABLE      */
+
+/* /////////////////////////   NAVBAR FIX       */
+/* USE IT AT INDEX
+body { 
+	padding-top: 115px; 
+}
+*/
+
+/* /////////////////////////   INICIO FOOTER      */
+#footer {
+	color: #a7a7a7;
+}
+#footer .container{
+	border-top:1px solid #dddddd;
+	margin-top: 15px;
+}
+.desenv{
+	position: relative;
+	left: 50%;
+	float: left;
+	width: 190px;
+	margin-left: -95px;
+}
+.desenv span{
+	display:block;
+	float:left;
+	line-height:40px;
+	margin-right:5px;
+}
+.desenv .logo-vialink{
+	display:block;
+	overflow:hidden;
+	margin-top:14px;
+	width:80px;
+	height:15px;
+	text-indent:-9999px;
+	float:left;
+	background:url(../img/logo-vialink.png) no-repeat top center;	
+}
+/* /////////////////////////   FIM FOOTER      */
+
+/* /////////////////////////   INICIO MODAL      */
+/*.modal{
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+	    -ms-border-radius: 6px;
+	     -o-border-radius: 6px;
+	        border-radius: 6px;
+}*/
+.modal-header {
+	padding: 10px 15px;
+	border-bottom: 1px solid #eee;
+}
+.modal-header h3{
+	color:#f2652a;
+	font-family: 'teuton23pro';
+	font-size:26px;
+}
+.modal-footer {
+	border-top: 1px solid #ddd;
+	background-color:#f5f5f5;
+}
+/* /////////////////////////   FIM MODAL      */

@@ -2,4 +2,10 @@ node_modules/
 messages/
 logs/
 
+static/index.html
+static/viacrypt.js
+static/lib/
+
+config.js
+
 *.swp

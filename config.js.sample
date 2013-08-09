@@ -1,0 +1,30 @@
+var cfg = {};
+
+cfg.listen = '127.0.0.1';
+cfg.port = 8001;
+
+// URL used when generating URL client-side and when retrieving a message.
+// Never prefix the protocol (http or https). It is generated according to
+// the access.
+cfg.baseurl = '//viacry.pt';
+
+// Rate limit
+// The interval must be in seconds.
+// Defaults to 75 messages every 30 minutes.
+// Uncomment to enable.
+//cfg.ratelimit = {};
+//cfg.ratelimit.limit = 75
+//cfg.ratelimit.interval = 60 * 30
+
+// You can use redis to rate limit.
+// Uncomment the follow lines to enable it.
+//cfg.ratelimit.redis = {}
+//cfg.ratelimit.redis.port = 6379;
+//cfg.ratelimit.redis.host = '127.0.0.1'
+//cfg.ratelimit.redis.options = {};
+
+// Google Analytics
+cfg.enable_ga = false;
+cfg.ga_tracking_code = 'UA-XXXXX-Y';
+
+module.exports = cfg;

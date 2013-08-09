@@ -1,21 +1,44 @@
-#!/usr/bin/nodejs
+#!/usr/bin/env node
+/*
+ * Copyright (c) 2013, Vialink Informática. All rights reserved.
+ *
+ * This file is part of ViaCRYPT.
+ *
+ * ViaCRYPT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ViaCRYPT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// TODO Send cache headers for static files;
 
 var connect = require('connect'),
     http = require('http'),
 	express = require('express'),
 	fs = require('fs'),
 	uuid = require('node-uuid'),
-	mustache = require('mustache');
+	mustache = require('mustache'),
+	ratelimit = require('express-rate'),
+	config = require('./config');
 
 // --------------
 // --- config ---
 // --------------
-var basedir = '/var/www/node-projects/viacrypt/';
+//var basedir = '/var/www/node-projects/viacrypt/';
+var basedir = __dirname + '/';
 
 var app = express();
 app.set('messages_path', basedir + 'messages/');
 
-var version = '0.0.1beta'
+var version = '0.0.2beta'
 var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
 
 // -----------
@@ -32,6 +55,7 @@ var re_userdata = /^[A-Za-z0-9+/=]+$/;
 // return message and delete it
 app.get('/m/:id', function(req, res) {
 	var id = req.params.id;
+	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 	if (re_uuid.test(id) === false) {
 		res.statusCode = 404;
 		res.send('invalid id');
@@ -52,7 +76,48 @@ app.get('/m/:id', function(req, res) {
 });
 
 // store new message
-app.post('/m/', function(req, res) {
+var middleware = [];
+if (config.ratelimit) {
+	if (config.ratelimit.redis) {
+		var redis = require('redis');
+		var rediscfg = config.ratelimit.redis;
+		var client = redis.createClient(rediscfg.port, rediscfg.host, rediscfg.options);
+		var handler = new ratelimit.Redis.RedisRateHandler({client: client});
+	} else {
+		var handler = new ratelimit.Memory.MemoryRateHandler();
+	}
+	var rate_middleware = ratelimit.middleware({
+		handler: handler, 
+		limit: config.ratelimit.limit, 
+		interval: config.ratelimit.interval,
+		getRemoteKey: function(req) {
+			return req.get('X-Forwarded-For') || req.connection.remoteAddress
+		},
+		onLimitReached: function(req, res, rate, limit, resetTime, next) {
+			console.log('rate limit exceeded');
+			res.statusCode = 429;
+			res.send('Rate limit exceeded. Check headers for limit information.');
+		},
+		setHeadersHandler: function(req, res, rate, limit, resetTime) {
+			var remaining = limit - rate;
+			if (remaining < 0) {
+				remaining = 0;
+			}
+
+			// follows Twitter's rate limiting scheme and header notation
+			// https://dev.twitter.com/docs/rate-limiting/faq#info
+			res.setHeader('X-RateLimit-Limit', limit);
+			res.setHeader('X-RateLimit-Remaining', remaining);
+			res.setHeader('X-RateLimit-Reset', resetTime);
+			
+			// This header allows the client to calculate the time they must 
+			// wait to save another message.
+			res.setHeader('X-RateLimit-CurrentTime', (new Date()).getTime());
+		}
+	});
+	middleware.push(rate_middleware);
+}
+app.post('/m/', middleware, function(req, res) {
 	var userdata = req.body.data;
 	if (re_userdata.test(userdata) === false) {
 		res.statusCode = 400;
@@ -66,17 +131,23 @@ app.post('/m/', function(req, res) {
 			res.statusCode = 500;
 			res.send('error due to duplicated id');
 		} else {
+			var ip = req.get('X-Forwarded-For');
+			if (ip === undefined) {
+				ip = req.connection.remoteAddress;
+			} else {
+				ip += ' (via ' + req.connection.remoteAddress + ')';
+			}
 			var content = {
 				version: version,
-				ip: req.connection.remoteAddress,
-	   			date: new Date().toString(),
+				ip: ip,
+				date: new Date().toString(),
 				data: userdata.match(/.{1,64}/g).join('\n')
 			};
 			var data = mustache.render(template, content);
 			fs.writeFile(path, data, function(err) {
 				if (err) {
 					res.statusCode = 500;
-					res.send('something wrong happened');
+					res.send('something wrong happened: ' + err);
 				} else {
 					res.send(JSON.stringify({ id: id }));
 				}
@@ -88,12 +159,16 @@ app.post('/m/', function(req, res) {
 // ------------------
 // --- web server ---
 // ------------------
+
+log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+
 connect()
-	.use(connect.logger())
+	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-    .use(connect.static(basedir + 'static'))
+    .use(connect.static(basedir + 'static', { maxAge: 10000 }))
+	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)
-    .listen(8001, '127.0.0.1');
+    .listen(config.port, config.listen);
 
-console.log('Server running at 0.0.0.0:8001');
+console.log('Server running at ' + config.listen + ':' + config.port);
