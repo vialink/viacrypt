@@ -34,6 +34,9 @@ function show_message(title, message) {
 }
 $(function() {
 	var baseurl = '{{{baseurl}}}';
+	if (baseurl.indexOf('http:') === 0 || baseurl.indexOf('https:') === 0) {
+		baseurl = baseurl.substring(baseurl.indexOf(':') + 1);
+	}
 	var hash = window.location.hash;
 	if (hash) {
 		var items = hash.split(';');
@@ -96,7 +99,7 @@ $(function() {
 			success: function(res) {
 				var data = $.parseJSON(res);
 				var id = data.id;
-				var url = baseurl + '/#' + id + ';' + passphrase;
+				var url = window.location.protocol + baseurl + '/#' + id + ';' + passphrase;
 				//console.log(url);
 
 				var div = $('#showUrl');

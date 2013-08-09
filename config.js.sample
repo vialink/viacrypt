@@ -2,7 +2,11 @@ var cfg = {};
 
 cfg.listen = '127.0.0.1';
 cfg.port = 8001;
-cfg.baseurl = 'http://viacry.pt';
+
+// URL used when generating URL client-side and when retrieving a message.
+// Never prefix the protocol (http or https). It is generated according to
+// the access.
+cfg.baseurl = '//viacry.pt';
 
 // curently only 'fs' is available
 cfg.message_store = 'fs';
