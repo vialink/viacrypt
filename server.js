@@ -61,7 +61,7 @@ app.get('/m/:id', function(req, res) {
 		res.statusCode = 404;
 		res.send('invalid id');
 	} else {
-		provider.find(id, function(err, data) {
+		provider.get(id, function(err, data) {
 			if (err) {
 				res.statusCode = 404;
 				res.send('id not found');
@@ -135,7 +135,7 @@ app.post('/m/', middleware, function(req, res) {
 		date: new Date().toString(),
 		data: userdata.match(/.{1,64}/g).join('\n')
 	};
-	provider.save(id, message, function(err) {
+	provider.put(id, message, function(err) {
 		//TODO distinguish between duplicate id, and general error
 		if (err) {
 			res.statusCode = 500;

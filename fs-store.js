@@ -43,7 +43,7 @@ Provider.prototype.make_path = function(id) {
 	return this.messages_path + id;
 }
 
-Provider.prototype.find = function (id, callback) {
+Provider.prototype.get = function (id, callback) {
 	var path = this.make_path(id);
 	fs.readFile(path, function(err, data) {
 		if (err) {
@@ -56,7 +56,7 @@ Provider.prototype.find = function (id, callback) {
 	});
 }
 
-Provider.prototype.save = function (id, message, callback) {
+Provider.prototype.put = function (id, message, callback) {
 	var path = this.make_path(id);
 	if (fs.exists(id, function(exists) {
 		if (exists) {
