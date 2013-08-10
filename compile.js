@@ -22,6 +22,16 @@ fs = require('fs')
 mustache = require('mustache')
 config = require('./config')
 
+//TODO put i18n hooks here:
+// this is used like {{#_}}Some text to translate{{/_}}
+// as suggested here: https://github.com/janl/mustache.js/issues/216
+config._ = function () {
+	return function (text) {
+		return text;
+		//return "blah";
+	}
+}
+
 var output_dir = 'static/';
 var input_dir = 'template/';
 var files = [

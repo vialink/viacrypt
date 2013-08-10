@@ -116,7 +116,7 @@ $(function() {
 					if (tryagain > 1) {
 						plural = 's';
 					}
-					show_message('Rate limit exceeded', 'Too many messages. Try again in '+tryagain+' minute'+plural+'.');
+					show_message('{{#_}}Rate limit exceeded{{/_}}', '{{#_}}Too many messages. Try again in{{/_}} ' + tryagain + ' {{#_}}minute{{/_}}' + plural + '.');
 					ga('send', 'event', 'post message ratelimit exceeded', 'post', 'exceeded');
 				} else {
 					ga('send', 'event', 'post message error', 'post', 'unknown error');
