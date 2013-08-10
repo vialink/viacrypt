@@ -16,20 +16,35 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
-var config = require('./config');
 var fs = require('fs');
 var mustache = require('mustache');
 
-var basedir = __dirname + '/';
+var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
 
-var messages_path = basedir + 'messages/'
-
-var make_path = function(id) {
-	return messages_path + id;
+var Provider = function(options){
+	var messages_path = options.messages_path;
+	if (messages_path == null) {
+		console.log('WARNING: implicit messages path is being deprecated, please configure one!');
+		messages_path = 'messages/'
+	}
+	// check if given path is absolute
+	if (messages_path.substr(0, 1) == '/') {
+		this.messages_path = messages_path;
+	} else {
+		this.messages_path = __dirname + '/' + messages_path;
+	}
+	// ensure path ends with '/'
+	if (this.messages_path.substr(-1, 1) != '/') {
+		this.messages_path += '/';
+	}
 }
 
-function get(id, callback) {
-	var path = make_path(id);
+Provider.prototype.make_path = function(id) {
+	return this.messages_path + id;
+}
+
+Provider.prototype.find = function (id, callback) {
+	var path = this.make_path(id);
 	fs.readFile(path, function(err, data) {
 		if (err) {
 			callback(err);
@@ -41,9 +56,8 @@ function get(id, callback) {
 	});
 }
 
-var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
-function put(id, message, callback) {
-	var path = make_path(id);
+Provider.prototype.save = function (id, message, callback) {
+	var path = this.make_path(id);
 	if (fs.exists(id, function(exists) {
 		if (exists) {
 			callback(exists);
@@ -60,4 +74,4 @@ function put(id, message, callback) {
 	}));
 }
 
-module.exports = {get:get, put:put};
+exports.Provider = Provider;

@@ -27,15 +27,14 @@ var connect = require('connect'),
 	ratelimit = require('express-rate'),
 	config = require('./config');
 
-var store;
-switch (config.message_store) {
-case 'fs':
-	store = require('./fs-store');
-	break;
-default:
-	//TODO warn for unrecognized store
-	break;
-}
+var store = new (function () {
+	switch (config.message_store) {
+	case 'fs': return require('./fs-store');
+	default: //TODO warn for unrecognized store
+	}
+})()
+
+var provider = new store.Provider(config);
 
 // --------------
 // --- config ---
@@ -62,7 +61,7 @@ app.get('/m/:id', function(req, res) {
 		res.statusCode = 404;
 		res.send('invalid id');
 	} else {
-		store.get(id, function(err, data) {
+		provider.find(id, function(err, data) {
 			if (err) {
 				res.statusCode = 404;
 				res.send('id not found');
@@ -136,7 +135,7 @@ app.post('/m/', middleware, function(req, res) {
 		date: new Date().toString(),
 		data: userdata.match(/.{1,64}/g).join('\n')
 	};
-	store.put(id, message, function(err) {
+	provider.save(id, message, function(err) {
 		//TODO distinguish between duplicate id, and general error
 		if (err) {
 			res.statusCode = 500;

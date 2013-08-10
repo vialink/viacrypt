@@ -11,6 +11,9 @@ cfg.baseurl = '//viacry.pt';
 // curently only 'fs' is available
 cfg.message_store = 'fs';
 
+// used with fs store
+cfg.messages_path = 'messages';
+
 // Rate limit
 // The interval must be in seconds.
 // Defaults to 75 messages every 30 minutes.
@@ -30,4 +33,4 @@ cfg.message_store = 'fs';
 cfg.enable_ga = false;
 cfg.ga_tracking_code = 'UA-XXXXX-Y';
 
-module.exports = cfg;
+exports = cfg;
