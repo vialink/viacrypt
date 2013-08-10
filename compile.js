@@ -18,15 +18,20 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-fs = require('fs');
-handlebars = require('handlebars');
-config = require('./config');
+var fs = require('fs');
+var handlebars = require('handlebars');
+var gettext = require('node-gettext');
+var config = require('./config');
+
+var gt = new gettext();
+gt.addTextdomain('en', fs.readFileSync('locale/en/translations.po'));
 
 //TODO put i18n hooks here:
 // this is used like {{#_}}Some text to translate{{/_}}
 // as suggested here: https://github.com/janl/mustache.js/issues/216
 handlebars.registerHelper('_', function (msgid) {
-	return msgid;
+	return gt.gettext(msgid);
+	//return msgid;
 	//return "blah";
 });
 

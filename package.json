@@ -8,6 +8,7 @@
 		"handlebars": "",
 		"express-rate": "",
 		"redis": "",
-		"mongodb": ""
+		"mongodb": "",
+		"node-gettext": ""
 	}
 }
