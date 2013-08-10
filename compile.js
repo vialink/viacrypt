@@ -26,7 +26,12 @@ var config = require('./config');
 var gt = new gettext();
 gt.addTextdomain('en', fs.readFileSync('locale/en/translations.po'));
 
-//TODO put i18n hooks here:
+// more info on the current gettext implementation here:
+// https://github.com/andris9/node-gettext
+
+// for instance, change default language:
+//gt.textdomain("en");
+
 // this is used like {{#_}}Some text to translate{{/_}}
 // as suggested here: https://github.com/janl/mustache.js/issues/216
 handlebars.registerHelper('_', function (msgid) {
