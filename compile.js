@@ -18,19 +18,17 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-fs = require('fs')
-mustache = require('mustache')
-config = require('./config')
+fs = require('fs');
+handlebars = require('handlebars');
+config = require('./config');
 
 //TODO put i18n hooks here:
 // this is used like {{#_}}Some text to translate{{/_}}
 // as suggested here: https://github.com/janl/mustache.js/issues/216
-config._ = function () {
-	return function (text) {
-		return text;
-		//return "blah";
-	}
-}
+handlebars.registerHelper('_', function (msgid) {
+	return msgid;
+	//return "blah";
+});
 
 var output_dir = 'static/';
 var input_dir = 'template/';
@@ -43,7 +41,7 @@ function compileTemplate(filepath) {
 	return function (err, data) {
 		fs.writeFile(
 			filepath,
-			mustache.render(data.toString(), config),
+			handlebars.compile(data.toString())(config),
 			function(err) { if (err) throw err; else console.log('compiled: ' + filepath)}
 		)
 	};
