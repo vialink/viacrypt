@@ -30,6 +30,7 @@ var connect = require('connect'),
 var store = new (function () {
 	switch (config.message_store) {
 	case 'fs': return require('./fs-store');
+	case 'mongo': return require('./mongo-store');
 	default: //TODO warn for unrecognized store
 	}
 })()

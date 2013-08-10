@@ -8,11 +8,17 @@ cfg.port = 8001;
 // the access.
 cfg.baseurl = '//viacry.pt';
 
-// curently only 'fs' is available
+// available options are 'fs' and 'mongo'
 cfg.message_store = 'fs';
 
 // used with fs store
 cfg.messages_path = 'messages';
+
+// used with mongo store
+cfg.mongo_host = 'localhost';
+cfg.mongo_port = '27017';
+cfg.mongo_database = 'viacrypt';
+cfg.mongo_collection = 'messages';
 
 // Rate limit
 // The interval must be in seconds.
