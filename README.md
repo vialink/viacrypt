@@ -35,8 +35,7 @@ Then checkout `localhost:8001` to see the app.
 Deploying
 ---------
 
-Supervisor
-==========
+### Supervisor
 
 Put the following typically on `/etc/supervisor/conf.d/viacrypt.conf`.
 
@@ -50,8 +49,7 @@ To start it:
 
 Supervisor has the advantage of automatic restart of the process on failures.
 
-Upstart
-=======
+### Upstart
 
 Put the following typically on `/etc/init/viacrypt.conf`.
 
