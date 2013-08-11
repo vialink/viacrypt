@@ -31,7 +31,7 @@ var Provider = function(options){
 	if (messages_path.substr(0, 1) == '/') {
 		this.messages_path = messages_path;
 	} else {
-		this.messages_path = __dirname + '/' + messages_path;
+		this.messages_path = __dirname + '/../' + messages_path;
 	}
 	// ensure path ends with '/'
 	if (this.messages_path.substr(-1, 1) != '/') {
