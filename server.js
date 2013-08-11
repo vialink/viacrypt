@@ -84,8 +84,8 @@ if (config.ratelimit) {
 		var handler = new ratelimit.Memory.MemoryRateHandler();
 	}
 	var rate_middleware = ratelimit.middleware({
-		handler: handler, 
-		limit: config.ratelimit.limit, 
+		handler: handler,
+		limit: config.ratelimit.limit,
 		interval: config.ratelimit.interval,
 		getRemoteKey: function(req) {
 			return req.get('X-Forwarded-For') || req.connection.remoteAddress
