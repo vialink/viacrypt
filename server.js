@@ -133,7 +133,7 @@ app.post('/m/', middleware, function(req, res) {
 	var message = {
 		version: version,
 		ip: ip,
-		date: new Date().toString(),
+		date: new Date(),
 		data: userdata.match(/.{1,64}/g).join('\n')
 	};
 	provider.put(id, message, function(err) {
