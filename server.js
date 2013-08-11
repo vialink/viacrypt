@@ -27,19 +27,19 @@ var connect = require('connect'),
 	ratelimit = require('express-rate'),
 	config = require('./config');
 
-var store = new (function () {
-	switch (config.message_store) {
-	case 'fs': return require('./fs-store');
-	case 'mongo': return require('./mongo-store');
-	default: //TODO warn for unrecognized store
-	}
-})()
-
-var provider = new store.Provider(config);
-
 // --------------
 // --- config ---
 // --------------
+
+var _provider = config.message_provider;
+if (_provider == null) {
+	console.log('WARNING: unconfigured message provider, falling back to fs store.');
+	_provider = 'fs';
+}
+var _provider_options = config[_provider + '_options'];
+var store = require('./providers/' + _provider);
+var provider = new store.Provider(_provider_options);
+
 //var basedir = '/var/www/node-projects/viacrypt/';
 var basedir = __dirname + '/';
 

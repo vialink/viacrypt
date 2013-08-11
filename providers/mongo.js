@@ -23,22 +23,18 @@ var mustache = require('mustache');
 var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
 
 var Provider = function(options){
-	var host = options.mongo_host;
-	var port = options.mongo_port;
-	var database = options.mongo_database;
-	var collection = options.mongo_collection;
-	//TODO maybe check the above?
-	this.collection = collection;
-	var server = new mongodb.Server(host, port, {auto_reconnect: true});
+	//TODO maybe check if options are ok
+	this._collection = options.collection;
+	var server = new mongodb.Server(options.host, options.port, {auto_reconnect: true});
 	this.mongoClient = new mongodb.MongoClient(server);
 	var _this = this;
 	this.mongoClient.open(function (err, mongoClient) {
-		_this.db = mongoClient.db(database);
+		_this.db = mongoClient.db(options.database);
 	});
 }
 
 Provider.prototype.getCollection = function (callback) {
-	this.db.collection(this.collection, function (err, message_collection) {
+	this.db.collection(this._collection, function (err, message_collection) {
 		if(err) callback(err);
 		else callback(null, message_collection);
 	});

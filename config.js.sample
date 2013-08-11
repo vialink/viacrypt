@@ -1,3 +1,4 @@
+// vim: filetype=javascript
 var cfg = {};
 
 cfg.listen = '127.0.0.1';
@@ -9,16 +10,20 @@ cfg.port = 8001;
 cfg.baseurl = '//viacry.pt';
 
 // available options are 'fs' and 'mongo'
-cfg.message_store = 'fs';
+cfg.message_provider = 'fs';
 
 // used with fs store
-cfg.messages_path = 'messages';
+cfg.fs_options = {
+	messages_path: 'messages'
+}
 
 // used with mongo store
-cfg.mongo_host = 'localhost';
-cfg.mongo_port = '27017';
-cfg.mongo_database = 'viacrypt';
-cfg.mongo_collection = 'messages';
+cfg.mongo_options = {
+	host: 'localhost',
+	port: '27017',
+	database: 'viacrypt',
+	collection: 'messages'
+}
 
 // Rate limit
 // The interval must be in seconds.
@@ -39,4 +44,4 @@ cfg.mongo_collection = 'messages';
 cfg.enable_ga = false;
 cfg.ga_tracking_code = 'UA-XXXXX-Y';
 
-exports = cfg;
+module.exports = cfg;
