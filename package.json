@@ -9,6 +9,7 @@
 		"express-rate": "",
 		"redis": "",
 		"mongodb": "",
-		"node-gettext": ""
+		"node-gettext": "",
+		"handlebars-xgettext": ""
 	}
 }
