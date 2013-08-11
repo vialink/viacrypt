@@ -32,9 +32,34 @@ Should be as simple as
 
 Then checkout `localhost:8001` to see the app.
 
+Deploying
+---------
+
 Supervisor
-----------
+==========
+
+Put the following typically on `/etc/supervisor/conf.d/viacrypt.conf`.
 
     [program:viacrypt]
     command=/path/to/viacrypt/server.js
     stdout_logfile=/path/to/viacrypt/logs/viacrypt.log
+
+To start it:
+
+    supervisorctl start viacrypt
+
+Supervisor has the advantage of automatic restart of the process on failures.
+
+Upstart
+=======
+
+Put the following typically on `/etc/init/viacrypt.conf`.
+
+    description "ViaCRYPT node.js server"
+    start on startup
+    stop on shutdown
+    exec /path/to/viacrypt/server.js >> /path/to/viacrypt/logs/viacrypt.log
+
+To start it:
+
+    start viacrypt
