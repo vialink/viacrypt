@@ -11,15 +11,19 @@
 <meta property="og:site_name" content="ViaCRYPT">
 <meta property="og:title" content="{{_ "ViaCRYPT"}}">
 <meta property="og:description" content="{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."}}">
+<meta name="apple-mobile-web-app-capable" content="yes" />
 
 <link href="lib/bootstrap-combined.min.css" rel="stylesheet">
 <link href="vialink.css" rel="stylesheet">
 
+<!-- IOS startup image -->
+<link rel="apple-touch-startup-image" href="img/logo-big.jpg">
+
 <!-- Favicons-->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" type="image/x-icon" href="ico/apple-touch-icon-57-precomposed.png">
+<link rel="apple-touch-icon" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon" type="image/x-icon" href="ico/apple-touch-icon-57-precomposed.png">
 <link rel="shortcut icon"  type="image/x-icon" href="ico/favicon.png">
 <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico"><![endif]-->
 <!-- or, set /ico/favicon.ico for IE10 win -->
@@ -38,9 +42,7 @@
 <script src="viacrypt.js"></script>
 </head>
 
-<body style="padding-top: 115px">
-
-<a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'banner');"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1031" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'banner');"><img id="git-ribbon" style="position: absolute; top: 0; right: 0; border: 0; z-index: 1031" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
 <div class="container">
 	<div class="navbar navbar-fixed-top">
