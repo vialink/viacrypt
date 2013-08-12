@@ -52,8 +52,8 @@ msgid "Save it"
 msgstr "Save it"
 
 #: template/index.html:82
-msgid "Single-use URL: "
-msgstr "Single-use URL: "
+msgid "Single-use URL:"
+msgstr "Single-use URL:"
 
 #: template/index.html:83
 msgid "IMPORTANT"
