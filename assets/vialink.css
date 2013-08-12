@@ -13,6 +13,7 @@ body {
 	background:url(../img/bg-geral.png) no-repeat 50% 100px;
 	font-family:Tahoma, Geneva, sans-serif;
 	line-height: 20px;
+    padding-top: 115px;
 }
 ::selection {
 	background-color:#f2652a;
@@ -308,4 +309,30 @@ body {
 	border-top: 1px solid #ddd;
 	background-color:#f5f5f5;
 }
+.modal-body {
+    overflow: scroll;
+}
 /* /////////////////////////   FIM MODAL      */
+
+/* /////////////////////////   INICIO IOS      */
+
+/* css para dispositivos menores (480/360)*/
+@media screen and (max-device-width: 480px) {
+            #nav { display: none; }
+            .container {width: 100%; }
+            body { padding-top: 0px; }
+            #message {height: 240px; }
+            #git-ribbon {width: 120px; height: 120px; }
+            .modal {height: 420px; }
+            #whatIsIt .modal-body { height: 60%; }
+            #examplesOfUse .modal-body { height: 68%; }
+            #forNerds .modal-body { height: 68%; }
+            #contactUs .modal-body { height: 68%; }
+            #teste { display: none; }
+}
+
+/* css para dispositivos retina display */
+@media screen and (-webkit-min-device-pixel-ratio:2) {
+            #nav { display: none; }
+}
+/* /////////////////////////   FIM IOS      */
