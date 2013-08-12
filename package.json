@@ -1,15 +1,19 @@
 {
-	"name": "ViaCRYPT",
-	"version": "0.0.1b",
-	"dependencies": {
-		"connect": "",
-		"express": "",
-		"node-uuid": "",
-		"handlebars": "",
-		"express-rate": "",
-		"redis": "",
-		"mongodb": "",
-		"node-gettext": "",
-		"handlebars-xgettext": ""
-	}
+  "name": "ViaCRYPT",
+  "version": "0.0.1b",
+  "dependencies": {
+    "connect": "~2.8.5",
+    "express": "~3.3.5",
+    "node-uuid": "~1.4.0",
+    "handlebars": "~1.0.12",
+    "express-rate": "~0.0.1",
+    "redis": "~0.8.4",
+    "mongodb": "~1.3.17",
+    "node-gettext": "~0.2.14"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-curl": "~1.1.1",
+    "grunt-gettext": "~0.1.0"
+  }
 }

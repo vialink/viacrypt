@@ -9,19 +9,22 @@ Dependencies are handled by npm and installed like this:
 
     npm install
 
+You will also need to install the grunt-cli globally if you don't already have it.
+
+    npm install -g grunt-cli
+
 Compiling
 ---------
 
-Required files are generated with compile.js, and needed assets
-are gotten with get\_assets:
+To generate the files from templates, and download required assets simply run grunt.
 
-(Note: this is still a bit cumbersome)
+    grunt
 
-    ./compile.js
-    ./get_assets
+Configurations are found on config.js, copy and adapt yours from the config.js.sample
 
-Configurations are found on config.js, copy and adapt yours from
-the config.js.sample
+To regenerate only file from templates run the compile task:
+
+    grunt compile
 
 Running
 -------
