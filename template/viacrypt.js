@@ -37,6 +37,10 @@ $(function() {
 	if (baseurl.indexOf('http:') === 0 || baseurl.indexOf('https:') === 0) {
 		baseurl = baseurl.substring(baseurl.indexOf(':') + 1);
 	}
+	//---------------------------------------------------------------------------------
+	// Enable tooltips.
+	//
+	$('a[data-toggle="tooltip"]').tooltip();
 
 	//---------------------------------------------------------------------------------
 	// Load message if has hash.

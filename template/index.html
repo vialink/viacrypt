@@ -12,7 +12,7 @@
 <meta property="og:title" content="ViaCRYPT">
 <meta property="og:description" content="This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never more share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype.">
 
-<link href="lib/bootstrap-combined.min.css" rel="stylesheet">
+<link href="lib/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="vialink.css" rel="stylesheet">
 
 <!-- Favicons-->
@@ -32,9 +32,9 @@
 	</style>
 <![endif]-->
 
-<script src="lib/aes.js"></script>
-<script src="lib/jquery-1.10.2.min.js"></script>
-<script src="lib/bootstrap.min.js"></script>
+<script src="lib/js/aes.js"></script>
+<script src="lib/js/jquery-1.10.2.min.js"></script>
+<script src="lib/js/bootstrap.min.js"></script>
 <script src="viacrypt.js"></script>
 </head>
 
@@ -78,6 +78,7 @@
 			<label class="checkbox">
 				<input type="checkbox" class="notifyByEmailCheckbox" name="isNotifyByEmailEnabled">
 				Please, notify me when my message is read.
+				<a href="#" data-toggle="tooltip" title="Your e-mail must be stored non-encrypted into our servers."><i class="icon icon-info-sign"></i></a>
 			</label>
 			<div class="notifyByEmail hide">
 				My e-mail address is:

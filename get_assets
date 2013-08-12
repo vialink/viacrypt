@@ -1,8 +1,33 @@
 #!/bin/bash
 
-assets='netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js code.jquery.com/jquery-1.10.2.min.js netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js'
+css='netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css'
+
+img='netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/img/glyphicons-halflings.png netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/img/glyphicons-halflings-white.png'
+
+js='crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js code.jquery.com/jquery-1.10.2.min.js netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js'
+
+#---
+
 mkdir -p static/lib
 cd static/lib
-for asset in $assets; do
+
+mkdir -p css
+cd css
+for asset in $css; do
 	wget -N "$asset"
 done
+cd ..
+
+mkdir -p js
+cd js
+for asset in $js; do
+	wget -N "$asset"
+done
+cd ..
+
+mkdir -p img
+cd img
+for asset in $img; do
+	wget -N "$asset"
+done
+cd ..
