@@ -22,8 +22,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-curl');
 	grunt.loadNpmTasks('grunt-gettext');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.initConfig({
+		clean: ['static'],
 		copy: {
 			main: {
 				expand: true,
