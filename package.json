@@ -5,9 +5,11 @@
 		"connect": "",
 		"express": "",
 		"node-uuid": "",
-		"mustache": "",
+		"handlebars": "",
 		"express-rate": "",
 		"redis": "",
-		"mongodb": ""
+		"mongodb": "",
+		"node-gettext": "",
+		"handlebars-xgettext": ""
 	}
 }

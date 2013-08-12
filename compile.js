@@ -18,9 +18,30 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-fs = require('fs')
-mustache = require('mustache')
-config = require('./config')
+var fs = require('fs');
+var handlebars = require('handlebars');
+var gettext = require('node-gettext');
+var config = require('./config');
+
+var gt = new gettext();
+gt.addTextdomain('en', fs.readFileSync('locale/en/translations.mo'));
+gt.addTextdomain('pt-BR', fs.readFileSync('locale/pt-BR/translations.mo'));
+
+// more info on the current gettext implementation here:
+// https://github.com/andris9/node-gettext
+
+// setting the configured locale
+if (config.locale) {
+	gt.textdomain(config.locale);
+}
+
+// this is used like {{#_}}Some text to translate{{/_}}
+// as suggested here: https://github.com/janl/mustache.js/issues/216
+handlebars.registerHelper('_', function (msgid) {
+	return gt.gettext(msgid);
+	//return msgid;
+	//return "blah";
+});
 
 var output_dir = 'static/';
 var input_dir = 'template/';
@@ -33,7 +54,7 @@ function compileTemplate(filepath) {
 	return function (err, data) {
 		fs.writeFile(
 			filepath,
-			mustache.render(data.toString(), config),
+			handlebars.compile(data.toString())(config),
 			function(err) { if (err) throw err; else console.log('compiled: ' + filepath)}
 		)
 	};

@@ -18,9 +18,9 @@
  */
 // based on http://howtonode.org/express-mongodb
 var mongodb = require('mongodb');
-var mustache = require('mustache');
+var handlebars = require('handlebars');
 
-var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
+var template = handlebars.compile('-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n');
 
 var Provider = function(options){
 	//TODO maybe check if options are ok
@@ -49,7 +49,7 @@ Provider.prototype.get = function (id, callback) {
 			// when the message is not found, null is returned instead of an error
 			else if (message == null) callback({notfound: true});
 			else {
-				var data = mustache.render(template, message);
+				var data = template(message);
 				// if there are any errors on the callback the document is lost
 				callback(null, data);
 			}
