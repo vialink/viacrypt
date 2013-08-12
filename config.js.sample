@@ -3,6 +3,9 @@ var cfg = {};
 cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 
+// available locales: en, pt-BR
+cfg.locale = 'en';
+
 // URL used when generating URL client-side and when retrieving a message.
 // Never prefix the protocol (http or https). It is generated according to
 // the access.

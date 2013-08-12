@@ -24,13 +24,16 @@ var gettext = require('node-gettext');
 var config = require('./config');
 
 var gt = new gettext();
-gt.addTextdomain('en', fs.readFileSync('locale/en/translations.po'));
+gt.addTextdomain('en', fs.readFileSync('locale/en/translations.mo'));
+gt.addTextdomain('pt-BR', fs.readFileSync('locale/pt-BR/translations.mo'));
 
 // more info on the current gettext implementation here:
 // https://github.com/andris9/node-gettext
 
-// for instance, change default language:
-//gt.textdomain("en");
+// setting the configured locale
+if (config.locale) {
+	gt.textdomain(config.locale);
+}
 
 // this is used like {{#_}}Some text to translate{{/_}}
 // as suggested here: https://github.com/janl/mustache.js/issues/216

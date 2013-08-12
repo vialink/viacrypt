@@ -266,7 +266,7 @@ body {
 	position: relative;
 	left: 50%;
 	float: left;
-	width: 190px;
+	/*width: 190px;*/
 	margin-left: -95px;
 }
 .desenv span{
