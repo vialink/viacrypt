@@ -90,8 +90,8 @@ module.exports = function(grunt) {
 		var input_dir = 'template/';
 
 		grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
-            // ignoring hidden files for compilation
-            if(filename[0] == '.') return;
+			// ignoring hidden files for compilation
+			if(filename[0] == '.') return;
 			var data = grunt.file.read(filepath).toString();
 			var template = handlebars.compile(data);
 			var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
