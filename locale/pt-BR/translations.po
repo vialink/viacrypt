@@ -221,7 +221,7 @@ msgstr "LEMBRE-SE"
 
 #: template/index.html:151
 msgid "This message has been deleted and cannot be read again."
-msgstr "Essa mensagem foi deletada e não pode ser lida de novo."
+msgstr "Essa mensagem foi deletada e não pode ser lida novamente."
 
 #: template/index.html:161
 msgid "Message not found"
