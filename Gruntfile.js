@@ -21,8 +21,17 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-curl');
 	grunt.loadNpmTasks('grunt-gettext');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	grunt.initConfig({
+		copy: {
+			main: {
+				expand: true,
+				cwd: 'assets/',
+				src: ['**'],
+				dest: 'static/'
+			}
+		},
 		'curl-dir': {
 			'static/lib/': [
 				'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css',
@@ -47,7 +56,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task is compiling
-	grunt.registerTask('default', ['compile', 'curl-dir']);
+	grunt.registerTask('default', ['copy', 'curl-dir', 'compile']);
 
 	// Will compile every file in the ./template dir to the ./static dir
 	// recursively with handlebars using the configured locale for translations

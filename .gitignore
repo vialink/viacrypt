@@ -2,9 +2,7 @@ node_modules/
 messages/
 logs/
 
-static/index.html
-static/viacrypt.js
-static/lib/
+static/*
 
 config.js
 
