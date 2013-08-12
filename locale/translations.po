@@ -14,7 +14,7 @@ msgid "ViaCRYPT"
 msgstr ""
 
 #: ./template/index.html:13
-msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never more share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."
+msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."
 msgstr ""
 
 #: ./template/index.html:52
@@ -118,7 +118,7 @@ msgid "For nerds.."
 msgstr ""
 
 #: ./template/index.html:134
-msgid "The message is encrypted using AES and has a 256-bit key with passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."
+msgid "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."
 msgstr ""
 
 #: ./template/index.html:135

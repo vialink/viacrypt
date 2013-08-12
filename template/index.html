@@ -10,7 +10,7 @@
 <meta property="og:url" content="http://viacry.pt/">
 <meta property="og:site_name" content="ViaCRYPT">
 <meta property="og:title" content="{{_ "ViaCRYPT"}}">
-<meta property="og:description" content="{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never more share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."}}">
+<meta property="og:description" content="{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."}}">
 
 <link href="lib/bootstrap-combined.min.css" rel="stylesheet">
 <link href="vialink.css" rel="stylesheet">
@@ -131,7 +131,7 @@
 		<h3>{{_ "For nerds.."}}</h3>
 	</div>
 	<div class="modal-body">
-		<p>{{_ "The message is encrypted using AES and has a 256-bit key with passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."}}</p>
+		<p>{{_ "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."}}</p>
 		<p>{{_ "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."}}</p>
 		<p>{{_ "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."}}</p>
 		<p>{{_ "You can check the code yourself whether you're curious or just want to run it at home, it's available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'for nerds');">{{_ "Github"}}</a>.</p>

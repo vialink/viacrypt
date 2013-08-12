@@ -19,7 +19,7 @@ msgstr "ViaCRYPT"
 msgid ""
 "This app is an encrypted messaging system where the recipient can read the "
 "message only once. After the reading, the message is deleted and cannot be "
-"retrieved anymore. Never more share your passwords and secrets using plain-"
+"retrieved anymore. Never again share your passwords and secrets using plain-"
 "text e-mail, Facebook Chat, Google Talk or Skype."
 msgstr ""
 "Este aplicativo é um sistema de mensagens criptografadas onde o destinatário "
@@ -169,8 +169,8 @@ msgstr "Para nerds..."
 
 #: template/index.html:134
 msgid ""
-"The message is encrypted using AES and has a 256-bit key with passphrase. "
-"The passphrase is randomly generated at your browser, then the message is "
+"The message is encrypted using AES and has a 256-bit key as passphrase. The "
+"passphrase is randomly generated at your browser, then the message is "
 "encrypted and stored into our servers through an unique identifier. The "
 "generated URL is composed of two parts: the unique identified and the random "
 "passphrase. Both are in the fragment of the URL and are not sent to our "
@@ -213,7 +213,7 @@ msgstr ""
 
 #: template/index.html:147
 msgid "Your message is..."
-msgstr "Sua mensagem é..."
+msgstr "Sua mensagem é…"
 
 #: template/index.html:151
 msgid "REMEMBER"
