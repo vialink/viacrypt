@@ -32,8 +32,17 @@ function show_message(title, message) {
 	m.find('.modal-body').html(message);
 	m.modal();
 }
+function select_all(id)
+{
+    setTimeout(function() {
+        $("#"+id).focus();
+        $("#"+id).select();
+    }, 3000);
+}
 $(function() {
 	var baseurl = '{{{baseurl}}}';
+    $("#iosmenu").html($("#topmenu").html());
+    $("#iosmenu").find(".menu-hover").remove();
 	if (baseurl.indexOf('http:') === 0 || baseurl.indexOf('https:') === 0) {
 		baseurl = baseurl.substring(baseurl.indexOf(':') + 1);
 	}
@@ -103,7 +112,7 @@ $(function() {
 				//console.log(url);
 
 				var div = $('#showUrl');
-				div.find('.url').html('<input type="text" onClick="this.select();" style="width: 600px; cursor: pointer;" value="'+url+'" readonly="readonly">');
+				div.find('.url').html('<input id="url-field" type="text" onClick="select_all(this.id);" style="width: 85%; cursor: pointer;" value="'+url+'" readonly="readonly">');
 				div.show();
 				div.find('input').focus();
 			},

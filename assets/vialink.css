@@ -312,6 +312,9 @@ body {
 .modal-body {
     overflow: scroll;
 }
+#iosmenu {
+    display: none;
+}
 /* /////////////////////////   FIM MODAL      */
 
 /* /////////////////////////   INICIO IOS      */
@@ -331,6 +334,8 @@ body {
             #messageModal .modal-body { height: 68%; }
             #messageNotFound .modal-body {height: 68%; }
             #url-field { width: 100%; }
+            #iosmenu { display: block; }
+            #topmenu { display: none; }
 }
 
 /* css para dispositivos retina display */
