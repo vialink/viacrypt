@@ -93,7 +93,7 @@ $(function() {
 		$.ajax({
 			url: '/m/',
 			method: 'POST',
-			data: content, 
+			data: content,
 			success: function(res) {
 				var data = $.parseJSON(res);
 				var id = data.id;
