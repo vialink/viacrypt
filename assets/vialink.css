@@ -336,6 +336,7 @@ body {
             #url-field { width: 100%; }
             #iosmenu { display: block; }
             #topmenu { display: none; }
+            .navbar-inner { width: 300px; }
 }
 
 /* css para dispositivos retina display */
