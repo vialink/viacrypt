@@ -48,6 +48,9 @@ cfg.mongo_options = {
 //cfg.ratelimit.redis.host = '127.0.0.1'
 //cfg.ratelimit.redis.options = {};
 
+// enable live reloading for glorious development
+cfg.enable_livereload = false;
+
 // Google Analytics
 cfg.enable_ga = false;
 cfg.ga_tracking_code = 'UA-XXXXX-Y';

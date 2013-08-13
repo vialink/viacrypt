@@ -61,14 +61,17 @@ module.exports = function(grunt) {
 			templates: {
 				files: ['template/**/*'],
 				tasks: ['compile'],
+				options: { livereload: true },
 			},
 			assets: {
 				files: ['assets/**/*'],
 				tasks: ['copy'],
+				options: { livereload: true },
 			},
 			config: {
 				files: ['config.js'],
 				tasks: ['copy', 'compile'],
+				options: { livereload: true },
 			}
 		}
 	});
