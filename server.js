@@ -25,6 +25,7 @@ var connect = require('connect'),
 	express = require('express'),
 	uuid = require('node-uuid'),
 	ratelimit = require('express-rate'),
+	version = require('./package').version,
 	config = require('./config');
 
 // --------------
@@ -44,8 +45,6 @@ var provider = new store.Provider(_provider_options);
 var basedir = __dirname + '/';
 
 var app = express();
-
-var version = '0.0.2beta'
 
 // -----------
 // --- app ---
