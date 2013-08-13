@@ -58,14 +58,20 @@ Provider.prototype.get = function (id, callback) {
 
 Provider.prototype.put = function (id, message, callback) {
 	var path = this.make_path(id);
-	if (fs.exists(id, function(exists) {
+	if (fs.exists(path, function(exists) {
 		if (exists) {
-			callback(exists);
+			callback('duplicate');
 		} else {
 			var data = template(message);
 			fs.writeFile(path, data, function(err) {
 				if (err) {
-					callback(err);
+					var error = (function () {
+						//TODO list known treatable errors.
+						switch(err) {
+						default: return 'unkown';
+						}
+					})();
+					callback(error);
 				} else {
 					callback();
 				}

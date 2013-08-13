@@ -123,7 +123,6 @@ app.post('/m/', middleware, function(req, res) {
 		res.send('invalid data');
 		return;
 	}
-	var id = uuid.v4();
 	var ip = req.get('X-Forwarded-For');
 	if (ip === undefined) {
 		ip = req.connection.remoteAddress;
@@ -136,16 +135,26 @@ app.post('/m/', middleware, function(req, res) {
 		date: new Date(),
 		data: userdata.match(/.{1,64}/g).join('\n')
 	};
-	provider.put(id, message, function(err) {
-		//TODO distinguish between duplicate id, and general error
-		if (err) {
-			res.statusCode = 500;
-			//res.send('error due to duplicated id');
-			res.send('something wrong happened: ' + err);
-		} else {
-			res.send(JSON.stringify({ id: id }));
-		}
-	});
+	// in theory it's almost impossible to get ONE collision
+	// but we're trying 10 times just in case
+	var attempts = 0, max_attempts = 10;
+	(function save() {
+		var id = uuid.v4();
+		provider.put(id, message, function(err) {
+			if (err) {
+				if (err == 'duplicate' && attempts < max_attempts) {
+					attempts += 1;
+					// recursion! limited to 10 times.
+					save();
+				} else {
+					res.statusCode = 500;
+					res.send('something wrong happened: ' + err);
+				}
+			} else {
+				res.send(JSON.stringify({ id: id }));
+			}
+		});
+	})();
 });
 
 // ------------------
