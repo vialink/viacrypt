@@ -40,10 +40,6 @@ if (_provider == null) {
 var _provider_options = config[_provider + '_options'];
 var store = require('./providers/' + _provider);
 var provider = new store.Provider(_provider_options);
-
-//var basedir = '/var/www/node-projects/viacrypt/';
-var basedir = __dirname + '/';
-
 var app = express();
 
 // -----------
@@ -162,13 +158,19 @@ app.post('/m/', middleware, function(req, res) {
 
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-connect()
+var con = connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-    .use(connect.static(basedir + 'static', { maxAge: 10000 }))
+if (config.serve_static) {
+	con = con.use(connect.static(config.static_dir, { maxAge: 10000 }));
+} else if (config.serve_static !== false) {
+	console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
+	con = con.use(connect.static(__dirname + '/static', { maxAge: 10000 }));
+}
+con = con
 	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)
-    .listen(config.port, config.listen);
+	.listen(config.port, config.listen);
 
 console.log('Server running at ' + config.listen + ':' + config.port);

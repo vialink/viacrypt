@@ -12,6 +12,11 @@ cfg.locale = 'en';
 // the access.
 cfg.baseurl = '//viacry.pt';
 
+// you might want to disable serving static files on production to avoid
+// unecessary hassles that may come with it. (set to false to disable)
+cfg.serve_static = true;
+cfg.static_dir = __dirname + '/static';
+
 // available options are 'fs' and 'mongo'
 cfg.message_provider = 'fs';
 
