@@ -323,12 +323,14 @@ body {
             body { padding-top: 0px; }
             #message {height: 240px; }
             #git-ribbon {width: 120px; height: 120px; }
-            .modal {height: 420px; }
+            .modal {height: 370px; }
             #whatIsIt .modal-body { height: 60%; }
             #examplesOfUse .modal-body { height: 68%; }
             #forNerds .modal-body { height: 68%; }
             #contactUs .modal-body { height: 68%; }
-            #teste { display: none; }
+            #messageModal .modal-body { height: 68%; }
+            #messageNotFound .modal-body {height: 68%; }
+            #url-field { width: 100%; }
 }
 
 /* css para dispositivos retina display */
