@@ -319,14 +319,14 @@ body {
 
 /* /////////////////////////   INICIO IOS      */
 
-/* css para dispositivos menores (480/360)*/
-@media screen and (max-device-width: 480px) {
+/* css for smaller devices (640px max height and width)*/
+@media screen and (max-device-width: 640px) {
             #nav { display: none; }
-            .container {width: 100%; }
+            .container { width: 100%; }
             body { padding-top: 0px; }
-            #message {height: 240px; }
-            #git-ribbon {width: 120px; height: 120px; }
-            .modal {height: 370px; }
+            #message { height: 240px; }
+            #git-ribbon { width: 120px; height: 120px; }
+            .modal { height: 90%; }
             #whatIsIt .modal-body { height: 60%; }
             #examplesOfUse .modal-body { height: 68%; }
             #forNerds .modal-body { height: 68%; }
@@ -339,8 +339,13 @@ body {
             .navbar-inner { width: 300px; }
 }
 
-/* css para dispositivos retina display */
-@media screen and (-webkit-min-device-pixel-ratio:2) {
-            #nav { display: none; }
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+            .modal { height: 70%; }
+            #whatIsIt .modal-body { height: 60%; }
+            #examplesOfUse .modal-body { height: 60%; }
+            #forNerds .modal-body { height: 60%; }
+            #contactUs .modal-body { height: 60%; }
+            #messageModal .modal-body { height: 60%; }
+            #messageNotFound .modal-body {height: 60%; }
 }
 /* /////////////////////////   FIM IOS      */
