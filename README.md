@@ -1,6 +1,6 @@
 # ![ViaCRYPT](static/img/logo.png)
 
-One time message system.
+One time read messaging system. You can try it at [http://viacry.pt/](http://viacry.pt/).
 
 Install
 -------
