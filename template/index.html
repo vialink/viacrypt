@@ -38,6 +38,7 @@
 
 <script src="lib/aes.js"></script>
 <script src="lib/jquery-1.10.2.min.js"></script>
+<script src="lib/touchscroll.js"></script>
 <script src="lib/bootstrap.min.js"></script>
 <script src="viacrypt.js"></script>
 </head>
@@ -104,7 +105,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3>{{_ "What is it and how does it work?"}}</h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" id="whatIsItText">
 		<p>{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."}}</p>
 		<p>{{_ "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."}}</p>
 		<p>{{_ "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"}} <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">{{_ "here"}}</a>.</p>
@@ -120,7 +121,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3>{{_ "Examples of use"}}</h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" id="examplesOfUseText">
 		<ol>
 			<li>{{_ "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases."}}</li>
 			<li>{{_ "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."}}</li>
@@ -137,7 +138,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3>{{_ "For nerds.."}}</h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" id="forNerdsText">
 		<p>{{_ "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."}}</p>
 		<p>{{_ "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."}}</p>
 		<p>{{_ "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."}}</p>
@@ -153,7 +154,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3>{{_ "Your message is..."}}</h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" id="messageText">
 		<pre class="message"></pre>
         <span class="label label-important">{{_ "REMEMBER"}}</span> {{_ "This message has been deleted and cannot be read again."}}
 	</div>
@@ -167,7 +168,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3>{{_ "Message not found"}}</h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" id="messageNotFoundText">
 		<p>{{_ "This message has already been read or has never been existed."}}</p>
 		<p>{{_ "You should ask the sender to send it again."}}</p>
 	</div>
@@ -181,7 +182,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3></h3>
 	</div>
-	<div class="modal-body"></div>
+	<div class="modal-body" id="messageBoxText"></div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
 	</div>
@@ -192,7 +193,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3>{{_ "Contact Information"}}</h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" id="contactUsText">
 		<p>{{_ "You can contact us by e-mail"}} <a href="&#109;&#97;&#105;l&#116;&#111;&#58;&#118;&#105;&#97;&#99;&#114;&#121;&#112;t&#64;&#118;ialin&#107;&#46;c&#111;&#109;.b&#114;" onclick="ga('send', 'event', 'send mail', 'click', 'contact us');">&#118;iac&#114;&#121;&#112;&#116;&#64;&#118;ial&#105;&#110;k.co&#109;.&#98;r</a>.</p>
 	</div>
 	<div class="modal-footer">
