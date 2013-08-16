@@ -1,4 +1,4 @@
-# ![ViaCRYPT](static/img/logo.png)
+# ![ViaCRYPT](assets/img/logo.png)
 
 One time message system.
 
