@@ -12,6 +12,11 @@ cfg.locale = 'en';
 // the access.
 cfg.baseurl = '//viacry.pt';
 
+// you might want to disable serving static files on production to avoid
+// unecessary hassles that may come with it. (set to false to disable)
+cfg.serve_static = true;
+cfg.static_dir = __dirname + '/static';
+
 // available options are 'fs' and 'mongo'
 cfg.message_provider = 'fs';
 
@@ -42,6 +47,9 @@ cfg.mongo_options = {
 //cfg.ratelimit.redis.port = 6379;
 //cfg.ratelimit.redis.host = '127.0.0.1'
 //cfg.ratelimit.redis.options = {};
+
+// enable live reloading for glorious development
+cfg.enable_livereload = false;
 
 // Google Analytics
 cfg.enable_ga = false;

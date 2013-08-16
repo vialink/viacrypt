@@ -23,11 +23,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-gettext');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.initConfig({
 		clean: ['static'],
 		copy: {
-			main: {
+			assets: {
 				expand: true,
 				cwd: 'assets/',
 				src: ['**'],
@@ -56,6 +57,24 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		// spawn=false was tried, didn't work as expected
+		watch: {
+			templates: {
+				files: ['template/**/*'],
+				tasks: ['compile'],
+				options: { livereload: true },
+			},
+			assets: {
+				files: ['assets/**/*'],
+				tasks: ['copy'],
+				options: { livereload: true },
+			},
+			config: {
+				files: ['config.js'],
+				tasks: ['copy', 'compile'],
+				options: { livereload: true },
+			}
+		}
 	});
 
 	// Default task is compiling
@@ -91,8 +110,8 @@ module.exports = function(grunt) {
 		var input_dir = 'template/';
 
 		grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
-            // ignoring hidden files for compilation
-            if(filename[0] == '.') return;
+			// ignoring hidden files for compilation
+			if(filename[0] == '.') return;
 			var data = grunt.file.read(filepath).toString();
 			var template = handlebars.compile(data);
 			var base_filepath = subdir == null ? filename : [subdir, filename].join('/');

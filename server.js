@@ -25,6 +25,7 @@ var connect = require('connect'),
 	express = require('express'),
 	uuid = require('node-uuid'),
 	ratelimit = require('express-rate'),
+	version = require('./package').version,
 	config = require('./config');
 
 // --------------
@@ -39,13 +40,7 @@ if (_provider == null) {
 var _provider_options = config[_provider + '_options'];
 var store = require('./providers/' + _provider);
 var provider = new store.Provider(_provider_options);
-
-//var basedir = '/var/www/node-projects/viacrypt/';
-var basedir = __dirname + '/';
-
 var app = express();
-
-var version = '0.0.2beta'
 
 // -----------
 // --- app ---
@@ -123,7 +118,6 @@ app.post('/m/', middleware, function(req, res) {
 		res.send('invalid data');
 		return;
 	}
-	var id = uuid.v4();
 	var ip = req.get('X-Forwarded-For');
 	if (ip === undefined) {
 		ip = req.connection.remoteAddress;
@@ -136,16 +130,26 @@ app.post('/m/', middleware, function(req, res) {
 		date: new Date(),
 		data: userdata.match(/.{1,64}/g).join('\n')
 	};
-	provider.put(id, message, function(err) {
-		//TODO distinguish between duplicate id, and general error
-		if (err) {
-			res.statusCode = 500;
-			//res.send('error due to duplicated id');
-			res.send('something wrong happened: ' + err);
-		} else {
-			res.send(JSON.stringify({ id: id }));
-		}
-	});
+	// in theory it's almost impossible to get ONE collision
+	// but we're trying 10 times just in case
+	var attempts = 0, max_attempts = 10;
+	(function save() {
+		var id = uuid.v4();
+		provider.put(id, message, function(err) {
+			if (err) {
+				if (err == 'duplicate' && attempts < max_attempts) {
+					attempts += 1;
+					// recursion! limited to 10 times.
+					save();
+				} else {
+					res.statusCode = 500;
+					res.send('something wrong happened: ' + err);
+				}
+			} else {
+				res.send(JSON.stringify({ id: id }));
+			}
+		});
+	})();
 });
 
 // ------------------
@@ -154,13 +158,19 @@ app.post('/m/', middleware, function(req, res) {
 
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-connect()
+var con = connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-    .use(connect.static(basedir + 'static', { maxAge: 10000 }))
+if (config.serve_static) {
+	con = con.use(connect.static(config.static_dir, { maxAge: 10000 }));
+} else if (config.serve_static !== false) {
+	console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
+	con = con.use(connect.static(__dirname + '/static', { maxAge: 10000 }));
+}
+con = con
 	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)
-    .listen(config.port, config.listen);
+	.listen(config.port, config.listen);
 
 console.log('Server running at ' + config.listen + ':' + config.port);

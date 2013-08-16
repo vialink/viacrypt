@@ -18,13 +18,11 @@
  */
 
 function generate_passphrase() {
-	var choices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	var ret = [];
-	for (var i=0; i<24; i++) {
-		var idx = Math.floor(Math.random() * choices.length);
-		ret.push(choices[idx]);
-	}
-	return ret.join('');
+	//TODO think about the right size for the key
+	// for now 18 bits will yield 24 chars as before, but now we have a base 64 instead of 62
+	// and better randomness from CryptoJS instead of native Math
+	var bits = 18;
+	return CryptoJS.enc.Base64.stringify(CryptoJS.lib.WordArray.random(bits));
 }
 function show_message(title, message) {
 	var m = $('#messageBox');
@@ -110,7 +108,7 @@ $(function() {
 		$.ajax({
 			url: '/m/',
 			method: 'POST',
-			data: content, 
+			data: content,
 			success: function(res) {
 				var data = $.parseJSON(res);
 				var id = data.id;

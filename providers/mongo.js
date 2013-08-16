@@ -62,8 +62,17 @@ Provider.prototype.put = function (id, message, callback) {
 	this.getCollection(function (err, message_collection) {
 		if (err) callback(err);
 		else message_collection.insert(message, function (err) {
-			if (err) callback(err);
-			else callback(null);
+			if (err) {
+				var error = (function () {
+					switch(err.code) {
+					case 11000: return 'duplicate';
+					default: return 'unkown';
+					}
+				})();
+				callback(error);
+			} else {
+				callback(null);
+			}
 		});
 	});
 }
