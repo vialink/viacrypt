@@ -117,7 +117,9 @@ $(function() {
 		//return;
 
 		var content = {
-			data: data.toString()
+			data: data.toString(),
+            notify: notifyByEmailCheckbox.is(':checked'),
+            email: $(".notifyByEmail").find("input").val().toString() 
 		};
 		$.ajax({
 			url: '/m/',
@@ -167,7 +169,7 @@ $(function() {
 	var notifyByEmail = $('.notifyByEmail');
 	var notifyByEmailInput = notifyByEmail.find('input').keyup(checkEmail);
 	var notifyByEmailCheckbox = $('.notifyByEmailCheckbox').click(function() {
-		if (notifyByEmailCheckbox.is(':checked')) {
+		if(notifyByEmailCheckbox.is(':checked')) {
 			notifyByEmailInput.removeAttr('disabled');
 			notifyByEmail.show();
 			checkEmail();

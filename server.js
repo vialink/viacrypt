@@ -128,6 +128,8 @@ app.post('/m/', middleware, function(req, res) {
 		version: version,
 		ip: ip,
 		date: new Date(),
+        notification: req.body.notify,
+        email: req.body.email,
 		data: userdata.match(/.{1,64}/g).join('\n')
 	};
 	// in theory it's almost impossible to get ONE collision
