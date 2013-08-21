@@ -73,7 +73,7 @@ $(function() {
 			url: url,
 			success: function(res) {
 				var lines = res.split('\n');
-				var data = lines.slice(5, lines.length-2).join('');
+				var data = lines.slice(6, lines.length-2).join('');
 				//console.log(data);
 
 				var decrypted = CryptoJS.AES.decrypt(data, passphrase);
@@ -116,10 +116,12 @@ $(function() {
 		//console.log('decrypt_test', decrypt.toString(CryptoJS.enc.Utf8));
 		//return;
 
+        var mail = $(".notifyByEmail").find("input").val();
+
 		var content = {
 			data: data.toString(),
             notify: notifyByEmailCheckbox.is(':checked'),
-            email: $(".notifyByEmail").find("input").val().toString() 
+            email: (mail === undefined ? "" : mail.toString())
 		};
 		$.ajax({
 			url: '/m/',

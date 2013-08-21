@@ -62,11 +62,21 @@ app.get('/m/:id', function(req, res) {
 				res.statusCode = 404;
 				res.send('id not found');
 			} else {
+                data = parse(data.toString());
 				res.send(data);
 			}
 		});
 	}
 });
+
+function parse(data) {
+    var lines = data.split('\n');
+    if(config.notification_options['hide_header'] === true) {
+        lines[4] = ""; 
+        return lines.join('\n');
+    }
+    return data;
+}
 
 var middleware = [];
 if (config.ratelimit) {
