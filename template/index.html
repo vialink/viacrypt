@@ -80,6 +80,7 @@
 		<div class="control-group">
 			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%; box-sizing: border-box;" class="input-xxlarge" rows="20" placeholder="{{_ "Type your secret message here..."}}"></textarea>
 		</div>
+        {{#if enable_email_notification}}
 		<div class="control-group">
 			<label class="checkbox">
 				<input type="checkbox" class="notifyByEmailCheckbox" name="isNotifyByEmailEnabled">
@@ -91,6 +92,7 @@
 				<input type="text" name="notifyByEmail" class="input-xlarge">
 			</div>
 		</div>
+        {{/if}}
 		<div class="control-group">
 			<button id="save" type="button" class="btn btn-primary" onclick="ga('send', 'event', 'save it', 'click', 'generate url', 1);">{{_ "Save it"}}</button>
 		</div>

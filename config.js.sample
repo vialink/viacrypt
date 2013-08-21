@@ -33,6 +33,16 @@ cfg.mongo_options = {
 	collection: 'messages'
 }
 
+//Email notification configuration
+cfg.enable_email_notification = false;
+cfg.notification_options = {
+    smtp_server: '',
+    sender: '',
+    username: '',
+    password: '',
+	hide_header: false
+}
+
 // Rate limit
 // The interval must be in seconds.
 // Defaults to 75 messages every 30 minutes.
