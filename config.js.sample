@@ -1,12 +1,37 @@
+// vim: filetype=javascript
 var cfg = {};
 
 cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 
+// available locales: en, pt-BR
+cfg.locale = 'en';
+
 // URL used when generating URL client-side and when retrieving a message.
 // Never prefix the protocol (http or https). It is generated according to
 // the access.
 cfg.baseurl = '//viacry.pt';
+
+// you might want to disable serving static files on production to avoid
+// unecessary hassles that may come with it. (set to false to disable)
+cfg.serve_static = true;
+cfg.static_dir = __dirname + '/static';
+
+// available options are 'fs' and 'mongo'
+cfg.message_provider = 'fs';
+
+// used with fs store
+cfg.fs_options = {
+	messages_path: 'messages'
+}
+
+// used with mongo store
+cfg.mongo_options = {
+	host: 'localhost',
+	port: '27017',
+	database: 'viacrypt',
+	collection: 'messages'
+}
 
 // Rate limit
 // The interval must be in seconds.
@@ -22,6 +47,9 @@ cfg.baseurl = '//viacry.pt';
 //cfg.ratelimit.redis.port = 6379;
 //cfg.ratelimit.redis.host = '127.0.0.1'
 //cfg.ratelimit.redis.options = {};
+
+// enable live reloading for glorious development
+cfg.enable_livereload = false;
 
 // Google Analytics
 cfg.enable_ga = false;

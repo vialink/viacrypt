@@ -13,6 +13,7 @@ body {
 	background:url(../img/bg-geral.png) no-repeat 50% 100px;
 	font-family:Tahoma, Geneva, sans-serif;
 	line-height: 20px;
+    padding-top: 115px;
 }
 ::selection {
 	background-color:#f2652a;
@@ -220,6 +221,9 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(242,101,42,.6);
 	float:right;
 	margin-left:20px;	
 }
+#url-field {
+    background-color: #eeeeee;
+}
 /* /////////////////////////   FIM FORM      */
 
 /* /////////////////////////   INICIO TABLE      */
@@ -266,7 +270,7 @@ body {
 	position: relative;
 	left: 50%;
 	float: left;
-	width: 190px;
+	/*width: 190px;*/
 	margin-left: -95px;
 }
 .desenv span{
@@ -308,4 +312,43 @@ body {
 	border-top: 1px solid #ddd;
 	background-color:#f5f5f5;
 }
+.modal-body {
+    overflow: scroll;
+}
+#iosmenu {
+    display: none;
+}
 /* /////////////////////////   FIM MODAL      */
+
+/* /////////////////////////   INICIO IOS      */
+
+/* css for smaller devices (640px max height and width)*/
+@media screen and (max-device-width: 640px) {
+            #nav { display: none; }
+            .container { width: 100%; }
+            body { padding-top: 0px; }
+            #message { height: 240px; }
+            #git-ribbon { width: 120px; height: 120px; }
+            .modal { height: 90%; }
+            #whatIsIt .modal-body { height: 60%; }
+            #examplesOfUse .modal-body { height: 68%; }
+            #forNerds .modal-body { height: 68%; }
+            #contactUs .modal-body { height: 68%; }
+            #messageModal .modal-body { height: 68%; }
+            #messageNotFound .modal-body {height: 68%; }
+            #url-field { width: 100%; }
+            #iosmenu { display: block; }
+            #topmenu { display: none; }
+            .navbar-inner { width: 300px; }
+}
+
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+            .modal { height: 70%; }
+            #whatIsIt .modal-body { height: 60%; }
+            #examplesOfUse .modal-body { height: 60%; }
+            #forNerds .modal-body { height: 60%; }
+            #contactUs .modal-body { height: 60%; }
+            #messageModal .modal-body { height: 60%; }
+            #messageNotFound .modal-body {height: 60%; }
+}
+/* /////////////////////////   FIM IOS      */

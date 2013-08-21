@@ -21,33 +21,30 @@
 // TODO Send cache headers for static files;
 
 var connect = require('connect'),
-    http = require('http'),
+	http = require('http'),
 	express = require('express'),
-	fs = require('fs'),
 	uuid = require('node-uuid'),
-	mustache = require('mustache'),
 	ratelimit = require('express-rate'),
+	version = require('./package').version,
 	config = require('./config');
 
 // --------------
 // --- config ---
 // --------------
-//var basedir = '/var/www/node-projects/viacrypt/';
-var basedir = __dirname + '/';
 
+var _provider = config.message_provider;
+if (_provider == null) {
+	console.log('WARNING: unconfigured message provider, falling back to fs store.');
+	_provider = 'fs';
+}
+var _provider_options = config[_provider + '_options'];
+var store = require('./providers/' + _provider);
+var provider = new store.Provider(_provider_options);
 var app = express();
-app.set('messages_path', basedir + 'messages/');
-
-var version = '0.0.2beta'
-var template = '-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n';
 
 // -----------
 // --- app ---
 // -----------
-
-var make_path = function(id) {
-	return app.get('messages_path') + id;
-}
 
 var re_uuid = /^[A-Za-z0-9-]+$/;
 var re_userdata = /^[A-Za-z0-9+/=]+$/;
@@ -59,23 +56,18 @@ app.get('/m/:id', function(req, res) {
 	if (re_uuid.test(id) === false) {
 		res.statusCode = 404;
 		res.send('invalid id');
-
 	} else {
-		var path = make_path(id);
-		fs.readFile(path, function(err, data) {
+		provider.get(id, function(err, data) {
 			if (err) {
 				res.statusCode = 404;
 				res.send('id not found');
 			} else {
 				res.send(data);
-				fs.unlink(path);
 			}
 		});
-
 	}
 });
 
-// store new message
 var middleware = [];
 if (config.ratelimit) {
 	if (config.ratelimit.redis) {
@@ -87,8 +79,8 @@ if (config.ratelimit) {
 		var handler = new ratelimit.Memory.MemoryRateHandler();
 	}
 	var rate_middleware = ratelimit.middleware({
-		handler: handler, 
-		limit: config.ratelimit.limit, 
+		handler: handler,
+		limit: config.ratelimit.limit,
 		interval: config.ratelimit.interval,
 		getRemoteKey: function(req) {
 			return req.get('X-Forwarded-For') || req.connection.remoteAddress
@@ -117,6 +109,8 @@ if (config.ratelimit) {
 	});
 	middleware.push(rate_middleware);
 }
+
+// store new message
 app.post('/m/', middleware, function(req, res) {
 	var userdata = req.body.data;
 	if (re_userdata.test(userdata) === false) {
@@ -124,36 +118,38 @@ app.post('/m/', middleware, function(req, res) {
 		res.send('invalid data');
 		return;
 	}
-	var id = uuid.v4();
-	var path = make_path(id);
-	if (fs.exists(path, function(exists) {
-		if (exists) {
-			res.statusCode = 500;
-			res.send('error due to duplicated id');
-		} else {
-			var ip = req.get('X-Forwarded-For');
-			if (ip === undefined) {
-				ip = req.connection.remoteAddress;
-			} else {
-				ip += ' (via ' + req.connection.remoteAddress + ')';
-			}
-			var content = {
-				version: version,
-				ip: ip,
-				date: new Date().toString(),
-				data: userdata.match(/.{1,64}/g).join('\n')
-			};
-			var data = mustache.render(template, content);
-			fs.writeFile(path, data, function(err) {
-				if (err) {
+	var ip = req.get('X-Forwarded-For');
+	if (ip === undefined) {
+		ip = req.connection.remoteAddress;
+	} else {
+		ip += ' (via ' + req.connection.remoteAddress + ')';
+	}
+	var message = {
+		version: version,
+		ip: ip,
+		date: new Date(),
+		data: userdata.match(/.{1,64}/g).join('\n')
+	};
+	// in theory it's almost impossible to get ONE collision
+	// but we're trying 10 times just in case
+	var attempts = 0, max_attempts = 10;
+	(function save() {
+		var id = uuid.v4();
+		provider.put(id, message, function(err) {
+			if (err) {
+				if (err == 'duplicate' && attempts < max_attempts) {
+					attempts += 1;
+					// recursion! limited to 10 times.
+					save();
+				} else {
 					res.statusCode = 500;
 					res.send('something wrong happened: ' + err);
-				} else {
-					res.send(JSON.stringify({ id: id }));
 				}
-			});
-		}
-	}));
+			} else {
+				res.send(JSON.stringify({ id: id }));
+			}
+		});
+	})();
 });
 
 // ------------------
@@ -162,13 +158,19 @@ app.post('/m/', middleware, function(req, res) {
 
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-connect()
+var con = connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-    .use(connect.static(basedir + 'static', { maxAge: 10000 }))
+if (config.serve_static) {
+	con = con.use(connect.static(config.static_dir, { maxAge: 10000 }));
+} else if (config.serve_static !== false) {
+	console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
+	con = con.use(connect.static(__dirname + '/static', { maxAge: 10000 }));
+}
+con = con
 	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)
-    .listen(config.port, config.listen);
+	.listen(config.port, config.listen);
 
 console.log('Server running at ' + config.listen + ':' + config.port);

@@ -18,13 +18,11 @@
  */
 
 function generate_passphrase() {
-	var choices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	var ret = [];
-	for (var i=0; i<24; i++) {
-		var idx = Math.floor(Math.random() * choices.length);
-		ret.push(choices[idx]);
-	}
-	return ret.join('');
+	//TODO think about the right size for the key
+	// for now 18 bits will yield 24 chars as before, but now we have a base 64 instead of 62
+	// and better randomness from CryptoJS instead of native Math
+	var bits = 18;
+	return CryptoJS.enc.Base64.stringify(CryptoJS.lib.WordArray.random(bits));
 }
 function show_message(title, message) {
 	var m = $('#messageBox');
@@ -34,6 +32,21 @@ function show_message(title, message) {
 }
 $(function() {
 	var baseurl = '{{{baseurl}}}';
+
+    $("#iosmenu").html($("#topmenu").html());
+    $("#iosmenu").find(".menu-hover").remove();
+
+    var ua = navigator.userAgent;
+    if(ua.indexOf("android")) {
+        var version = parseFloat(ua.slice(ua.indexOf("Android")+8));
+        if(version < 3.0) {
+            var modals = $('.modal-body');
+            modals.each(function(i,el) {
+                touchScroll(el.id);
+            });
+        }
+    }
+
 	if (baseurl.indexOf('http:') === 0 || baseurl.indexOf('https:') === 0) {
 		baseurl = baseurl.substring(baseurl.indexOf(':') + 1);
 	}
@@ -109,7 +122,7 @@ $(function() {
 		$.ajax({
 			url: '/m/',
 			method: 'POST',
-			data: content, 
+			data: content,
 			success: function(res) {
 				var data = $.parseJSON(res);
 				var id = data.id;
@@ -117,7 +130,7 @@ $(function() {
 				//console.log(url);
 
 				var div = $('#showUrl');
-				div.find('.url').html('<input type="text" onClick="this.select();" style="width: 600px; cursor: pointer;" value="'+url+'" readonly="readonly">');
+				div.find('.url').html('<input id="url-field" type="text" onClick="this.select()" onkeydown="event.preventDefault();event.stopPropagation();return false;" oncut="event.preventDefault();event.stopPropagation();return false;" style="width: 85%; cursor: pointer;" value="'+url+'">');
 				div.show();
 				div.find('input').focus();
 			},
@@ -130,7 +143,7 @@ $(function() {
 					if (tryagain > 1) {
 						plural = 's';
 					}
-					show_message('Rate limit exceeded', 'Too many messages. Try again in '+tryagain+' minute'+plural+'.');
+					show_message('{{_ "Rate limit exceeded"}}', '{{_ "Too many messages. Try again in"}} ' + tryagain + ' {{_ "minute"}}' + plural + '.');
 					ga('send', 'event', 'post message ratelimit exceeded', 'post', 'exceeded');
 				} else {
 					ga('send', 'event', 'post message error', 'post', 'unknown error');
