@@ -34,7 +34,7 @@ cfg.mongo_options = {
 }
 
 //Email notification configuration
-// The hide_header flag indicates wheter or not the email addres header
+// The hide_header flag indicates wheter or not the email address header
 // will be suppressed when the message is sent to the user
 // the service parameter is optional and should be one of the 
 // services defined by nodemailer 
