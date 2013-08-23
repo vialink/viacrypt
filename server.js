@@ -90,6 +90,7 @@ function parse(data) {
 // sends an email message using nodemailer
 function send_mail_to(mail) {
     var smtpTransport = nodemailer.createTransport("SMTP", {
+        service: config.notification_options['service'],
         host: config.notification_options['smtp_server'],
         port: config.notification_options['smtp_port'],
         auth: {

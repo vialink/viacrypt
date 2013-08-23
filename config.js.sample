@@ -36,8 +36,12 @@ cfg.mongo_options = {
 //Email notification configuration
 // The hide_header flag indicates wheter or not the email addres header
 // will be suppressed when the message is sent to the user
+// the service parameter is optional and should be one of the 
+// services defined by nodemailer 
+// (http://www.nodemailer.com/#well-known-services-for-smtp)
 cfg.enable_email_notification = false;
 cfg.notification_options = {
+    service: null,
     smtp_server: '',
     smtp_port: '25',
     sender: '',
