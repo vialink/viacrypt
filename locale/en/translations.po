@@ -1,17 +1,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: node-gettext\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Segre <jan@vialink.com.br>\n"
 "Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: template/index.html:4 template/index.html:12 template/index.html:48
+#: template/index.html:4
+#: template/index.html:12
+#: template/index.html:52
 msgid "ViaCRYPT"
 msgstr "ViaCRYPT"
 
@@ -27,53 +30,63 @@ msgstr ""
 "retrieved anymore. Never again share your passwords and secrets using plain-"
 "text e-mail, Facebook Chat, Google Talk or Skype."
 
-#: template/index.html:52 template/index.html:98
+#: template/index.html:57
+#: template/index.html:120
 msgid "What is it and how does it work?"
 msgstr "What is it and how does it work?"
 
-#: template/index.html:57 template/index.html:114
+#: template/index.html:62
+#: template/index.html:136
 msgid "Examples of use"
 msgstr "Examples of use"
 
-#: template/index.html:62
+#: template/index.html:67
 msgid "Explanation for nerds"
 msgstr "Explanation for nerds"
 
-#: template/index.html:67
+#: template/index.html:72
 msgid "Contact Us"
 msgstr "Contact Us"
 
-#: template/index.html:75
+#: template/index.html:81
 msgid "Type your secret message here..."
 msgstr "Type your secret message here..."
 
-#: template/index.html:78
+#: template/index.html:87
+msgid "Please, notify me when my message is read."
+msgstr "Please, notify me when my message is read."
+
+#: template/index.html:91
+msgid "My e-mail address is:"
+msgstr "My e-mail address is:"
+
+#: template/index.html:97
 msgid "Save it"
 msgstr "Save it"
 
-#: template/index.html:82
+#: template/index.html:101
 msgid "Single-use URL:"
 msgstr "Single-use URL:"
 
-#: template/index.html:83
+#: template/index.html:102
 msgid "IMPORTANT"
 msgstr "IMPORTANT"
 
-#: template/index.html:83
+#: template/index.html:102
 msgid ""
 "This message can be read only once and will be deleted on the first read."
 msgstr ""
 "This message can be read only once and will be deleted on the first read."
 
-#: template/index.html:89
+#: template/index.html:111
 msgid "Developed by"
 msgstr "Developed by"
 
-#: template/index.html:89
+#: template/index.html:111
 msgid "VIALINK"
 msgstr "VIALINK"
 
-#: template/index.html:101
+#: template/index.html:123
 msgid ""
 "This app is an encrypted messaging system where the recipient can read the "
 "message only once. After the reading, the message is deleted and cannot be "
@@ -83,7 +96,7 @@ msgstr ""
 "message only once. After the reading, the message is deleted and cannot be "
 "retrieved anymore."
 
-#: template/index.html:102
+#: template/index.html:124
 msgid ""
 "The message is encrypted in your browser and stored into our servers. The "
 "key to decrypt the message is inside the generated URL and no one, but you "
@@ -95,7 +108,7 @@ msgstr ""
 "and the recipient, has it. Thus, it is impossible to anyone, even us or any "
 "government to read the content of your message."
 
-#: template/index.html:103
+#: template/index.html:125
 msgid ""
 "The encryption system is so strong that all computers in the world together "
 "would take much more than one trillion years to break it. You can have more "
@@ -105,11 +118,12 @@ msgstr ""
 "would take much more than one trillion years to break it. You can have more "
 "information about it"
 
-#: template/index.html:103
+#: template/index.html:125
 msgid "here"
 msgstr "here"
 
-#: template/index.html:104 template/index.html:137
+#: template/index.html:126
+#: template/index.html:159
 msgid ""
 "You can check the code yourself whether you're curious or just want to run "
 "it at home, it's available at"
@@ -117,16 +131,20 @@ msgstr ""
 "You can check the code yourself whether you're curious or just want to run "
 "it at home, it's available at"
 
-#: template/index.html:104 template/index.html:137
+#: template/index.html:126
+#: template/index.html:159
 msgid "Github"
 msgstr "Github"
 
-#: template/index.html:107 template/index.html:154 template/index.html:168
-#: template/index.html:179 template/index.html:192
+#: template/index.html:129
+#: template/index.html:176
+#: template/index.html:190
+#: template/index.html:201
+#: template/index.html:214
 msgid "Close"
 msgstr "Close"
 
-#: template/index.html:118
+#: template/index.html:140
 msgid ""
 "When you are sending any password to someone, it is more secure to generate "
 "an encrypted message and send only the URL. Thus, if you send by e-mail and "
@@ -140,7 +158,7 @@ msgstr ""
 "password. Or else, if you send it through GTalk, Facebook Chat or Skype, "
 "your password isn't stored in their databases."
 
-#: template/index.html:119
+#: template/index.html:141
 msgid ""
 "You can create a message with a single word and send the URL to many "
 "friends. The first to open the message gets the word and wins some prize."
@@ -148,11 +166,11 @@ msgstr ""
 "You can create a message with a single word and send the URL to many "
 "friends. The first to open the message gets the word and wins some prize."
 
-#: template/index.html:121
+#: template/index.html:143
 msgid "Be creative!"
 msgstr "Be creative!"
 
-#: template/index.html:121
+#: template/index.html:143
 msgid ""
 "You can use it in many ways. Don't forget to let us know how you are using "
 "it :)"
@@ -160,11 +178,11 @@ msgstr ""
 "You can use it in many ways. Don't forget to let us know how you are using "
 "it :)"
 
-#: template/index.html:131
+#: template/index.html:153
 msgid "For nerds.."
 msgstr "For nerds.."
 
-#: template/index.html:134
+#: template/index.html:156
 msgid ""
 "The message is encrypted using AES and has a 256-bit key as passphrase. The "
 "passphrase is randomly generated at your browser, then the message is "
@@ -180,7 +198,7 @@ msgstr ""
 "passphrase. Both are in the fragment of the URL and are not sent to our "
 "webserver when the URL is opened."
 
-#: template/index.html:135
+#: template/index.html:157
 msgid ""
 "When the generated URL is opened, a javascript code parses the URL and "
 "retrieve the message by its unique identifier. The servers return the "
@@ -196,7 +214,7 @@ msgstr ""
 "same message again, our servers will return a 404 status code because the "
 "message no longer exists."
 
-#: template/index.html:136
+#: template/index.html:158
 msgid ""
 "One can argue that someone might retrieve your message and make it "
 "unavailable to you. Although it is possible, the unique identifiers are "
@@ -208,46 +226,46 @@ msgstr ""
 "randomly generated using RFC4122 v4 UUID and the probability of a random hit "
 "is about 8.64E-78."
 
-#: template/index.html:147
+#: template/index.html:169
 msgid "Your message is..."
 msgstr "Your message is..."
 
-#: template/index.html:151
+#: template/index.html:173
 msgid "REMEMBER"
 msgstr "REMEMBER"
 
-#: template/index.html:151
+#: template/index.html:173
 msgid "This message has been deleted and cannot be read again."
 msgstr "This message has been deleted and cannot be read again."
 
-#: template/index.html:161
+#: template/index.html:183
 msgid "Message not found"
 msgstr "Message not found"
 
-#: template/index.html:164
+#: template/index.html:186
 msgid "This message has already been read or has never been existed."
 msgstr "This message has already been read or has never been existed."
 
-#: template/index.html:165
+#: template/index.html:187
 msgid "You should ask the sender to send it again."
 msgstr "You should ask the sender to send it again."
 
-#: template/index.html:186
+#: template/index.html:208
 msgid "Contact Information"
 msgstr "Contact Information"
 
-#: template/index.html:189
+#: template/index.html:211
 msgid "You can contact us by e-mail"
 msgstr "You can contact us by e-mail"
 
-#: template/viacrypt.js:119
+#: template/viacrypt.js:150
 msgid "Rate limit exceeded"
 msgstr "Rate limit exceeded"
 
-#: template/viacrypt.js:119
+#: template/viacrypt.js:150
 msgid "Too many messages. Try again in"
 msgstr "Too many messages. Try again in"
 
-#: template/viacrypt.js:119
+#: template/viacrypt.js:150
 msgid "minute"
 msgstr "minute"
