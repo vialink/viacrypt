@@ -116,7 +116,7 @@ $(function() {
 				//console.log(url);
 
 				var div = $('#showUrl');
-				div.find('.url').html('<input id="url-field" type="text" onClick="this.select()" onkeydown="event.preventDefault();event.stopPropagation();return false;" oncut="event.preventDefault();event.stopPropagation();return false;" style="width: 85%; cursor: pointer;" value="'+url+'">');
+				div.find('.url').html('<input id="url-field" type="text" onClick="this.select()" oninput="this.value = '+'\''+url+'\''+'" oncut="event.preventDefault();event.stopPropagation();return false;" style="width: 85%; cursor: pointer;" value="'+url+'">');
 				div.show();
 				div.find('input').focus();
 			},
