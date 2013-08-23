@@ -34,12 +34,18 @@ cfg.mongo_options = {
 }
 
 //Email notification configuration
+// The hide_header flag indicates wheter or not the email addres header
+// will be suppressed when the message is sent to the user
 cfg.enable_email_notification = false;
 cfg.notification_options = {
     smtp_server: '',
+    smtp_port: '25',
     sender: '',
     username: '',
     password: '',
+    subject: '',
+    text: '',
+    html: '',
 	hide_header: false
 }
 

@@ -24,6 +24,7 @@ var connect = require('connect'),
 	http = require('http'),
 	express = require('express'),
 	uuid = require('node-uuid'),
+    nodemailer = require('nodemailer'),
 	ratelimit = require('express-rate'),
 	version = require('./package').version,
 	config = require('./config');
@@ -69,13 +70,48 @@ app.get('/m/:id', function(req, res) {
 	}
 });
 
+// parses the message removing the email address header 
+// if necessary and verifying if an email has to be sent
 function parse(data) {
     var lines = data.split('\n');
+    var tokens = lines[4].trim().split(' ');
+    if(tokens[1] === 'true')
+    {
+        var mail = tokens[tokens.length-1];
+        send_mail_to(mail);
+    }
     if(config.notification_options['hide_header'] === true) {
         lines[4] = ""; 
         return lines.join('\n');
     }
     return data;
+}
+
+// sends an email message using nodemailer
+function send_mail_to(mail) {
+    var smtpTransport = nodemailer.createTransport("SMTP", {
+        host: config.notification_options['smtp_server'],
+        port: config.notification_options['smtp_port'],
+        auth: {
+            user: config.notification_options['username'], 
+            pass: config.notification_options['password']
+        }
+    });
+    var mailOptions = {
+        from: config.notification_options['sender'],
+        to: mail,
+        subject: config.notification_options['subject'],
+        text: config.notification_options['text'],
+        html: config.notification_options['html'] 
+    }
+    smtpTransport.sendMail(mailOptions, function(error, response) {
+        if(error) {
+            console.log(error);
+        } else {
+            console.log("Message sent:" + response.message);
+        }
+    });
+    smtpTransport.close();
 }
 
 var middleware = [];
