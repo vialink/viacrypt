@@ -18,12 +18,12 @@ Compiling
 ---------
 
 Required files are generated with compile.js, and needed assets
-are gotten with get\_assets:
+are gotten with getassets.js:
 
 (Note: this is still a bit cumbersome)
 
     ./compile.js
-    ./get_assets
+    ./getassets.js
 
 Configurations are found on config.js, copy and adapt yours from
 the config.js.sample. Any change in config.js demands rerun compile.js.
