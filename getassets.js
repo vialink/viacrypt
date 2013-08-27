@@ -31,10 +31,6 @@ var fileUrls = [
 
 var libDir = 'static/lib/'
 
-var getFiles = function(err) {
-	fileUrls.forEach(getFile);
-}
-
 // Get the file from the internet and put the file in "/static/lib"
 var getFile = function(fileUrl) {
 	console.log('getting: ' + fileUrl);
@@ -57,4 +53,4 @@ var getFile = function(fileUrl) {
 	});
 }
 
-fs.mkdir(libDir, getFiles);
+fileUrls.forEach(getFile);
