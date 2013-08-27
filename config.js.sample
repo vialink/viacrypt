@@ -47,9 +47,6 @@ cfg.notification_options = {
     sender: '',
     username: '',
     password: '',
-    subject: '',
-    text: '',
-    html: '',
 	hide_header: false
 }
 
