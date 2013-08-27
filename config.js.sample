@@ -6,7 +6,7 @@ cfg.port = 8001;
 // URL used when generating URL client-side and when retrieving a message.
 // Never prefix the protocol (http or https). It is generated according to
 // the access.
-cfg.baseurl = '//viacry.pt';
+cfg.baseurl = '//127.0.0.1:8001';
 
 // Rate limit
 // The interval must be in seconds.

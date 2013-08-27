@@ -2,6 +2,11 @@
 
 One time read messaging system. You can try it at [http://viacry.pt/](http://viacry.pt/).
 
+Requirements
+------------
+
+* [Node.js](http://nodejs.org/)
+
 Install
 -------
 
@@ -21,7 +26,7 @@ are gotten with get\_assets:
     ./get_assets
 
 Configurations are found on config.js, copy and adapt yours from
-the config.js.sample
+the config.js.sample. Any change in config.js demands rerun compile.js.
 
 Running
 -------
