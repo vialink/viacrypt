@@ -41,7 +41,7 @@ module.exports = function(grunt) {
 				'http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js',
 				'http://code.jquery.com/jquery-1.10.2.min.js',
 				'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js',
-                'http://www.seabreezecomputers.com/tips/touchscroll.js'
+				'http://www.seabreezecomputers.com/tips/touchscroll.js'
 			]
 		},
 		xgettext: {

@@ -13,18 +13,37 @@ You will also need to install the grunt-cli globally if you don't already have i
 
     npm install -g grunt-cli
 
-Compiling
----------
-
-To generate the files from templates, and download required assets simply run grunt.
-
-    grunt
+Configuring
+-----------
 
 Configurations are found on config.js, copy and adapt yours from the config.js.sample
 
-To regenerate only file from templates run the compile task:
+An `static` directory is generated from the `assets` and `templates` dirs, and some dependencies
+that need to be downloaded. Those tasks are automated with grunt.
+
+To generate the static dir, simply run `grunt` on the project root:
+
+    grunt
+
+The files in `template` are passed through handlebars and given the config.js module as input.
+You'll have to run this every time the configuration or templates are altered.
 
     grunt compile
+
+The files in `assets` are simply copied to `static`. You'll have to run this every time a file
+in `assets` is altered or added.
+
+    grunt copy
+
+Some depenencies are downloaded, those are specified on the Gruntfile.js. You'll probably only
+have to do this manually if you alter these dependencies.
+
+    grunt curl-dir
+
+For easing development there is a `watch` task to automatically rerun a task above when one of
+its input files are altered.
+
+    grunt watch
 
 Running
 -------
