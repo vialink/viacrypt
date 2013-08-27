@@ -27,7 +27,9 @@ var connect = require('connect'),
     nodemailer = require('nodemailer'),
 	ratelimit = require('express-rate'),
 	version = require('./package').version,
-	config = require('./config');
+	config = require('./config'),
+    mustache = require('mustache'),
+    fs = require('fs');
 
 // --------------
 // --- config ---
@@ -75,10 +77,17 @@ app.get('/m/:id', function(req, res) {
 function parse(data) {
     var lines = data.split('\n');
     var tokens = lines[4].trim().split(' ');
-    if(tokens[1] === 'true')
+    var last = tokens.length-1;
+    if(tokens[last] !== '')
     {
-        var mail = tokens[tokens.length-1];
-        send_mail_to(mail);
+        var info = {
+            mail: tokens[last],
+            context : {
+                now: Date().substr(0,24).trim(),
+                date: lines[3].substr(16,24).trim()
+            }
+        };
+        send_mail_to(info);
     }
     if(config.notification_options['hide_header'] === true) {
         lines[4] = ""; 
@@ -88,7 +97,7 @@ function parse(data) {
 }
 
 // sends an email message using nodemailer
-function send_mail_to(mail) {
+function send_mail_to(info) {
     var smtpTransport = nodemailer.createTransport("SMTP", {
         service: config.notification_options['service'],
         host: config.notification_options['smtp_server'],
@@ -98,20 +107,29 @@ function send_mail_to(mail) {
             pass: config.notification_options['password']
         }
     });
-    var mailOptions = {
-        from: config.notification_options['sender'],
-        to: mail,
-        subject: config.notification_options['subject'],
-        text: config.notification_options['text'],
-        html: config.notification_options['html'] 
-    }
-    smtpTransport.sendMail(mailOptions, function(error, response) {
-        if(error) {
-            console.log(error);
+    fs.readFile('template/email.mustache','utf-8', function(err,data) {
+        if(err) {
+            console.log(err);
         } else {
-            console.log("Message sent:" + response.message);
+            var template = data.split('Subject:');
+            var subj = template[1].split('\n')[0];
+            var body = template[1].split('\n\n')[1];
+            var mailOptions = {
+                from: config.notification_options['sender'],
+                to: info['mail'],
+                subject: mustache.to_html(subj, info['context']),
+                html: mustache.to_html(body, info['context'])
+            }
+            smtpTransport.sendMail(mailOptions, function(error, response) {
+                if(error) {
+                    console.log(error);
+                } else {
+                    console.log("Message sent:" + response.message);
+                }
+            });
         }
     });
+
     smtpTransport.close();
 }
 
