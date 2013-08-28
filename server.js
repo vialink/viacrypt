@@ -107,7 +107,7 @@ function send_mail_to(info) {
             pass: config.notification_options['password']
         }
     });
-    fs.readFile('template/email.mustache','utf-8', function(err,data) {
+    fs.readFile(__dirname+'/template/email.mustache','utf-8', function(err,data) {
         if(err) {
             console.log(err);
         } else {
