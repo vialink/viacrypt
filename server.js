@@ -225,16 +225,44 @@ app.post('/m/', middleware, function(req, res) {
 
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
+/// XXX - TEST
+function rewrite_locale(root, options) {
+    var static_enUS = connect.static(root, {maxAge: 10000, index: 'en/index.html'}),
+        static_ptBR = connect.static(root, {maxAge: 10000, index: 'pt-BR/index.html'});
+
+    return function(req, res, next) {
+        var get = req._parsedUrl['query'];
+        var locale = 'en';
+        var params = '';
+        if(get)
+        {
+            params = get.split('&');
+            for(idx in params)
+            {
+                var kv = params[idx].split('='); 
+                if(kv[0] == 'locale') locale = kv[1];
+            }
+        }
+        if (locale == 'pt-BR') {
+            return static_ptBR(req, res, next);
+        } else {
+            return static_enUS(req, res, next);
+        }
+    }
+}
+
+var static_dir;
+if (config.serve_static) {
+    static_dir = config.static_dir;
+} else if (config.serve_static !== false) {
+	console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
+    static_dir = __dirname + '/static';
+}
+
 var con = connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-if (config.serve_static) {
-	con = con.use(connect.static(config.static_dir, { maxAge: 10000 }));
-} else if (config.serve_static !== false) {
-	console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
-	con = con.use(connect.static(__dirname + '/static', { maxAge: 10000 }));
-}
-con = con
+	.use(rewrite_locale(static_dir))
 	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)

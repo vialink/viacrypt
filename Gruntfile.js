@@ -97,10 +97,8 @@ module.exports = function(grunt) {
 		// more info on the current gettext implementation here:
 		// https://github.com/andris9/node-gettext
 
-		// setting the configured locale
-		if (config.locale) {
-			gt.textdomain(config.locale);
-		}
+		// setting the configured locales
+        var languages = ['pt-BR', 'en'];
 
 		// this is used like {{#_}}Some text to translate{{/_}}
 		// as suggested here: https://github.com/janl/mustache.js/issues/216
@@ -108,18 +106,29 @@ module.exports = function(grunt) {
 			return gt.gettext(msgid);
 		});
 
-		var output_dir = 'static/';
+        var i18n_formats = ['html', 'mustache']
 		var input_dir = 'template/';
+        var output_dir = 'static/';
 
-		grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
-			// ignoring hidden files for compilation
-			if(filename[0] == '.') return;
-			var data = grunt.file.read(filepath).toString();
-			var template = handlebars.compile(data);
-			var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
-			var progress = grunt.log.write('compiling: ' + base_filepath + '... ');
-			grunt.file.write(output_dir + base_filepath, template(config));
-			progress.ok();
-		});
+        grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
+            // ignoring hidden files for compilation
+            if(filename[0] == '.') return;
+            var data = grunt.file.read(filepath).toString();
+            var template = handlebars.compile(data);
+            var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
+            var progress = grunt.log.write('compiling: ' + base_filepath + '... ');
+            if(i18n_formats.indexOf(filename.split('.')[1]) >= 0)
+            {
+                for(idx in languages)
+                {
+                    var lang = languages[idx];
+                    var locale_dir = output_dir+lang+'/';
+                    gt.textdomain(lang);
+                    grunt.file.write(locale_dir + base_filepath, template(config));
+                }
+            }
+            else  grunt.file.write(output_dir + base_filepath, template(config));
+            progress.ok();
+        });
 	});
 }
