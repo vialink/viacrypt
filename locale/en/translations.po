@@ -269,3 +269,15 @@ msgstr "Too many messages. Try again in"
 #: template/viacrypt.js:150
 msgid "minute"
 msgstr "minute"
+
+#: template/email.mustache:7
+msgid "ViaCRYPT - Message read on"
+msgstr "ViaCRYPT - Message read on"
+
+#: template/email.mustache:10
+msgid "The message you wrote on"
+msgstr "The message you wrote on"
+
+#: template/email.mustache:10
+msgid "was just read."
+msgstr "was just read."

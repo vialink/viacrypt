@@ -272,3 +272,15 @@ msgstr "Muitas mensagens. Tente novamente em"
 #: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/viacrypt.js:150
 msgid "minute"
 msgstr "minuto"
+
+#: template/email.mustache:7
+msgid "ViaCRYPT - Message read on"
+msgstr "ViaCRYPT - Mensagem lida em"
+
+#: template/email.mustache:10
+msgid "The message you wrote on"
+msgstr "A mensagem que você escreveu em"
+
+#: template/email.mustache:10
+msgid "was just read."
+msgstr "acabou de ser lida."
