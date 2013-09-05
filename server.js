@@ -29,7 +29,8 @@ var connect = require('connect'),
 	version = require('./package').version,
 	config = require('./config'),
     mustache = require('mustache'),
-    fs = require('fs');
+    fs = require('fs'),
+    url = require('url');
 
 // --------------
 // --- config ---
@@ -44,6 +45,7 @@ var _provider_options = config[_provider + '_options'];
 var store = require('./providers/' + _provider);
 var provider = new store.Provider(_provider_options);
 var app = express();
+var default_locale = 'en';
 
 // -----------
 // --- app ---
@@ -76,12 +78,14 @@ app.get('/m/:id', function(req, res) {
 // if necessary and verifying if an email has to be sent
 function parse(data) {
     var lines = data.split('\n');
-    var tokens = lines[4].trim().split(' ');
+    var locale = lines[4].trim().split(' ')[1];
+    var tokens = lines[5].trim().split(' ');
     var last = tokens.length-1;
-    if(tokens[last] !== '')
+    if(tokens[last] != '')
     {
         var info = {
             mail: tokens[last],
+            locale: locale,
             context : {
                 now: Date().substr(0,24).trim(),
                 date: lines[3].substr(16,24).trim()
@@ -90,7 +94,7 @@ function parse(data) {
         send_mail_to(info);
     }
     if(config.notification_options['hide_header'] === true) {
-        lines[4] = ""; 
+        lines[5] = ""; 
         return lines.join('\n');
     }
     return data;
@@ -107,8 +111,7 @@ function send_mail_to(info) {
             pass: config.notification_options['password']
         }
     });
-    // FIXME -- generalize this to send the correct email message
-    fs.readFile('static/en/email.mustache','utf-8', function(err,data) {
+    fs.readFile('static/' + info.locale + '/email.mustache','utf-8', function(err,data) {
         if(err) {
             console.log(err);
         } else {
@@ -190,13 +193,15 @@ app.post('/m/', middleware, function(req, res) {
 	} else {
 		ip += ' (via ' + req.connection.remoteAddress + ')';
 	}
+    var query = url.parse(req.get('referer')).query;
 	var message = {
 		version: version,
 		ip: ip,
 		date: new Date(),
         notification: req.body.notify,
         email: req.body.email,
-		data: userdata.match(/.{1,64}/g).join('\n')
+		data: userdata.match(/.{1,64}/g).join('\n'),
+        locale: get_locale(query)
 	};
 	// in theory it's almost impossible to get ONE collision
 	// but we're trying 10 times just in case
@@ -226,30 +231,31 @@ app.post('/m/', middleware, function(req, res) {
 
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-/// XXX - TEST
+function get_locale(query) {
+    if(query) {
+        var params = query.split('&');
+        for(idx in params)
+        {
+            var kv = params[idx].split('='); 
+            if(kv[0] == 'locale') return kv[1];
+        }
+    }
+    return default_locale;
+}
+
 function rewrite_locale(root, options) {
     var static_enUS = connect.static(root, {maxAge: 10000, index: 'en/index.html'}),
         static_ptBR = connect.static(root, {maxAge: 10000, index: 'pt-BR/index.html'});
 
     return function(req, res, next) {
         var get = req._parsedUrl['query'];
-        var locale = 'en';
-        var params = '';
-        if(get)
-        {
-            params = get.split('&');
-            for(idx in params)
-            {
-                var kv = params[idx].split('='); 
-                if(kv[0] == 'locale') locale = kv[1];
-            }
-        }
+        locale = get_locale(get);
         if (locale == 'pt-BR') {
             return static_ptBR(req, res, next);
         } else {
             return static_enUS(req, res, next);
         }
-    }
+    };
 }
 
 var static_dir;
