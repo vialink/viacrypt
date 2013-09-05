@@ -110,7 +110,7 @@ $(function() {
 		//console.log('message', message);
 		//console.log('passphrase', passphrase);
 
-		console.log($('form').serializeArray());
+		//console.log($('form').serializeArray());
 
 		var data = CryptoJS.AES.encrypt(message, passphrase);
 		//console.log(data.toString());
@@ -133,8 +133,13 @@ $(function() {
 			success: function(res) {
 				var data = $.parseJSON(res);
 				var id = data.id;
-				var url = window.location.protocol + baseurl + '/#' + id + ';' + passphrase;
-				//console.log(url);
+                var oldUrl = window.location.href;
+                var get = '';
+                if(oldUrl.indexOf('?') >= 0) {
+                    get = '?' + window.location.href.split('#')[0].split('?')[1];
+                }
+
+				var url = window.location.protocol + baseurl + '/' + get + '#' + id + ';' + passphrase;
 
 				var div = $('#showUrl');
 				div.find('.url').html('<input id="url-field" type="text" onClick="this.select()" oninput="this.value = '+'\''+url+'\''+'" oncut="event.preventDefault();event.stopPropagation();return false;" style="width: 85%; cursor: pointer;" value="'+url+'">');

@@ -107,7 +107,8 @@ function send_mail_to(info) {
             pass: config.notification_options['password']
         }
     });
-    fs.readFile('template/email.mustache','utf-8', function(err,data) {
+    // FIXME -- generalize this to send the correct email message
+    fs.readFile('static/en/email.mustache','utf-8', function(err,data) {
         if(err) {
             console.log(err);
         } else {
