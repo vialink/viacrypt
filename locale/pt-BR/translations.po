@@ -50,7 +50,7 @@ msgstr "Entre em contato"
 
 #: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:81
 msgid "Type your secret message here..."
-msgstr "Digite sua mensagem aqui..."
+msgstr "Digite sua mensagem secreta aqui..."
 
 #: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:87
 msgid "Please, notify me when my message is read."
