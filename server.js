@@ -30,7 +30,8 @@ var connect = require('connect'),
 	config = require('./config'),
     mustache = require('mustache'),
     fs = require('fs'),
-    url = require('url');
+    url = require('url'),
+    dateformat = require('dateformat');
 
 // --------------
 // --- config ---
@@ -83,12 +84,14 @@ function parse(data) {
     var last = tokens.length-1;
     if(tokens[last] != '')
     {
+        var now = new Date();
+        var old = new Date(lines[3].substr(16,24).trim());
         var info = {
             mail: tokens[last],
             locale: locale,
             context : {
-                now: Date().substr(0,24).trim(),
-                date: lines[3].substr(16,24).trim()
+                now: dateformat(now,"mm-dd-yy HH:MM:ss"),
+                date: dateformat(old,"mm-dd-yy HH:MM:ss")
             }
         };
         send_mail_to(info);
