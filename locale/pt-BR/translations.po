@@ -274,13 +274,9 @@ msgid "minute"
 msgstr "minuto"
 
 #: template/email.mustache:7
-msgid "ViaCRYPT - Message read on"
-msgstr "ViaCRYPT - Mensagem lida em"
+msgid "ViaCRYPT - Message read on {{ now }}"
+msgstr "ViaCRYPT - Mensagem lida em {{ now }}"
 
 #: template/email.mustache:10
-msgid "The message you wrote on"
-msgstr "A mensagem que você escreveu em"
-
-#: template/email.mustache:10
-msgid "was just read."
-msgstr "acabou de ser lida."
+msgid "The message you wrote on {{ date }} was just read."
+msgstr "A mensagem que você escreveu em {{ date }} acabou de ser lida."
