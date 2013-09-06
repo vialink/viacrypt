@@ -24,12 +24,12 @@ var connect = require('connect'),
 	http = require('http'),
 	express = require('express'),
 	uuid = require('node-uuid'),
-    nodemailer = require('nodemailer'),
+	nodemailer = require('nodemailer'),
 	ratelimit = require('express-rate'),
 	version = require('./package').version,
 	config = require('./config'),
-    mustache = require('mustache'),
-    fs = require('fs');
+	mustache = require('mustache'),
+	fs = require('fs');
 
 // --------------
 // --- config ---
@@ -65,7 +65,7 @@ app.get('/m/:id', function(req, res) {
 				res.statusCode = 404;
 				res.send('id not found');
 			} else {
-                data = parse(data.toString());
+				data = parse(data.toString());
 				res.send(data);
 			}
 		});
@@ -75,25 +75,27 @@ app.get('/m/:id', function(req, res) {
 // parses the message removing the email address header 
 // if necessary and verifying if an email has to be sent
 function parse(data) {
-    var lines = data.split('\n');
-    var tokens = lines[4].trim().split(' ');
-    var last = tokens.length-1;
-    if(tokens[last] !== '')
-    {
-        var info = {
-            mail: tokens[last],
-            context : {
-                now: Date().substr(0,24).trim(),
-                date: lines[3].substr(16,24).trim()
-            }
-        };
-        send_mail_to(info);
-    }
-    if(config.notification_options['hide_header'] === true) {
-        lines[4] = ""; 
-        return lines.join('\n');
-    }
-    return data;
+	var lines = data.split('\n');
+	var tokens = lines[4].trim().split(' ');
+	var last = tokens.length-1;
+	if (tokens[last] !== '')
+	{
+		var info = {
+			mail: tokens[last],
+			context: {
+				now: Date().substr(0,24).trim(),
+				date: lines[3].substr(16,24).trim()
+			}
+		};
+		if (config.enable_email_notification) {
+			send_mail_to(info);
+			if (config.notification_options['hide_header'] === true) {
+				lines[4] = '';
+				return lines.join('\n');
+			}
+		}
+	}
+	return data;
 }
 
 // sends an email message using nodemailer
