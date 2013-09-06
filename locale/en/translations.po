@@ -12,9 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: template/index.html:4
-#: template/index.html:12
-#: template/index.html:52
+#: template/index.html:4 template/index.html:12 template/index.html:52
 msgid "ViaCRYPT"
 msgstr "ViaCRYPT"
 
@@ -30,13 +28,11 @@ msgstr ""
 "retrieved anymore. Never again share your passwords and secrets using plain-"
 "text e-mail, Facebook Chat, Google Talk or Skype."
 
-#: template/index.html:57
-#: template/index.html:120
+#: template/index.html:57 template/index.html:120
 msgid "What is it and how does it work?"
 msgstr "What is it and how does it work?"
 
-#: template/index.html:62
-#: template/index.html:136
+#: template/index.html:62 template/index.html:136
 msgid "Examples of use"
 msgstr "Examples of use"
 
@@ -122,8 +118,7 @@ msgstr ""
 msgid "here"
 msgstr "here"
 
-#: template/index.html:126
-#: template/index.html:159
+#: template/index.html:126 template/index.html:159
 msgid ""
 "You can check the code yourself whether you're curious or just want to run "
 "it at home, it's available at"
@@ -131,16 +126,12 @@ msgstr ""
 "You can check the code yourself whether you're curious or just want to run "
 "it at home, it's available at"
 
-#: template/index.html:126
-#: template/index.html:159
+#: template/index.html:126 template/index.html:159
 msgid "Github"
 msgstr "Github"
 
-#: template/index.html:129
-#: template/index.html:176
-#: template/index.html:190
-#: template/index.html:201
-#: template/index.html:214
+#: template/index.html:129 template/index.html:176 template/index.html:190
+#: template/index.html:201 template/index.html:214
 msgid "Close"
 msgstr "Close"
 
@@ -258,14 +249,14 @@ msgstr "Contact Information"
 msgid "You can contact us by e-mail"
 msgstr "You can contact us by e-mail"
 
-#: template/viacrypt.js:150
+#: template/viacrypt.js:153
 msgid "Rate limit exceeded"
 msgstr "Rate limit exceeded"
 
-#: template/viacrypt.js:150
+#: template/viacrypt.js:153
 msgid "Too many messages. Try again in"
 msgstr "Too many messages. Try again in"
 
-#: template/viacrypt.js:150
+#: template/viacrypt.js:153
 msgid "minute"
 msgstr "minute"
