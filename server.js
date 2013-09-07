@@ -28,7 +28,7 @@ var connect = require('connect'),
 	ratelimit = require('express-rate'),
 	version = require('./package').version,
 	config = require('./config'),
-	mustache = require('mustache'),
+	handlebars = require('handlebars'),
 	fs = require('fs');
 
 // --------------
@@ -81,7 +81,7 @@ function parse(data) {
 	if (tokens[last] !== '')
 	{
 		var info = {
-			mail: tokens[last],
+			email: tokens[last],
 			context: {
 				now: Date().substr(0,24).trim(),
 				date: lines[3].substr(16,24).trim()
@@ -89,7 +89,7 @@ function parse(data) {
 		};
 		if (config.enable_email_notification) {
 			send_mail_to(info);
-			if (config.notification_options['hide_header'] === true) {
+			if (config.notification_options.hide_header === true) {
 				lines[4] = '';
 				return lines.join('\n');
 			}
@@ -100,39 +100,51 @@ function parse(data) {
 
 // sends an email message using nodemailer
 function send_mail_to(info) {
-    var smtpTransport = nodemailer.createTransport("SMTP", {
-        service: config.notification_options['service'],
-        host: config.notification_options['smtp_server'],
-        port: config.notification_options['smtp_port'],
-        auth: {
-            user: config.notification_options['username'], 
-            pass: config.notification_options['password']
-        }
-    });
-    fs.readFile(__dirname+'/template/email.mustache','utf-8', function(err,data) {
-        if(err) {
-            console.log(err);
-        } else {
-            var template = data.split('Subject:');
-            var subj = template[1].split('\n')[0];
-            var body = template[1].split('\n\n')[1];
-            var mailOptions = {
-                from: config.notification_options['sender'],
-                to: info['mail'],
-                subject: mustache.to_html(subj, info['context']),
-                html: mustache.to_html(body, info['context'])
-            }
-            smtpTransport.sendMail(mailOptions, function(error, response) {
-                if(error) {
-                    console.log(error);
-                } else {
-                    console.log("Message sent:" + response.message);
-                }
-            });
-        }
-    });
-
-    smtpTransport.close();
+	fs.readFile(__dirname + '/template/_email.html', 'utf-8', function(err, data) {
+		if(err) {
+			console.log(err);
+		} else {
+			var template = data.split('Subject:');
+			var subj = template[1].split('\n')[0];
+			var body = template[1].split('\n\n')[1];
+			var mail = {
+				from: config.notification_options.sender,
+				to: info.email,
+				subject: handlebars.compile(subj)(info.context),
+				html: handlebars.compile(body)(info.context)
+			}
+			var backend = config.notification_options.backend;
+			if (backend == null)
+				console.log('WARNING: unconfigured email backend, the configuration format has changed.');
+			else switch (backend.type) {
+				case 'smtp':
+					var transport = nodemailer.createTransport("SMTP", {
+							service: null,
+							host: backend.smtp_server,
+							port: backend.smtp_port,
+							auth: {
+								user: backend.username,
+								pass: backend.password
+							}
+					});
+					transport.sendMail(mail, function(err, response) {
+						if (err) console.log(err);
+						else console.log("Message sent:" + response.message);
+					});
+					transport.close();
+					break;
+				case 'file':
+					var out = JSON.stringify(mail) + '\n';
+					fs.appendFile(backend.filepath, out, function(err, data) {
+						if (err) console.log(err);
+					});
+					break;
+				default:
+					console.log('WARNING: unrecognized backend type, email not sent!');
+					break;
+			}
+		}
+	});
 }
 
 var middleware = [];

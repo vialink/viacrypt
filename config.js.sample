@@ -41,13 +41,21 @@ cfg.mongo_options = {
 // (http://www.nodemailer.com/#well-known-services-for-smtp)
 cfg.enable_email_notification = false;
 cfg.notification_options = {
-    service: null,
-    smtp_server: '',
-    smtp_port: '25',
-    sender: '',
-    username: '',
-    password: '',
-	hide_header: false
+	hide_header: false,
+	sender: 'viacrypt@localbost',
+	// file backend
+	backend: {
+		type: 'file',
+		filepath: 'mail.log'
+	}
+	// smtp (real) backend
+	//backend: {
+	//	type: 'smtp',
+	//	smtp_server: '',
+	//	smtp_port: '25',
+	//	username: '',
+	//	password: ''
+	//}
 }
 
 // Rate limit
