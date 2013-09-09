@@ -42,7 +42,7 @@ cfg.mongo_options = {
 cfg.enable_email_notification = false;
 cfg.notification_options = {
 	hide_header: false,
-	sender: 'viacrypt@localbost',
+	sender: 'viacrypt@localhost',
 	// file backend
 	backend: {
 		type: 'file',
