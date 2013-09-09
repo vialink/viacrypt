@@ -85,7 +85,7 @@ function parse(data) {
 		var now = new Date();
 		var old = new Date(lines[3].substr(16, 24).trim());
 		var info = {
-			mail: tokens[last],
+			email: tokens[last],
 			locale: locale,
 			context : {
 				now: dateformat(now, "mm-dd-yyyy HH:MM:ss"),
