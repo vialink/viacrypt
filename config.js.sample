@@ -5,7 +5,7 @@ cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 
 // available locales: en, pt-BR
-cfg.locales = ['pt-BR', 'en'];
+cfg.locales = ['br', 'en'];
 cfg.locale = 'en';
 
 // URL used when generating URL client-side and when retrieving a message.
