@@ -133,13 +133,8 @@ $(function() {
 			success: function(res) {
 				var data = $.parseJSON(res);
 				var id = data.id;
-                var oldUrl = window.location.href;
-                var get = '';
-                if(oldUrl.indexOf('?') >= 0) {
-                    get = '?' + window.location.href.split('#')[0].split('?')[1];
-                }
-
-				var url = window.location.protocol + baseurl + '/' + get + '#' + id + ';' + passphrase;
+				var path = location.pathname;
+				var url = window.location.protocol + baseurl + path + '#' + id + ';' + passphrase;
 
 				var div = $('#showUrl');
 				div.find('.url').html('<input id="url-field" type="text" onClick="this.select()" oninput="this.value = '+'\''+url+'\''+'" oncut="event.preventDefault();event.stopPropagation();return false;" style="width: 85%; cursor: pointer;" value="'+url+'">');

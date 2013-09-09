@@ -257,20 +257,20 @@ function get_locale(query) {
 	return default_locale;
 }
 
-function rewrite_locale(root, options) {
-    var static_enUS = connect.static(root, {maxAge: 10000, index: 'en/index.html'}),
-        static_ptBR = connect.static(root, {maxAge: 10000, index: 'pt-BR/index.html'});
-
-    return function(req, res, next) {
-        var get = req._parsedUrl['query'];
-        locale = get_locale(get);
-        if (locale == 'pt-BR') {
-            return static_ptBR(req, res, next);
-        } else {
-            return static_enUS(req, res, next);
-        }
-    };
-}
+//function rewrite_locale(root, options) {
+//    var static_enUS = connect.static(root, {maxAge: 10000, index: 'en/index.html'}),
+//        static_ptBR = connect.static(root, {maxAge: 10000, index: 'pt-BR/index.html'});
+//
+//    return function(req, res, next) {
+//        var get = req._parsedUrl['query'];
+//        locale = get_locale(get);
+//        if (locale == 'pt-BR') {
+//            return static_ptBR(req, res, next);
+//        } else {
+//            return static_enUS(req, res, next);
+//        }
+//    };
+//}
 
 var static_dir;
 if (config.serve_static) {
@@ -283,7 +283,8 @@ if (config.serve_static) {
 var con = connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-	.use(rewrite_locale(static_dir))
+	//.use(rewrite_locale(static_dir))
+	.use(connect.static(static_dir, {maxAge: 10000}))
 	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)

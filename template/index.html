@@ -13,22 +13,22 @@
 <meta property="og:description" content="{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."}}">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 
-<link href="lib/css/bootstrap-combined.min.css" rel="stylesheet">
-<link href="vialink.css" rel="stylesheet">
+<link href="/lib/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="/vialink.css" rel="stylesheet">
 
 <!-- IOS startup image -->
-<link rel="apple-touch-startup-image" href="img/logo-big.jpg">
+<link rel="apple-touch-startup-image" href="/img/logo-big.jpg">
 
 <!-- Favicons-->
-<link rel="apple-touch-icon" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon" type="image/x-icon" href="ico/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon"  type="image/x-icon" href="ico/favicon.png">
-<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico"><![endif]-->
+<link rel="apple-touch-icon" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon" type="image/x-icon" href="/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon"  type="image/x-icon" href="/ico/favicon.png">
+<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/ico/favicon.ico"><![endif]-->
 <!-- or, set /ico/favicon.ico for IE10 win -->
 <meta name="msapplication-TileColor" content="#fff" />
-<meta name="msapplication-TileImage" content="ico/tileicon.png" /><!--144x144px -->
+<meta name="msapplication-TileImage" content="/ico/tileicon.png" /><!--144x144px -->
 
 <!--[if !IE 7]>
 	<style type="text/css">
@@ -36,10 +36,10 @@
 	</style>
 <![endif]-->
 
-<script src="lib/aes.js"></script>
-<script src="lib/jquery-1.10.2.min.js"></script>
-<script src="lib/touchscroll.js"></script>
-<script src="lib/bootstrap.min.js"></script>
+<script src="/lib/aes.js"></script>
+<script src="/lib/jquery-1.10.2.min.js"></script>
+<script src="/lib/touchscroll.js"></script>
+<script src="/lib/bootstrap.min.js"></script>
 <script src="viacrypt.js"></script>
 {{#if enable_livereload}}<script src="http://localhost:35729/livereload.js"></script>{{/if}}
 </head>
@@ -112,8 +112,9 @@
 			</div>
             <div class="locale">
                 <ul>
-                    <li> <a href='/?locale=pt-BR'><img src='img/BRA-flag.png'></a></li>
-                    <li> <a href='/?locale=en'><img src='img/USA-flag.png'></a></li>
+                    {{#each locales}}
+                    <li> <a href='/{{this}}/'><img src='/img/flags/{{this}}.png'></a></li>
+                    {{/each}}
                 </ul>
             </div>
 		</div>
