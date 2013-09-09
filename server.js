@@ -46,7 +46,6 @@ var _provider_options = config[_provider + '_options'];
 var store = require('./providers/' + _provider);
 var provider = new store.Provider(_provider_options);
 var app = express();
-var default_locale = 'en';
 
 // -----------
 // --- app ---
@@ -208,7 +207,7 @@ app.post('/m/', middleware, function(req, res) {
 	} else {
 		ip += ' (via ' + req.connection.remoteAddress + ')';
 	}
-	var query = url.parse(req.get('referer')).query;
+	var query = url.parse(req.get('referer')).pathname;
 	var message = {
 		version: version,
 		ip: ip,
@@ -247,14 +246,12 @@ app.post('/m/', middleware, function(req, res) {
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
 function get_locale(query) {
-	if (query) {
-		var params = query.split('&');
-		for (idx in params) {
-			var kv = params[idx].split('='); 
-			if(kv[0] == 'locale') return kv[1];
-		}
+	var available_locales = config.locales;
+	var lang = query.match(/\/?([^\/]*)\/?/)[1];
+	if (available_locales.indexOf(lang) >= 0) {
+		return lang;
 	}
-	return default_locale;
+	return config.locale;
 }
 
 //function rewrite_locale(root, options) {
