@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 		xgettext: {
 			options: {
 				functionName: "_",
-				potFile: "locale/translations.po",
+				potFile: "locale/translations.pot",
 				//processMessage: function(message) { ... }
 			},
 			target: {
@@ -86,49 +86,28 @@ module.exports = function(grunt) {
 	// recursively with handlebars using the configured locale for translations
 	grunt.registerTask('compile', function() {
 		var fs = require('fs');
-		var handlebars = require('handlebars');
-		var gettext = require('node-gettext');
 		var config = require('./config');
+		var templating = require('./templating');
+		var languages = config.locales;
+		var default_lang = config.locale;
 
-		var gt = new gettext();
-		gt.addTextdomain('en', fs.readFileSync('locale/en/translations.mo'));
-		gt.addTextdomain('pt-BR', fs.readFileSync('locale/pt-BR/translations.mo'));
-
-		// more info on the current gettext implementation here:
-		// https://github.com/andris9/node-gettext
-
-		// setting the configured locales
-        var languages = ['pt-BR', 'en'];
-
-		// this is used like {{#_}}Some text to translate{{/_}}
-		// as suggested here: https://github.com/janl/mustache.js/issues/216
-		handlebars.registerHelper('_', function (msgid) {
-			return gt.gettext(msgid);
-		});
-
-        var i18n_formats = ['html', 'mustache']
 		var input_dir = 'template/';
-        var output_dir = 'static/';
-
-        grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
-            // ignoring hidden files for compilation
-            if(filename[0] == '.') return;
-            var data = grunt.file.read(filepath).toString();
-            var template = handlebars.compile(data);
-            var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
-            var progress = grunt.log.write('compiling: ' + base_filepath + '... ');
-            if(i18n_formats.indexOf(filename.split('.')[1]) >= 0)
-            {
-                for(idx in languages)
-                {
-                    var lang = languages[idx];
-                    var locale_dir = output_dir+lang+'/';
-                    gt.textdomain(lang);
-                    grunt.file.write(locale_dir + base_filepath, template(config));
-                }
-            }
-            else  grunt.file.write(output_dir + base_filepath, template(config));
-            progress.ok();
-        });
+		var output_dir = 'static/';
+		function compile(lang, _, _, lang_dir) {
+			templating.changelang(lang);
+			grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
+				// ignoring hidden files for compilation
+				if (filename[0] == '.' || filename[0] == '_') return;
+				var data = grunt.file.read(filepath).toString();
+				var template = templating.compile(data);
+				var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
+				var locale_dir = lang_dir || (lang + '/');
+				var progress = grunt.log.write('compiling: ' + locale_dir + base_filepath + '... ');
+				grunt.file.write(output_dir + locale_dir + base_filepath, template(config));
+				progress.ok();
+			});
+		}
+		languages.forEach(compile);
+		compile(default_lang, null, null, '/');
 	});
 }

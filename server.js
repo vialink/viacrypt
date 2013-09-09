@@ -24,14 +24,14 @@ var connect = require('connect'),
 	http = require('http'),
 	express = require('express'),
 	uuid = require('node-uuid'),
-    nodemailer = require('nodemailer'),
+	nodemailer = require('nodemailer'),
 	ratelimit = require('express-rate'),
 	version = require('./package').version,
 	config = require('./config'),
-    mustache = require('mustache'),
-    fs = require('fs'),
-    url = require('url'),
-    dateformat = require('dateformat');
+	url = require('url'),
+	dateformat = require('dateformat');
+	templating = require('./templating'),
+	fs = require('fs');
 
 // --------------
 // --- config ---
@@ -68,7 +68,7 @@ app.get('/m/:id', function(req, res) {
 				res.statusCode = 404;
 				res.send('id not found');
 			} else {
-                data = parse(data.toString());
+				data = parse(data.toString());
 				res.send(data);
 			}
 		});
@@ -78,66 +78,78 @@ app.get('/m/:id', function(req, res) {
 // parses the message removing the email address header 
 // if necessary and verifying if an email has to be sent
 function parse(data) {
-    var lines = data.split('\n');
-    var locale = lines[4].trim().split(' ')[1];
-    var tokens = lines[5].trim().split(' ');
-    var last = tokens.length-1;
-    if(tokens[last] != '')
-    {
-        var now = new Date();
-        var old = new Date(lines[3].substr(16,24).trim());
-        var info = {
-            mail: tokens[last],
-            locale: locale,
-            context : {
-                now: dateformat(now,"mm-dd-yy HH:MM:ss"),
-                date: dateformat(old,"mm-dd-yy HH:MM:ss")
-            }
-        };
-        send_mail_to(info);
-    }
-    if(config.notification_options['hide_header'] === true) {
-        lines[5] = ""; 
-        return lines.join('\n');
-    }
-    return data;
+	var lines = data.split('\n');
+	var locale = lines[4].trim().split(' ')[1];
+	var tokens = lines[5].trim().split(' ');
+	var last = tokens.length - 1;
+	if (tokens[last] != '') {
+		var now = new Date();
+		var old = new Date(lines[3].substr(16, 24).trim());
+		var info = {
+			mail: tokens[last],
+			locale: locale,
+			context : {
+				now: dateformat(now, "mm-dd-yyyy HH:MM:ss"),
+				date: dateformat(old, "mm-dd-yyyy HH:MM:ss")
+			}
+		};
+		send_mail_to(info);
+	}
+	if (config.notification_options['hide_header'] === true) {
+		lines[5] = ""; 
+		return lines.join('\n');
+	}
+	return data;
 }
 
 // sends an email message using nodemailer
 function send_mail_to(info) {
-    var smtpTransport = nodemailer.createTransport("SMTP", {
-        service: config.notification_options['service'],
-        host: config.notification_options['smtp_server'],
-        port: config.notification_options['smtp_port'],
-        auth: {
-            user: config.notification_options['username'], 
-            pass: config.notification_options['password']
-        }
-    });
-    fs.readFile('static/' + info.locale + '/email.mustache','utf-8', function(err,data) {
-        if(err) {
-            console.log(err);
-        } else {
-            var template = data.split('Subject:');
-            var subj = template[1].split('\n')[0];
-            var body = template[1].split('\n\n')[1];
-            var mailOptions = {
-                from: config.notification_options['sender'],
-                to: info['mail'],
-                subject: mustache.to_html(subj, info['context']),
-                html: mustache.to_html(body, info['context'])
-            }
-            smtpTransport.sendMail(mailOptions, function(error, response) {
-                if(error) {
-                    console.log(error);
-                } else {
-                    console.log("Message sent:" + response.message);
-                }
-            });
-        }
-    });
-
-    smtpTransport.close();
+	templating.changelang(info.locale);
+	fs.readFile(__dirname + '/template/_email.html', 'utf-8', function(err, data) {
+		if(err) {
+			console.log(err);
+		} else {
+			var template = data.split('Subject:');
+			var subj = template[1].split('\n')[0];
+			var body = template[1].split('\n\n')[1];
+			var mail = {
+				from: config.notification_options.sender,
+				to: info.email,
+				subject: templating.compile(subj)(info.context),
+				html: templating.compile(body)(info.context)
+			}
+			var backend = config.notification_options.backend;
+			if (backend == null)
+				console.log('WARNING: unconfigured email backend, the configuration format has changed.');
+			else switch (backend.type) {
+				case 'smtp':
+					var transport = nodemailer.createTransport("SMTP", {
+							service: null,
+							host: backend.smtp_server,
+							port: backend.smtp_port,
+							auth: {
+								user: backend.username,
+								pass: backend.password
+							}
+					});
+					transport.sendMail(mail, function(err, response) {
+						if (err) console.log(err);
+						else console.log("Message sent:" + response.message);
+					});
+					transport.close();
+					break;
+				case 'file':
+					var out = JSON.stringify(mail) + '\n';
+					fs.appendFile(backend.filepath, out, function(err, data) {
+						if (err) console.log(err);
+					});
+					break;
+				default:
+					console.log('WARNING: unrecognized backend type, email not sent!');
+					break;
+			}
+		}
+	});
 }
 
 var middleware = [];
@@ -196,15 +208,15 @@ app.post('/m/', middleware, function(req, res) {
 	} else {
 		ip += ' (via ' + req.connection.remoteAddress + ')';
 	}
-    var query = url.parse(req.get('referer')).query;
+	var query = url.parse(req.get('referer')).query;
 	var message = {
 		version: version,
 		ip: ip,
 		date: new Date(),
-        notification: req.body.notify,
-        email: req.body.email,
+		notification: req.body.notify,
+		email: req.body.email,
 		data: userdata.match(/.{1,64}/g).join('\n'),
-        locale: get_locale(query)
+		locale: get_locale(query)
 	};
 	// in theory it's almost impossible to get ONE collision
 	// but we're trying 10 times just in case
@@ -235,15 +247,14 @@ app.post('/m/', middleware, function(req, res) {
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
 function get_locale(query) {
-    if(query) {
-        var params = query.split('&');
-        for(idx in params)
-        {
-            var kv = params[idx].split('='); 
-            if(kv[0] == 'locale') return kv[1];
-        }
-    }
-    return default_locale;
+	if (query) {
+		var params = query.split('&');
+		for (idx in params) {
+			var kv = params[idx].split('='); 
+			if(kv[0] == 'locale') return kv[1];
+		}
+	}
+	return default_locale;
 }
 
 function rewrite_locale(root, options) {
@@ -266,7 +277,7 @@ if (config.serve_static) {
     static_dir = config.static_dir;
 } else if (config.serve_static !== false) {
 	console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
-    static_dir = __dirname + '/static';
+	static_dir = __dirname + '/static';
 }
 
 var con = connect()

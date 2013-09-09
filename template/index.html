@@ -76,7 +76,7 @@
             </div>
 		</div>
 	</div>
-	<form class="form-horizontal">
+	<div class="form-horizontal">
 		<div class="control-group">
 			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%; box-sizing: border-box;" class="input-xxlarge" rows="20" placeholder="{{_ "Type your secret message here..."}}"></textarea>
 		</div>
@@ -96,7 +96,7 @@
 		<div class="control-group">
 			<button id="save" type="button" class="btn btn-primary" onclick="ga('send', 'event', 'save it', 'click', 'generate url', 1);">{{_ "Save it"}}</button>
 		</div>
-	</form>
+	</div>
 	<div id="showUrl" class="well hide">
 		<p>{{_ "Single-use URL:"}} <span class="url"></span></p>
 		<p><span class="label label-important">{{_ "IMPORTANT"}}</span> {{_ "This message can be read only once and will be deleted on the first read."}}</p>

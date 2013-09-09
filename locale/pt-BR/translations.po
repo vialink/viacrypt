@@ -12,13 +12,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:4
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:12
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:52
+#: template/_email.html:7
+msgid "ViaCRYPT - Message read on"
+msgstr "ViaCRYPT - Mensagem lida em"
+
+#: template/_email.html:10
+msgid "The message you wrote on"
+msgstr "A mensagem que você escreveu em"
+
+#: template/_email.html:10
+msgid "was just read."
+msgstr "acabou de ser lida."
+
+#: template/index.html:4 template/index.html:12 template/index.html:52
 msgid "ViaCRYPT"
 msgstr "ViaCRYPT"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:13
+#: template/index.html:13
 msgid ""
 "This app is an encrypted messaging system where the recipient can read the "
 "message only once. After the reading, the message is deleted and cannot be "
@@ -30,64 +40,62 @@ msgstr ""
 "não pode mais ser recuperada. Nunca mais compartilhe suas senhas e segredos "
 "em claro por e-mail, Facebook Chat, Google Talk ou Skype."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:57
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:120
+#: template/index.html:57 template/index.html:126
 msgid "What is it and how does it work?"
 msgstr "O que é e como funciona?"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:62
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:136
+#: template/index.html:62 template/index.html:142
 msgid "Examples of use"
 msgstr "Exemplos de uso"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:67
+#: template/index.html:67
 msgid "Explanation for nerds"
 msgstr "Explicação para nerds"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:72
+#: template/index.html:72
 msgid "Contact Us"
 msgstr "Entre em contato"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:81
+#: template/index.html:81
 msgid "Type your secret message here..."
-msgstr "Digite sua mensagem aqui..."
+msgstr "Digite sua mensagem secreta aqui..."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:87
+#: template/index.html:87
 msgid "Please, notify me when my message is read."
 msgstr "Por favor, notifique-me quando minha mensagem for lida."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:91
+#: template/index.html:91
 msgid "My e-mail address is:"
 msgstr "Meu endereço de e-mail é:"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:97
+#: template/index.html:97
 msgid "Save it"
 msgstr "Salvar"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:101
+#: template/index.html:101
 msgid "Single-use URL:"
 msgstr "URL de uso único:"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:102
+#: template/index.html:102
 msgid "IMPORTANT"
 msgstr "IMPORTANTE"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:102
+#: template/index.html:102
 msgid ""
 "This message can be read only once and will be deleted on the first read."
 msgstr ""
 "Essa mensagem pode ser lida apenas uma vez e será apagada depois da primeira "
 "leitura."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:111
+#: template/index.html:111
 msgid "Developed by"
 msgstr "Desenvolvido por"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:111
+#: template/index.html:111
 msgid "VIALINK"
 msgstr "VIALINK"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:123
+#: template/index.html:129
 msgid ""
 "This app is an encrypted messaging system where the recipient can read the "
 "message only once. After the reading, the message is deleted and cannot be "
@@ -97,7 +105,7 @@ msgstr ""
 "pode ler a mensagem apenas uma vez. Após a leitura, a mensagem é apagada e "
 "não pode mais ser recuperada."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:124
+#: template/index.html:130
 msgid ""
 "The message is encrypted in your browser and stored into our servers. The "
 "key to decrypt the message is inside the generated URL and no one, but you "
@@ -110,7 +118,7 @@ msgstr ""
 "qualquer pessoa, mesmo nós ou qualquer governo ler o conteúdo de sua "
 "mensagem."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:125
+#: template/index.html:131
 msgid ""
 "The encryption system is so strong that all computers in the world together "
 "would take much more than one trillion years to break it. You can have more "
@@ -120,12 +128,11 @@ msgstr ""
 "juntos levariam muito mais de um trilhão de anos para quebrá-la. Você pode "
 "ter mais informações sobre esse"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:125
+#: template/index.html:131
 msgid "here"
 msgstr "aqui"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:126
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:159
+#: template/index.html:132 template/index.html:165
 msgid ""
 "You can check the code yourself whether you're curious or just want to run "
 "it at home, it's available at"
@@ -133,20 +140,16 @@ msgstr ""
 "Você pode verificar o código por conta própria, esteja você curioso ou "
 "simplesmente quer executá-lo em casa, ele está disponível em"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:126
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:159
+#: template/index.html:132 template/index.html:165
 msgid "Github"
 msgstr "Github"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:129
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:176
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:190
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:201
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:214
+#: template/index.html:135 template/index.html:182 template/index.html:196
+#: template/index.html:207 template/index.html:220
 msgid "Close"
 msgstr "Fechar"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:140
+#: template/index.html:146
 msgid ""
 "When you are sending any password to someone, it is more secure to generate "
 "an encrypted message and send only the URL. Thus, if you send by e-mail and "
@@ -160,7 +163,7 @@ msgstr ""
 "então, se você enviá-la através GTalk, Facebook Chat ou Skype, a senha não é "
 "armazenada nos seus bancos de dados."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:141
+#: template/index.html:147
 msgid ""
 "You can create a message with a single word and send the URL to many "
 "friends. The first to open the message gets the word and wins some prize."
@@ -169,11 +172,11 @@ msgstr ""
 "muitos amigos. O primeiro a abrir a mensagem obtém a palavra e ganha algum "
 "prêmio."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:143
+#: template/index.html:149
 msgid "Be creative!"
 msgstr "Seja criativo!"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:143
+#: template/index.html:149
 msgid ""
 "You can use it in many ways. Don't forget to let us know how you are using "
 "it :)"
@@ -181,11 +184,11 @@ msgstr ""
 "Você pode usar de muitas maneiras. Não se esqueca de nos contar como você "
 "está usando :)"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:153
+#: template/index.html:159
 msgid "For nerds.."
 msgstr "Para nerds..."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:156
+#: template/index.html:162
 msgid ""
 "The message is encrypted using AES and has a 256-bit key as passphrase. The "
 "passphrase is randomly generated at your browser, then the message is "
@@ -201,7 +204,7 @@ msgstr ""
 "único e a chave aleatória. Ambos estão no fragmento da URL e não são "
 "enviados para o nosso servidor quando a URL é aberta."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:157
+#: template/index.html:163
 msgid ""
 "When the generated URL is opened, a javascript code parses the URL and "
 "retrieve the message by its unique identifier. The servers return the "
@@ -217,7 +220,7 @@ msgstr ""
 "novamente, nossos servidores irão retornar um código de status 404 porque a "
 "mensagem não existe mais."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:158
+#: template/index.html:164
 msgid ""
 "One can argue that someone might retrieve your message and make it "
 "unavailable to you. Although it is possible, the unique identifiers are "
@@ -229,54 +232,46 @@ msgstr ""
 "são gerados aleatoriamente usando a RFC4122 UUID v4 e a probabilidade de "
 "colisão ao acaso é de cerca de 8.64E-78."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:169
+#: template/index.html:175
 msgid "Your message is..."
 msgstr "Sua mensagem é…"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:173
+#: template/index.html:179
 msgid "REMEMBER"
 msgstr "LEMBRE-SE"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:173
+#: template/index.html:179
 msgid "This message has been deleted and cannot be read again."
 msgstr "Essa mensagem foi deletada e não pode ser lida novamente."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:183
+#: template/index.html:189
 msgid "Message not found"
 msgstr "Mensagem não encontrada"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:186
+#: template/index.html:192
 msgid "This message has already been read or has never been existed."
 msgstr "Essa mensagem já foi lida ou nunca existiu."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:187
+#: template/index.html:193
 msgid "You should ask the sender to send it again."
 msgstr "Você deve pedir ao remetente para enviá-la novamente."
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:208
+#: template/index.html:214
 msgid "Contact Information"
 msgstr "Informações de contato"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/index.html:211
+#: template/index.html:217
 msgid "You can contact us by e-mail"
 msgstr "Você pode nos contactar por e-mail"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/viacrypt.js:150
+#: template/viacrypt.js:158
 msgid "Rate limit exceeded"
 msgstr "Taxa limite excedida"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/viacrypt.js:150
+#: template/viacrypt.js:158
 msgid "Too many messages. Try again in"
 msgstr "Muitas mensagens. Tente novamente em"
 
-#: /Volumes/data/feliperasinhas/Vialink/viacrypt/template/viacrypt.js:150
+#: template/viacrypt.js:158
 msgid "minute"
 msgstr "minuto"
-
-#: template/email.mustache:7
-msgid "ViaCRYPT - Message read on {{ now }}"
-msgstr "ViaCRYPT - Mensagem lida em {{ now }}"
-
-#: template/email.mustache:10
-msgid "The message you wrote on {{ date }} was just read."
-msgstr "A mensagem que você escreveu em {{ date }} acabou de ser lida."

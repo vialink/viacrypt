@@ -5,12 +5,13 @@ cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 
 // available locales: en, pt-BR
+cfg.locales = ['pt-BR', 'en'];
 cfg.locale = 'en';
 
 // URL used when generating URL client-side and when retrieving a message.
 // Never prefix the protocol (http or https). It is generated according to
 // the access.
-cfg.baseurl = '//viacry.pt';
+cfg.baseurl = '//127.0.0.1:8001';
 
 // you might want to disable serving static files on production to avoid
 // unecessary hassles that may come with it. (set to false to disable)
@@ -41,13 +42,21 @@ cfg.mongo_options = {
 // (http://www.nodemailer.com/#well-known-services-for-smtp)
 cfg.enable_email_notification = false;
 cfg.notification_options = {
-    service: null,
-    smtp_server: '',
-    smtp_port: '25',
-    sender: '',
-    username: '',
-    password: '',
-	hide_header: false
+	hide_header: false,
+	sender: 'viacrypt@localhost',
+	// file backend
+	backend: {
+		type: 'file',
+		filepath: 'mail.log'
+	}
+	// smtp (real) backend
+	//backend: {
+	//	type: 'smtp',
+	//	smtp_server: '',
+	//	smtp_port: '25',
+	//	username: '',
+	//	password: ''
+	//}
 }
 
 // Rate limit

@@ -1,6 +1,11 @@
 # ![ViaCRYPT](assets/img/logo.png)
 
-One time message system.
+One time read messaging system. You can try it at [http://viacry.pt/](http://viacry.pt/).
+
+Requirements
+------------
+
+* [Node.js](http://nodejs.org/)
 
 Install
 -------
@@ -45,6 +50,7 @@ its input files are altered.
 
     grunt watch
 
+
 Running
 -------
 
@@ -53,6 +59,30 @@ Should be as simple as
     ./server.js
 
 Then checkout `localhost:8001` to see the app.
+
+Translating
+-----------
+
+Translations are being done with gettext and translation files should be located on `locale/<LANG>/translations.mo`
+with its respective .po file.
+
+The current scheme still needs some polishing, we could compile the .po to .mo and ease the extraction.
+
+Although there is an `xgettext` task, using [handlebars-xgettext](https://github.com/gmarty/handlebars-xgettext)
+package yield better results, as the current task will not extract source lines.
+
+To create a new translation it's easier to copy an existing one.
+
+To update an existing translation the following is recommended. Replace `en` for the desired language.
+
+    handlebars-xgettext -o locale/translations.pot -D template
+    sed -i.tmp 's/\/absolute\/path\/to\/viacrypt\///' locale/translations.pot
+    rm locale/translations.pot.tmp
+    msgmerge locale/en/translations.po locale/translations.pot > locale/en/translations.po.new
+    mv locale/en/translations.po.new locale/en/translations.po
+    msgfmt -o locale/en/translations.mo locale/en/translations.po
+    rm locale/translations.pot
+
 
 Deploying
 ---------
