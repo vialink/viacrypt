@@ -289,6 +289,20 @@ body {
 	float:left;
 	background:url(../img/logo-vialink.png) no-repeat top center;	
 }
+
+.locale li{
+    text-decoration: none;
+    position: relative;
+    float: right;
+    margin-top: -15px;
+    padding: 4px;
+    list-style: none;
+}
+
+.locale img{
+    height: 30px;
+    width: 30px
+}
 /* /////////////////////////   FIM FOOTER      */
 
 /* /////////////////////////   INICIO MODAL      */
