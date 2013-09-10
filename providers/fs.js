@@ -23,6 +23,10 @@ var template = handlebars.compile('-----BEGIN USER MESSAGE-----\nViaCRYPT-Versio
 
 var Provider = function(options){
 	var messages_path = options.messages_path;
+	// ensure dir exists
+	if (!fs.existsSync(messages_path))
+		fs.mkdirSync(messages_path);
+
 	if (messages_path == null) {
 		console.log('WARNING: implicit messages path is being deprecated, please configure one!');
 		messages_path = 'messages/'
