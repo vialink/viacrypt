@@ -17,10 +17,14 @@ languages.forEach(function (lang) {
 // as suggested here: https://github.com/janl/mustache.js/issues/216
 function changelang(lang) {
 	gt.textdomain(lang);
-	handlebars.registerHelper('_', function (msgid) {
-		return gt.gettext(msgid);
-	});
+	//handlebars.registerHelper('_', function (msgid) {
+	//	return gt.gettext(msgid);
+	//});
 }
+
+handlebars.registerHelper('_', function (msgid) {
+	return gt.gettext(msgid);
+});
 
 module.exports = {
 	changelang: changelang,

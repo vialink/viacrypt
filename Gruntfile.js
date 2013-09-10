@@ -94,9 +94,13 @@ module.exports = function(grunt) {
 	grunt.registerTask('compile', function() {
 		var input_dir = 'template/';
 		var output_dir = 'static/';
-		config.languages.forEach(function(lang, _, _, lang_dir) {
+		config.supported_locales.forEach(function(locale_list, _, _, lang_dir) {
+			var lang = locale_list[0];
+			var code = locale_list[1].replace('_', '-');
 			templating.changelang(lang);
 			grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
+				var context = JSON.parse(JSON.stringify(config));
+				context.lang = code;
 				// ignoring hidden files for compilation
 				if (filename[0] == '.' || filename[0] == '_') return;
 				var data = grunt.file.read(filepath).toString();
@@ -104,7 +108,7 @@ module.exports = function(grunt) {
 				var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
 				var locale_dir = lang_dir || (lang + '/');
 				var progress = grunt.log.write('compiling: ' + locale_dir + base_filepath + '... ');
-				grunt.file.write(output_dir + locale_dir + base_filepath, template(config));
+				grunt.file.write(output_dir + locale_dir + base_filepath, template(context));
 				progress.ok();
 			});
 		});

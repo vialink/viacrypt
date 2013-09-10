@@ -4,11 +4,22 @@ var cfg = {};
 cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 
-// internationalization codes an mappings
-cfg.locale_codes = {
-	en_US: 'en',
-	pt_BR: 'br'
-}
+// internationalization options
+//
+cfg.supported_locales = [
+	['en', 'en_US'],
+	['br', 'pt_BR'],
+]
+
+// generate locale codes from supported locales
+cfg.locale_codes = {}
+cfg.supported_locales.forEach(function(locale_list) {
+	var name = locale_list[0];
+	for (i = 1; i < locale_list.length; i++) {
+		var code = locale_list[i];
+		cfg.locale_codes[code] = name;
+	}
+});
 
 // list of locales, extraced from locale codes
 cfg.locales = Object.keys(cfg.locale_codes);
