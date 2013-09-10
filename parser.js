@@ -17,6 +17,8 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var message = require('./templating').compile(require('fs').readFileSync(__dirname + '/template/_message.txt').toString());
+
 // known headers and they're mappings:
 var headers = {
 	'ViaCRYPT-Version': 'version',
@@ -62,4 +64,7 @@ function parse(string) {
 	return parsed;
 }
 
-module.exports.parse = parse;
+module.exports = {
+	parse: parse,
+	message: message
+}

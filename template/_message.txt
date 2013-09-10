@@ -1,0 +1,9 @@
+-----BEGIN USER MESSAGE-----
+ViaCRYPT-Version: {{version}}
+Submitted-by: {{ip}}
+Submitted-date: {{date}}{{#if locale}}
+Sender-locale: {{locale}}{{/if}}{{#if email}}
+Send-notification-to: {{email}}{{/if}}
+
+{{{data}}}
+-----END USER MESSAGE-----

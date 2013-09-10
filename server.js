@@ -29,8 +29,9 @@ var connect = require('connect'),
 	version = require('./package').version,
 	config = require('./config'),
 	i18n = require('./i18n'),
-	dateformat = require('dateformat');
+	dateformat = require('dateformat'),
 	templating = require('./templating'),
+	parser = require('./parser'),
 	locale = require('locale'),
 	url = require('url'),
 	fs = require('fs');
@@ -69,8 +70,8 @@ app.get('/m/:id', function(req, res) {
 				res.statusCode = 404;
 				res.send('id not found');
 			} else {
-				data = parse(data.toString());
-				res.send(data);
+				var prepared = prepare(data);
+				res.send(prepared);
 			}
 		});
 	}
@@ -78,17 +79,13 @@ app.get('/m/:id', function(req, res) {
 
 // parses the message removing the email address header 
 // if necessary and verifying if an email has to be sent
-function parse(data) {
-	var lines = data.split('\n');
-	var locale = lines[4].trim().split(' ')[1];
-	var tokens = lines[5].trim().split(' ');
-	var last = tokens.length - 1;
-	if (tokens[last] != '') {
+function prepare(data) {
+	if (data.email) {
 		var now = new Date();
-		var old = new Date(lines[3].substr(16, 24).trim());
+		var old = data.date;
 		var info = {
-			email: tokens[last],
-			locale: locale,
+			email: data.email,
+			locale: data.locale,
 			context : {
 				now: dateformat(now, "mm-dd-yyyy HH:MM:ss"),
 				date: dateformat(old, "mm-dd-yyyy HH:MM:ss")
@@ -96,11 +93,9 @@ function parse(data) {
 		};
 		send_mail_to(info);
 	}
-	if (config.notification_options['hide_header'] === true) {
-		lines[5] = "";
-		return lines.join('\n');
-	}
-	return data;
+	if (config.notification_options['hide_header'] === true)
+		delete data.email;
+	return parser.message(data);
 }
 
 // sends an email message using nodemailer
