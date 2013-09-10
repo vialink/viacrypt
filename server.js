@@ -31,7 +31,8 @@ var connect = require('connect'),
 	i18n = require('./i18n'),
 	dateformat = require('dateformat');
 	templating = require('./templating'),
-	locale = require("locale"),
+	locale = require('locale'),
+	url = require('url'),
 	fs = require('fs');
 
 // --------------
@@ -249,7 +250,7 @@ function get_locale(req) {
 	var lang = (req.url || '').match(/\/?([^\/]*)\/?/)[1];
 	if (i18n.languages.indexOf(lang) >= 0) return lang;
 	console.log(req.headers);
-	var ref_lang = (req.headers['referer'] || '').match(/\/?([^\/]*)\/?/)[1];
+	var ref_lang = (url.parse(req.headers['referer']).pathname || '').match(/\/?([^\/]*)\/?/)[1];
 	if (i18n.languages.indexOf(ref_lang) >= 0) return ref_lang;
 	return null;
 }
