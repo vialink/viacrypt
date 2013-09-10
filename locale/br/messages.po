@@ -130,7 +130,7 @@ msgid ""
 msgstr ""
 "O sistema de criptografia é tão forte que todos os computadores do mundo "
 "juntos levariam muito mais de um trilhão de anos para quebrá-la. Você pode "
-"ter mais informações sobre esse"
+"ter mais informações sobre isso"
 
 #: template/index.html:132
 msgid "here"
@@ -142,7 +142,7 @@ msgid ""
 "it at home, it's available at"
 msgstr ""
 "Você pode verificar o código por conta própria, esteja você curioso ou "
-"simplesmente quer executá-lo em casa, ele está disponível em"
+"simplesmente queira executá-lo em casa, ele está disponível em"
 
 #: template/index.html:133 template/index.html:166
 msgid "Github"
@@ -163,9 +163,9 @@ msgid ""
 msgstr ""
 "Ao enviar alguma senha para alguém, é mais seguro gerar uma mensagem "
 "criptografada e enviar apenas a URL. Assim, se você enviar por e-mail e "
-"alguém, no futuro, ter acesso ao e-mail, o invasor não terá a senha. Ou "
+"alguém, no futuro, tiver acesso ao e-mail, o invasor não terá a senha. Ou "
 "então, se você enviá-la através GTalk, Facebook Chat ou Skype, a senha não é "
-"armazenada nos seus bancos de dados."
+"armazenada em seus bancos de dados."
 
 #: template/index.html:148
 msgid ""
