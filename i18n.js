@@ -17,6 +17,8 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var locale = require('locale');
+var url = require('url');
 var i18n = {};
 
 // imporing configured locales
@@ -46,5 +48,36 @@ i18n.locales = Object.keys(i18n.locale_codes);
 
 // list of languages, extracted from locale codes
 i18n.languages = i18n.locales.map(function(k) { return i18n.locale_codes[k]; });
+
+i18n.get_locale = function(path) {
+	var ref_lang = (url.parse(path || '').pathname || '').match(/\/?([^\/]*)\/?/)[1];
+	if (i18n.languages.indexOf(ref_lang) >= 0) return ref_lang;
+	return null;
+}
+
+i18n.best_locale = function(req) {
+	var langs = new locale.Locales(req.headers['accept-language']);
+	var supported = new locale.Locales(i18n.locales);
+	var best = langs.best(supported);
+	return i18n.locale_codes[best];
+}
+
+i18n.localized_static = function(connect, root, options) {
+	var statics = {};
+	i18n.languages.forEach(function (lang) {
+		var new_root = root + '/' + lang;
+		statics[lang] = connect.static(new_root, options);
+	});
+	var static_default = connect.static(root, options);
+
+	return function(req, res, next) {
+		if (i18n.get_locale(req.url)) return static_default(req, res, next);
+		else return statics[i18n.best_locale(req)](req, res, next);
+	};
+}
+
+i18n.message_locale = function(req) {
+	return i18n.get_locale(req.headers['referer']) || i18n.best_locale(req);
+}
 
 module.exports = i18n;
