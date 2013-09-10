@@ -4,9 +4,17 @@ var cfg = {};
 cfg.listen = '127.0.0.1';
 cfg.port = 8001;
 
-// available locales: en, pt-BR
-cfg.locales = ['br', 'en'];
-cfg.locale = 'en';
+// internationalization codes an mappings
+cfg.locale_codes = {
+	en_US: 'en',
+	pt_BR: 'br'
+}
+
+// list of locales, extraced from locale codes
+cfg.locales = Object.keys(cfg.locale_codes);
+
+// list of languages, extracted from locale codes
+cfg.languages = cfg.locales.map(function(k) { return cfg.locale_codes[k]; });
 
 // URL used when generating URL client-side and when retrieving a message.
 // Never prefix the protocol (http or https). It is generated according to

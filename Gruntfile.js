@@ -17,6 +17,10 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var fs = require('fs');
+var config = require('./config');
+var templating = require('./templating');
+
 module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-curl');
@@ -27,25 +31,27 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		clean: ['static'],
-		copy: {
-			assets: {
+		copy: config.languages.map(function (lang) {
+			return {
 				expand: true,
 				cwd: 'assets/',
 				src: ['**'],
-				dest: 'static/'
+				dest: 'static/' + lang + '/',
 			}
-		},
-		'curl-dir': {
-			'static/lib/': [
-				'http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js',
-				'http://code.jquery.com/jquery-1.10.2.min.js',
-				'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js',
-				'http://www.seabreezecomputers.com/tips/touchscroll.js',
-				'http://code.jquery.com/jquery-1.10.2.min.map'
-			],
-			'static/lib/css/': [
-				'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css',
-			]
+		}),
+		getassets: {
+			'static/': {
+				'lib/': [
+					'http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js',
+					'http://code.jquery.com/jquery-1.10.2.min.js',
+					'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js',
+					'http://www.seabreezecomputers.com/tips/touchscroll.js',
+					'http://code.jquery.com/jquery-1.10.2.min.map'
+				],
+				'lib/css/': [
+					'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css',
+				]
+			}
 		},
 		xgettext: {
 			options: {
@@ -81,20 +87,14 @@ module.exports = function(grunt) {
 	});
 
 	// Default task is compiling
-	grunt.registerTask('default', ['copy', 'curl-dir', 'compile']);
+	grunt.registerTask('default', ['copy', 'getassets', 'compile']);
 
 	// Will compile every file in the ./template dir to the ./static dir
 	// recursively with handlebars using the configured locale for translations
 	grunt.registerTask('compile', function() {
-		var fs = require('fs');
-		var config = require('./config');
-		var templating = require('./templating');
-		var languages = config.locales;
-		var default_lang = config.locale;
-
 		var input_dir = 'template/';
 		var output_dir = 'static/';
-		function compile(lang, _, _, lang_dir) {
+		config.languages.forEach(function(lang, _, _, lang_dir) {
 			templating.changelang(lang);
 			grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
 				// ignoring hidden files for compilation
@@ -107,8 +107,22 @@ module.exports = function(grunt) {
 				grunt.file.write(output_dir + locale_dir + base_filepath, template(config));
 				progress.ok();
 			});
-		}
-		languages.forEach(compile);
-		compile(default_lang, null, null, '/');
+		});
+	});
+
+	grunt.registerTask('getassets', function() {
+		this.requiresConfig('getassets');
+		var cfg = grunt.config('getassets');
+		var curl_dir_cfg = {};
+		config.languages.forEach(function (lang) {
+			var locale_dir = lang + '/';
+			var progress = grunt.log.write('getting assets for ' + lang + ' locale... ');
+			for (base in cfg)
+				for (dir in cfg[base])
+					curl_dir_cfg[base + locale_dir + dir] = cfg[base][dir];
+			progress.ok();
+		});
+		grunt.config('curl-dir', curl_dir_cfg);
+		grunt.task.run('curl-dir');
 	});
 }

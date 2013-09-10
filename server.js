@@ -28,9 +28,9 @@ var connect = require('connect'),
 	ratelimit = require('express-rate'),
 	version = require('./package').version,
 	config = require('./config'),
-	url = require('url'),
 	dateformat = require('dateformat');
 	templating = require('./templating'),
+	locale = require("locale"),
 	fs = require('fs');
 
 // --------------
@@ -207,7 +207,6 @@ app.post('/m/', middleware, function(req, res) {
 	} else {
 		ip += ' (via ' + req.connection.remoteAddress + ')';
 	}
-	var query = url.parse(req.get('referer')).pathname;
 	var message = {
 		version: version,
 		ip: ip,
@@ -215,7 +214,7 @@ app.post('/m/', middleware, function(req, res) {
 		notification: req.body.notify,
 		email: req.body.email,
 		data: userdata.match(/.{1,64}/g).join('\n'),
-		locale: get_locale(query)
+		locale: get_locale(req) || best_locale(req)
 	};
 	// in theory it's almost impossible to get ONE collision
 	// but we're trying 10 times just in case
@@ -245,29 +244,34 @@ app.post('/m/', middleware, function(req, res) {
 
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-function get_locale(query) {
-	var available_locales = config.locales;
-	var lang = query.match(/\/?([^\/]*)\/?/)[1];
-	if (available_locales.indexOf(lang) >= 0) {
-		return lang;
-	}
-	return config.locale;
+function get_locale(req) {
+	var lang = (req.url || '').match(/\/?([^\/]*)\/?/)[1];
+	if (config.languages.indexOf(lang) >= 0) return lang;
+	var ref_lang = (req.headers['referer'] || '').match(/\/?([^\/]*)\/?/)[1];
+	if (config.languages.indexOf(ref_lang) >= 0) return ref_lang;
+	return null;
 }
 
-//function rewrite_locale(root, options) {
-//    var static_enUS = connect.static(root, {maxAge: 10000, index: 'en/index.html'}),
-//        static_ptBR = connect.static(root, {maxAge: 10000, index: 'pt-BR/index.html'});
-//
-//    return function(req, res, next) {
-//        var get = req._parsedUrl['query'];
-//        locale = get_locale(get);
-//        if (locale == 'pt-BR') {
-//            return static_ptBR(req, res, next);
-//        } else {
-//            return static_enUS(req, res, next);
-//        }
-//    };
-//}
+function best_locale(req) {
+	var langs = new locale.Locales(req.headers['accept-language']);
+	var supported = new locale.Locales(config.locales);
+	var best = langs.best(supported);
+	return config.locale_codes[best];
+}
+
+function default_locale_static(root, options) {
+	var statics = {};
+	config.languages.forEach(function (lang) {
+		var new_root = root + '/' + lang;
+		statics[lang] = connect.static(new_root, options);
+	});
+	var static_default = connect.static(root, options);
+
+	return function(req, res, next) {
+		if (get_locale(req)) return static_default(req, res, next);
+		else return statics[best_locale(req)](req, res, next);
+	};
+};
 
 var static_dir;
 if (config.serve_static) {
@@ -280,8 +284,8 @@ if (config.serve_static) {
 var con = connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
-	//.use(rewrite_locale(static_dir))
-	.use(connect.static(static_dir, {maxAge: 10000}))
+	.use(default_locale_static(static_dir, {maxAge: 10000}))
+	//.use(connect.static(static_dir, {maxAge: 10000}))
 	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)

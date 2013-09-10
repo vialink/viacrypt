@@ -3,8 +3,7 @@ var handlebars = require('handlebars');
 var gettext = require('node-gettext');
 var config = require('./config');
 
-var languages = config.locales;
-var default_lang = config.locale;
+var languages = config.languages;
 
 // more info on the current gettext implementation here:
 // https://github.com/andris9/node-gettext
