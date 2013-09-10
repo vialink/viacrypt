@@ -10,7 +10,7 @@
     font-style: normal;
 } 
 body {
-	background:url(../img/bg-geral.png) no-repeat 50% 100px;
+	background:url(img/bg-geral.png) no-repeat 50% 100px;
 	font-family:Tahoma, Geneva, sans-serif;
 	line-height: 20px;
     padding-top: 115px;
@@ -66,7 +66,7 @@ a{
 	margin-top:20px;
 	margin-left:0;
 	padding:0;
-	background:url(../img/logo.png) no-repeat top left;
+	background:url(img/logo.png) no-repeat top left;
 }
 .navbar .nav{
 	margin-top:32px;
@@ -287,7 +287,7 @@ body {
 	height:15px;
 	text-indent:-9999px;
 	float:left;
-	background:url(../img/logo-vialink.png) no-repeat top center;	
+	background:url(img/logo-vialink.png) no-repeat top center;	
 }
 
 .locale li{
