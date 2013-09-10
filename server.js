@@ -188,7 +188,7 @@ if (config.serve_static) {
 	static_dir = __dirname + '/static';
 }
 
-var con = connect()
+var server = connect()
 	.use(connect.logger(log_fmt))
 	.use(connect.responseTime())
 	.use(i18n.localized_static(connect, static_dir, {maxAge: 10000}))
@@ -196,6 +196,11 @@ var con = connect()
 	.use(connect.limit('10mb'))
 	.use(connect.bodyParser())
 	.use(app)
-	.listen(config.port, config.listen);
 
-console.log('Server running at ' + config.listen + ':' + config.port);
+server.run = function() {
+	console.log('Server running at ' + config.listen + ':' + config.port);
+	return this.listen(config.port, config.listen);
+}
+
+server.run();
+
