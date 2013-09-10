@@ -97,7 +97,7 @@ function parse(data) {
 		send_mail_to(info);
 	}
 	if (config.notification_options['hide_header'] === true) {
-		lines[5] = ""; 
+		lines[5] = "";
 		return lines.join('\n');
 	}
 	return data;
@@ -111,39 +111,38 @@ function send_mail_to(info) {
 			console.log(err);
 		} else {
 			var template = data.split('Subject:');
-			var subj = template[1].split('\n')[0];
-			var body = template[1].split('\n\n')[1];
+			var subj = template[1].split('\n')[0].trim();
+			var body = template[1].split('\n\n')[1].trim();
+			info.context.logo_src = __dirname + '/assets/img/logo.png';
+			info.context.siteurl = config.siteurl || 'http:' + config.baseurl;
 			var mail = {
 				from: config.notification_options.sender,
 				to: info.email,
 				subject: templating.compile(subj)(info.context),
-				html: templating.compile(body)(info.context)
+				html: templating.compile(body)(info.context),
+				generateTextFromHTML: true,
+				forceEmbeddedImages: true
 			}
 			var backend = config.notification_options.backend;
+			function email_callback(err, data) {
+				if (err) console.log(err);
+				else console.log('Message sent: ' + JSON.stringify(data || 'OK'));
+			}
 			if (backend == null)
 				console.log('WARNING: unconfigured email backend, the configuration format has changed.');
 			else switch (backend.type) {
 				case 'smtp':
-					var transport = nodemailer.createTransport("SMTP", {
-							service: null,
-							host: backend.smtp_server,
-							port: backend.smtp_port,
-							auth: {
-								user: backend.username,
-								pass: backend.password
-							}
-					});
-					transport.sendMail(mail, function(err, response) {
-						if (err) console.log(err);
-						else console.log("Message sent:" + response.message);
-					});
+					if (!('auth' in backend)) {
+						console.log('WARNING: using outdated backend configuration, please update your config.js.');
+						backend.auth = { user: backend.username, pass: backend.password };
+					}
+					var transport = nodemailer.createTransport("SMTP", backend);
+					transport.sendMail(mail, email_callback);
 					transport.close();
 					break;
 				case 'file':
 					var out = JSON.stringify(mail) + '\n';
-					fs.appendFile(backend.filepath, out, function(err, data) {
-						if (err) console.log(err);
-					});
+					fs.appendFile(backend.filepath, out, email_callback);
 					break;
 				default:
 					console.log('WARNING: unrecognized backend type, email not sent!');

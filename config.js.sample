@@ -16,6 +16,9 @@ cfg.locales = {
 // the access.
 cfg.baseurl = '//127.0.0.1:8001';
 
+// this URL will be used on the footer links on mails
+cfg.siteurl = 'http:' + cfg.baseurl;
+
 // you might want to disable serving static files on production to avoid
 // unecessary hassles that may come with it. (set to false to disable)
 cfg.serve_static = true;
