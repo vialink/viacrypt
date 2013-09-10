@@ -75,14 +75,15 @@ $(function() {
 		$.ajax({
 			url: url,
 			success: function(res) {
-				var lines = res.split('\n');
-				var data = lines.slice(6, lines.length-2).join('');
-				//console.log(data);
+				var msg = res.split('\n\n')[1];
+                var lines = msg.split('\n');
+				var data = lines.slice(0, lines.length-2).join('');
+				console.log(data);
 
 				var decrypted = CryptoJS.AES.decrypt(data, passphrase);
 				var message = decrypted.toString(CryptoJS.enc.Utf8);
-				//console.log(decrypted);
-				//console.log(message);
+				console.log(decrypted);
+				console.log(message);
 
 				ga('send', 'event', 'view message', 'view', 'success');
 
