@@ -70,7 +70,7 @@ The current scheme still needs some polishing, we could compile the .po to .mo a
 Although there is an `xgettext` task, using [handlebars-xgettext](https://github.com/gmarty/handlebars-xgettext)
 package yield better results, as the current task will not extract source lines.
 
-To create a new translation it's easier to copy an existing one.
+To create a new translation one can use `locale/messages.pot` as a template.
 
 To update all existing translation the following is recommended.
 
