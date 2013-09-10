@@ -94,7 +94,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('compile', function() {
 		var input_dir = 'template/';
 		var output_dir = 'static/';
-		config.supported_locales.forEach(function(locale_list, _, _, lang_dir) {
+		config.supported_locales.forEach(function(locale_list) {
 			var lang = locale_list[0];
 			var code = locale_list[1].replace('_', '-');
 			templating.changelang(lang);
@@ -106,7 +106,7 @@ module.exports = function(grunt) {
 				var data = grunt.file.read(filepath).toString();
 				var template = templating.compile(data);
 				var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
-				var locale_dir = lang_dir || (lang + '/');
+				var locale_dir = lang + '/';
 				var progress = grunt.log.write('compiling: ' + locale_dir + base_filepath + '... ');
 				grunt.file.write(output_dir + locale_dir + base_filepath, template(context));
 				progress.ok();
