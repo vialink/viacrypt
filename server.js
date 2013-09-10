@@ -216,7 +216,7 @@ app.post('/m/', middleware, function(req, res) {
 		notification: req.body.notify,
 		email: req.body.email,
 		data: userdata.match(/.{1,64}/g).join('\n'),
-		locale: get_locale(req) || best_locale(req)
+		locale: get_locale(req.headers['referer']) || best_locale(req)
 	};
 	// in theory it's almost impossible to get ONE collision
 	// but we're trying 10 times just in case
@@ -246,11 +246,8 @@ app.post('/m/', middleware, function(req, res) {
 
 log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-function get_locale(req) {
-	var lang = (req.url || '').match(/\/?([^\/]*)\/?/)[1];
-	if (i18n.languages.indexOf(lang) >= 0) return lang;
-	console.log(req.headers);
-	var ref_lang = (url.parse(req.headers['referer'] || '').pathname || '').match(/\/?([^\/]*)\/?/)[1];
+function get_locale(path) {
+	var ref_lang = (url.parse(path || '').pathname || '').match(/\/?([^\/]*)\/?/)[1];
 	if (i18n.languages.indexOf(ref_lang) >= 0) return ref_lang;
 	return null;
 }
@@ -271,7 +268,7 @@ function default_locale_static(root, options) {
 	var static_default = connect.static(root, options);
 
 	return function(req, res, next) {
-		if (get_locale(req)) return static_default(req, res, next);
+		if (get_locale(req.url)) return static_default(req, res, next);
 		else return statics[best_locale(req)](req, res, next);
 	};
 };
