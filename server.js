@@ -250,7 +250,7 @@ function get_locale(req) {
 	var lang = (req.url || '').match(/\/?([^\/]*)\/?/)[1];
 	if (i18n.languages.indexOf(lang) >= 0) return lang;
 	console.log(req.headers);
-	var ref_lang = (url.parse(req.headers['referer']).pathname || '').match(/\/?([^\/]*)\/?/)[1];
+	var ref_lang = (url.parse(req.headers['referer'] || '').pathname || '').match(/\/?([^\/]*)\/?/)[1];
 	if (i18n.languages.indexOf(ref_lang) >= 0) return ref_lang;
 	return null;
 }
