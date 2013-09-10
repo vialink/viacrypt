@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 		xgettext: {
 			options: {
 				functionName: "_",
-				potFile: "locale/translations.pot",
+				potFile: "locale/messages.pot",
 				//processMessage: function(message) { ... }
 			},
 			target: {

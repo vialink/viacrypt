@@ -63,8 +63,7 @@ Then checkout `localhost:8001` to see the app.
 Translating
 -----------
 
-Translations are being done with gettext and translation files should be located on `locale/<LANG>/translations.mo`
-with its respective .po file.
+Translations are being done with gettext and translation files should be located on `locale/<LANG>/messages.po`.
 
 The current scheme still needs some polishing, we could compile the .po to .mo and ease the extraction.
 
@@ -73,15 +72,15 @@ package yield better results, as the current task will not extract source lines.
 
 To create a new translation it's easier to copy an existing one.
 
-To update an existing translation the following is recommended. Replace `en` for the desired language.
+To update all existing translation the following is recommended.
 
-    handlebars-xgettext -o locale/translations.pot -D template
-    sed -i.tmp 's/\/absolute\/path\/to\/viacrypt\///' locale/translations.pot
-    rm locale/translations.pot.tmp
-    msgmerge locale/en/translations.po locale/translations.pot > locale/en/translations.po.new
-    mv locale/en/translations.po.new locale/en/translations.po
-    msgfmt -o locale/en/translations.mo locale/en/translations.po
-    rm locale/translations.pot
+    handlebars-xgettext -o locale/messages.pot -D template
+    sed -i.tmp 's/\/absolute\/path\/to\/viacrypt\///' locale/messages.pot
+    rm locale/messages.pot.tmp
+    for lang in en br; do
+    	msgmerge locale/$lang/messages.po locale/messages.pot > locale/$lang/messages.po.new
+    	mv locale/$lang/messages.po.new locale/$lang/messages.po
+    done
 
 
 Deploying

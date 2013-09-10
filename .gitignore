@@ -3,6 +3,8 @@ messages/
 logs/
 *.log
 
+locale/**/*.mo
+
 static/*
 
 config.js

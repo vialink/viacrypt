@@ -1,0 +1,198 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: node-gettext\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: template/_email.html:7
+msgid "ViaCRYPT - Message read on"
+msgstr ""
+
+#: template/_email.html:10
+msgid "The message you wrote on"
+msgstr ""
+
+#: template/_email.html:10
+msgid "was just read."
+msgstr ""
+
+#: template/index.html:4
+#: template/index.html:12
+#: template/index.html:52
+#: template/index.html:52
+msgid "ViaCRYPT"
+msgstr ""
+
+#: template/index.html:13
+msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."
+msgstr ""
+
+#: template/index.html:57
+#: template/index.html:127
+msgid "What is it and how does it work?"
+msgstr ""
+
+#: template/index.html:62
+#: template/index.html:143
+msgid "Examples of use"
+msgstr ""
+
+#: template/index.html:67
+msgid "Explanation for nerds"
+msgstr ""
+
+#: template/index.html:72
+msgid "Contact Us"
+msgstr ""
+
+#: template/index.html:81
+msgid "Type your secret message here..."
+msgstr ""
+
+#: template/index.html:87
+msgid "Please, notify me when my message is read."
+msgstr ""
+
+#: template/index.html:88
+msgid "Your e-mail will be stored non-encrypted into our servers."
+msgstr ""
+
+#: template/index.html:91
+msgid "My e-mail address is:"
+msgstr ""
+
+#: template/index.html:97
+msgid "Save it"
+msgstr ""
+
+#: template/index.html:101
+msgid "Single-use URL:"
+msgstr ""
+
+#: template/index.html:102
+msgid "IMPORTANT"
+msgstr ""
+
+#: template/index.html:102
+msgid "This message can be read only once and will be deleted on the first read."
+msgstr ""
+
+#: template/index.html:111
+msgid "Developed by"
+msgstr ""
+
+#: template/index.html:111
+msgid "VIALINK"
+msgstr ""
+
+#: template/index.html:130
+msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."
+msgstr ""
+
+#: template/index.html:131
+msgid "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."
+msgstr ""
+
+#: template/index.html:132
+msgid "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"
+msgstr ""
+
+#: template/index.html:132
+msgid "here"
+msgstr ""
+
+#: template/index.html:133
+#: template/index.html:166
+msgid "You can check the code yourself whether you're curious or just want to run it at home, it's available at"
+msgstr ""
+
+#: template/index.html:133
+#: template/index.html:166
+msgid "Github"
+msgstr ""
+
+#: template/index.html:136
+#: template/index.html:183
+#: template/index.html:197
+#: template/index.html:208
+#: template/index.html:221
+msgid "Close"
+msgstr ""
+
+#: template/index.html:147
+msgid "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases."
+msgstr ""
+
+#: template/index.html:148
+msgid "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."
+msgstr ""
+
+#: template/index.html:150
+msgid "Be creative!"
+msgstr ""
+
+#: template/index.html:150
+msgid "You can use it in many ways. Don't forget to let us know how you are using it :)"
+msgstr ""
+
+#: template/index.html:160
+msgid "For nerds.."
+msgstr ""
+
+#: template/index.html:163
+msgid "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."
+msgstr ""
+
+#: template/index.html:164
+msgid "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."
+msgstr ""
+
+#: template/index.html:165
+msgid "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."
+msgstr ""
+
+#: template/index.html:176
+msgid "Your message is..."
+msgstr ""
+
+#: template/index.html:180
+msgid "REMEMBER"
+msgstr ""
+
+#: template/index.html:180
+msgid "This message has been deleted and cannot be read again."
+msgstr ""
+
+#: template/index.html:190
+msgid "Message not found"
+msgstr ""
+
+#: template/index.html:193
+msgid "This message has already been read or has never been existed."
+msgstr ""
+
+#: template/index.html:194
+msgid "You should ask the sender to send it again."
+msgstr ""
+
+#: template/index.html:215
+msgid "Contact Information"
+msgstr ""
+
+#: template/index.html:218
+msgid "You can contact us by e-mail"
+msgstr ""
+
+#: template/viacrypt.js:153
+msgid "Rate limit exceeded"
+msgstr ""
+
+#: template/viacrypt.js:153
+msgid "Too many messages. Try again in"
+msgstr ""
+
+#: template/viacrypt.js:153
+msgid "minute"
+msgstr ""
