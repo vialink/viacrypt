@@ -8,6 +8,7 @@ cfg.port = 8001;
 cfg.locales = {
 	en: ['en_US'],
 	br: ['pt_BR']
+	//<public shortname: ['<main locale>', '<alias locale>', '<alias locale'>, ...]
 }
 
 // URL used when generating URL client-side and when retrieving a message.
