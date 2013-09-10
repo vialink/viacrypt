@@ -28,6 +28,7 @@ var connect = require('connect'),
 	ratelimit = require('express-rate'),
 	version = require('./package').version,
 	config = require('./config'),
+	i18n = require('./i18n'),
 	dateformat = require('dateformat');
 	templating = require('./templating'),
 	locale = require("locale"),
@@ -246,22 +247,23 @@ log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:ht
 
 function get_locale(req) {
 	var lang = (req.url || '').match(/\/?([^\/]*)\/?/)[1];
-	if (config.languages.indexOf(lang) >= 0) return lang;
+	if (i18n.languages.indexOf(lang) >= 0) return lang;
+	console.log(req.headers);
 	var ref_lang = (req.headers['referer'] || '').match(/\/?([^\/]*)\/?/)[1];
-	if (config.languages.indexOf(ref_lang) >= 0) return ref_lang;
+	if (i18n.languages.indexOf(ref_lang) >= 0) return ref_lang;
 	return null;
 }
 
 function best_locale(req) {
 	var langs = new locale.Locales(req.headers['accept-language']);
-	var supported = new locale.Locales(config.locales);
+	var supported = new locale.Locales(i18n.locales);
 	var best = langs.best(supported);
-	return config.locale_codes[best];
+	return i18n.locale_codes[best];
 }
 
 function default_locale_static(root, options) {
 	var statics = {};
-	config.languages.forEach(function (lang) {
+	i18n.languages.forEach(function (lang) {
 		var new_root = root + '/' + lang;
 		statics[lang] = connect.static(new_root, options);
 	});

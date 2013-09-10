@@ -19,6 +19,7 @@
 
 var fs = require('fs');
 var config = require('./config');
+var i18n = require('./i18n');
 var templating = require('./templating');
 
 module.exports = function(grunt) {
@@ -31,7 +32,7 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		clean: ['static'],
-		copy: config.languages.map(function (lang) {
+		copy: i18n.languages.map(function (lang) {
 			return {
 				expand: true,
 				cwd: 'assets/',
@@ -94,13 +95,14 @@ module.exports = function(grunt) {
 	grunt.registerTask('compile', function() {
 		var input_dir = 'template/';
 		var output_dir = 'static/';
-		config.supported_locales.forEach(function(locale_list) {
+		i18n.supported_locales.forEach(function(locale_list) {
 			var lang = locale_list[0];
 			var code = locale_list[1].replace('_', '-');
 			templating.changelang(lang);
 			grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
 				var context = JSON.parse(JSON.stringify(config));
 				context.lang = code;
+				context.languages = i18n.languages;
 				// ignoring hidden files for compilation
 				if (filename[0] == '.' || filename[0] == '_') return;
 				var data = grunt.file.read(filepath).toString();
@@ -118,7 +120,7 @@ module.exports = function(grunt) {
 		this.requiresConfig('getassets');
 		var cfg = grunt.config('getassets');
 		var curl_dir_cfg = {};
-		config.languages.forEach(function (lang) {
+		i18n.languages.forEach(function (lang) {
 			var locale_dir = lang + '/';
 			var progress = grunt.log.write('getting assets for ' + lang + ' locale... ');
 			for (base in cfg)

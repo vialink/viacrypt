@@ -1,9 +1,9 @@
 var fs = require('fs');
 var handlebars = require('handlebars');
 var gettext = require('node-gettext');
-var config = require('./config');
+var i18n = require('./i18n');
 
-var languages = config.languages;
+var languages = i18n.languages;
 
 // more info on the current gettext implementation here:
 // https://github.com/andris9/node-gettext
