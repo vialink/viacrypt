@@ -19,7 +19,7 @@
 var fs = require('fs');
 var handlebars = require('handlebars');
 
-var template = handlebars.compile('-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\nSender-locale: {{ locale }}\nSend-notification-to: {{ email }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n');
+var template = handlebars.compile('-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\nSender-locale: {{ locale }}\nSend-notification-to: {{ email }}\nNotification-id: {{ notification_id }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n');
 
 var Provider = function(options){
 	var messages_path = options.messages_path;

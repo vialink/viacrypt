@@ -7,5 +7,5 @@
 Subject:{{_ "ViaCRYPT - Message read on"}} {{ now }}.
 
 <div id="body"> 
-    {{_ "The message you wrote on"}} {{ date }} {{_ "was just read."}}
+    {{_ "The message" }} {{#if label }} {{_ "identified as" }} "{{ label }}" {{/if }}{{_ "you wrote on"}} {{ date }} {{_ "was just read."}}
 </div>

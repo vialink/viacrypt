@@ -82,6 +82,7 @@ function parse(data) {
 	var lines = data.split('\n');
 	var locale = lines[4].trim().split(' ')[1];
 	var tokens = lines[5].trim().split(' ');
+    var label = lines[6].trim().split(':')[1].trim();
 	var last = tokens.length - 1;
 	if (tokens[last] != '') {
 		var now = new Date();
@@ -91,7 +92,8 @@ function parse(data) {
 			locale: locale,
 			context : {
 				now: dateformat(now, "mm-dd-yyyy HH:MM:ss"),
-				date: dateformat(old, "mm-dd-yyyy HH:MM:ss")
+				date: dateformat(old, "mm-dd-yyyy HH:MM:ss"),
+                label: label 
 			}
 		};
 		send_mail_to(info);
@@ -216,7 +218,8 @@ app.post('/m/', middleware, function(req, res) {
 		notification: req.body.notify,
 		email: req.body.email,
 		data: userdata.match(/.{1,64}/g).join('\n'),
-		locale: get_locale(req.headers['referer']) || best_locale(req)
+		locale: get_locale(req.headers['referer']) || best_locale(req),
+        notification_id: req.body.label 
 	};
 	// in theory it's almost impossible to get ONE collision
 	// but we're trying 10 times just in case

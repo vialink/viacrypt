@@ -78,12 +78,12 @@ $(function() {
 				var msg = res.split('\n\n')[1];
                 var lines = msg.split('\n');
 				var data = lines.slice(0, lines.length-2).join('');
-				console.log(data);
+				//console.log(data);
 
 				var decrypted = CryptoJS.AES.decrypt(data, passphrase);
 				var message = decrypted.toString(CryptoJS.enc.Utf8);
-				console.log(decrypted);
-				console.log(message);
+				//console.log(decrypted);
+				//console.log(message);
 
 				ga('send', 'event', 'view message', 'view', 'success');
 
@@ -120,12 +120,14 @@ $(function() {
 		//console.log('decrypt_test', decrypt.toString(CryptoJS.enc.Utf8));
 		//return;
 
-        var mail = $(".notifyByEmail").find("input").val();
+        var mail = $('[name="notifyByEmail"]').val();
+        var nid = $('[name="notificationLabel"]').val();
 
 		var content = {
 			data: data.toString(),
             notify: notifyByEmailCheckbox.is(':checked'),
-            email: (mail === undefined ? "" : mail.toString())
+            email: (mail === undefined ? "" : mail.toString()),
+            label: (nid === undefined ? "" : nid.toString())
 		};
 		$.ajax({
 			url: '/m/',
