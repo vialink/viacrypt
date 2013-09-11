@@ -17,13 +17,18 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var locale = require('locale');
+var url = require('url');
 var i18n = {};
 
-// imporing configured locales
-locales = require('./config').locales;
+locales = {
+	en: ['en_US'],
+	br: ['pt_BR']
+	//<public shortname: ['<main locale>', '<alias locale>', '<alias locale'>, ...]
+}
 
 // generate a list with elements of the format:
-// [<alias>, <code1>, <code2>, ...]
+// [<public shortname>, <main locale>, <alias locale>, ...]
 i18n.supported_locales = []
 for (key in locales) {
 	var clone = locales[key].slice(0);
@@ -32,6 +37,7 @@ for (key in locales) {
 }
 
 // generate locale codes from supported locales
+// {<locale>: <public shortname>, <locale>: <public shortname>, ...}
 i18n.locale_codes = {}
 i18n.supported_locales.forEach(function(locale_list) {
 	var name = locale_list[0];
@@ -42,9 +48,57 @@ i18n.supported_locales.forEach(function(locale_list) {
 });
 
 // list of locales, extraced from locale codes
+// [<locale>, <locale>, <locale>, ...]
 i18n.locales = Object.keys(i18n.locale_codes);
 
 // list of languages, extracted from locale codes
+// [<public shortname>, <public shortname>, ...]
 i18n.languages = i18n.locales.map(function(k) { return i18n.locale_codes[k]; });
+
+// will parse a url: `[proto://domain:port]/pathname[?query]` and extract
+// the locale from the pathname, expected something like `/<public shortname>/...`
+// if not found will return null
+i18n.get_locale = function(path) {
+	var ref_lang = (url.parse(path || '').pathname || '').match(/\/?([^\/]*)\/?/)[1];
+	if (i18n.languages.indexOf(ref_lang) >= 0) return ref_lang;
+	return null;
+}
+
+// given a request `req`, will try to find the best locale to use
+// based soley on the Accept-Language header and local supported languages
+i18n.best_locale = function(req) {
+	var langs = new locale.Locales(req.headers['accept-language']);
+	var supported = new locale.Locales(i18n.locales);
+	var best = langs.best(supported);
+	return i18n.locale_codes[best];
+}
+
+// given the connect.js object, a root path and a set of options to pass
+// to each static middleware, this will create and static middleware that
+// serves localized first and best_locale if a locale is not given on the pathname
+//
+// with root `/static/root`, and `['en', 'br']` langs, this would happen:
+// /en/index.html -> /static/root/en/index.html
+// /br/index.html -> /static/root/br/index.html
+// /index.html -> /static/root/[br,en]/index.html based on best_locale
+i18n.localized_static = function(connect, root, options) {
+	var statics = {};
+	i18n.languages.forEach(function (lang) {
+		var new_root = root + '/' + lang;
+		statics[lang] = connect.static(new_root, options);
+	});
+	var static_default = connect.static(root, options);
+
+	return function(req, res, next) {
+		if (i18n.get_locale(req.url)) return static_default(req, res, next);
+		else return statics[i18n.best_locale(req)](req, res, next);
+	};
+}
+
+// given a request `req` this will always return a locale, it's either one extracted
+// from the url or the best_locale
+i18n.message_locale = function(req) {
+	return i18n.get_locale(req.headers['referer']) || i18n.best_locale(req);
+}
 
 module.exports = i18n;

@@ -75,9 +75,10 @@ $(function() {
 		$.ajax({
 			url: url,
 			success: function(res) {
-				var msg = res.split('\n\n')[1];
-                var lines = msg.split('\n');
-				var data = lines.slice(0, lines.length-2).join('');
+				var lines = res.trim().split('\n');
+				while (lines.shift() !== '');
+				lines.pop();
+				var data = lines.join('');
 				//console.log(data);
 
 				var decrypted = CryptoJS.AES.decrypt(data, passphrase);

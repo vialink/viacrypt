@@ -20,7 +20,7 @@
 var mongodb = require('mongodb');
 var handlebars = require('handlebars');
 
-var template = handlebars.compile('-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\nSender-locale: {{ locale }}\nSend-notification-to: {{ email }}\nNotification-id: {{ notification_id }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n');
+//var template = handlebars.compile('-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\nSender-locale: {{ locale }}\nSend-notification-to: {{ email }}\nNotification-id: {{ notification_id }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n');
 
 var Provider = function(options){
 	//TODO maybe check if options are ok
@@ -49,7 +49,8 @@ Provider.prototype.get = function (id, callback) {
 			// when the message is not found, null is returned instead of an error
 			else if (message == null) callback({notfound: true});
 			else {
-				var data = template(message);
+				//var data = template(message);
+				var data = message;
 				// if there are any errors on the callback the document is lost
 				callback(null, data);
 			}

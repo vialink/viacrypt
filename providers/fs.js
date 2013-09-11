@@ -16,10 +16,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 var fs = require('fs');
 var handlebars = require('handlebars');
-
-var template = handlebars.compile('-----BEGIN USER MESSAGE-----\nViaCRYPT-Version: {{ version }}\nSubmitted-by: {{ ip }}\nSubmitted-date: {{ date }}\nSender-locale: {{ locale }}\nSend-notification-to: {{ email }}\nNotification-id: {{ notification_id }}\n\n{{{ data }}}\n-----END USER MESSAGE-----\n');
+var message = require('../parser').message;
+var parse = require('../parser').parse;
 
 var Provider = function(options){
 	var messages_path = options.messages_path;
@@ -53,21 +54,21 @@ Provider.prototype.get = function (id, callback) {
 		if (err) {
 			callback(err);
 		} else {
-			callback(err, data);
+			callback(err, parse(data.toString()));
 			// delete the file
 			fs.unlink(path);
 		}
 	});
 }
 
-Provider.prototype.put = function (id, message, callback) {
+Provider.prototype.put = function (id, data, callback) {
 	var path = this.make_path(id);
 	if (fs.exists(path, function(exists) {
 		if (exists) {
 			callback('duplicate');
 		} else {
-			var data = template(message);
-			fs.writeFile(path, data, function(err) {
+			var raw_data = message(data);
+			fs.writeFile(path, raw_data, function(err) {
 				if (err) {
 					var error = (function () {
 						//TODO list known treatable errors.
