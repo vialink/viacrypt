@@ -29,7 +29,7 @@ var languages = i18n.languages;
 
 var gt = new gettext();
 languages.forEach(function (lang) {
-	gt.addTextdomain(lang, fs.readFileSync([__dirname, 'locale', lang, 'messages.po'].join('/')));
+	gt.addTextdomain(lang, fs.readFileSync([__dirname, '/../locale', lang, 'messages.po'].join('/')));
 });
 
 // this is used like {{#_}}Some text to translate{{/_}}

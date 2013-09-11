@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /*
  * Copyright (c) 2013, Vialink Informática. All rights reserved.
  *
@@ -24,7 +23,7 @@
 var connect = require('connect'),
 	express = require('express'),
 	uuid = require('node-uuid'),
-	version = require('./package').version,
+	version = require('../package').version,
 	i18n = require('./i18n'),
 	parser = require('./parser');
 
@@ -175,9 +174,5 @@ Server.prototype.spawn = function() {
 
 	return server;
 }
-
-// this whill go away when this is no longer a script
-var server = new Server(require('./config'));
-server.spawn().run();
 
 module.exports.Server = Server;
