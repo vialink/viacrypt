@@ -21,11 +21,11 @@ cfg.siteurl = 'http:' + cfg.baseurl;
 
 // ## Internationalization Options
 //
-cfg.locales = {
-	en: ['en_US'],
-	br: ['pt_BR']
-	//<public shortname: ['<main locale>', '<alias locale>', '<alias locale'>, ...]
-}
+// the available langs are on locale dir
+cfg.enabled_langs = [
+	'en',
+	'br',
+]
 
 // you might want to disable serving static files on production to avoid
 // unecessary hassles that may come with it. (set to false to disable)

@@ -20,20 +20,26 @@
 var nodemailer = require('nodemailer')
 	templating = require('./templating'),
 	dateformat = require('dateformat'),
-	fs = require('fs'),
-	config = require('./config');
+	fs = require('fs');
+
+function Mailer(config) {
+	this.options = config.notification_options;
+	this.siteurl = config.siteurl || 'http:' + config.baseurl;
+}
 
 // sends an email message using nodemailer
-function send_mail(data) {
+Mailer.prototype.send_mail = function(data) {
 	var now = new Date();
 	var old = data.date;
 	var email = data.email;
 	var locale = data.locale;
+	var sender = this.options.sender;
+	var backend = this.options.backend;
 	var context = {
 		now: dateformat(now, "mm-dd-yyyy HH:MM:ss"),
 		date: dateformat(old, "mm-dd-yyyy HH:MM:ss"),
 		logo_src: __dirname + '/assets/img/logo.png',
-		siteurl: config.siteurl || 'http:' + config.baseurl
+		siteurl: this.siteurl
 	};
 	templating.changelang(locale);
 	fs.readFile(__dirname + '/template/_email.html', 'utf-8', function(err, data) {
@@ -44,14 +50,13 @@ function send_mail(data) {
 			var subj = template[1].split('\n')[0].trim();
 			var body = template[1].split('\n\n')[1].trim();
 			var mail = {
-				from: config.notification_options.sender,
+				from: sender,
 				to: email,
 				subject: templating.compile(subj)(context),
 				html: templating.compile(body)(context),
 				generateTextFromHTML: true,
 				forceEmbeddedImages: true
 			}
-			var backend = config.notification_options.backend;
 			function email_callback(err, data) {
 				if (err) console.log(err);
 				else console.log('Message sent: ' + JSON.stringify(data || 'OK'));
@@ -80,4 +85,4 @@ function send_mail(data) {
 	});
 }
 
-module.exports.send_mail = send_mail;
+module.exports.Mailer = Mailer;

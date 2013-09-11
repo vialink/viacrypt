@@ -28,7 +28,7 @@ var connect = require('connect'),
 	version = require('./package').version,
 	i18n = require('./i18n'),
 	parser = require('./parser'),
-	mailer = require('./mailer'),
+	Mailer = require('./mailer').Mailer,
 	config = require('./config');
 
 // --------------
@@ -44,6 +44,8 @@ var _provider_options = config[_provider + '_options'];
 var store = require('./providers/' + _provider);
 var provider = new store.Provider(_provider_options);
 var app = express();
+
+var mailer = new Mailer(config);
 
 // -----------
 // --- app ---
@@ -66,16 +68,23 @@ app.get('/m/:id', function(req, res) {
 				res.send('id not found');
 			} else {
 				res.send(prepare(data));
-				hooks(data);
+				run_hooks(data);
 			}
 		});
 	}
 });
 
+// set up hooks
+var hooks = [];
+if (config.enable_email_notification) {
+	hooks.push(function(data) {
+		if (data.email) mailer.send_mail(data);
+	});
+}
+
 // do proper hooks after having sent the data
-function hooks(data) {
-	if (data.email)
-		mailer.send_mail(data);
+function run_hooks(data) {
+	hooks.forEach(function(hook) { hook(data); });
 }
 
 // parses the message removing the email address header 
