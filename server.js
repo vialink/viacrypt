@@ -18,198 +18,166 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// TODO Send cache headers for static files;
+// The web server
+// ==============
 
 var connect = require('connect'),
-	http = require('http'),
 	express = require('express'),
 	uuid = require('node-uuid'),
-	ratelimit = require('express-rate'),
 	version = require('./package').version,
 	i18n = require('./i18n'),
-	parser = require('./parser'),
-	Mailer = require('./mailer').Mailer,
-	config = require('./config');
-
-// --------------
-// --- config ---
-// --------------
-
-var _provider = config.message_provider;
-if (_provider == null) {
-	console.log('WARNING: unconfigured message provider, falling back to fs store.');
-	_provider = 'fs';
-}
-var _provider_options = config[_provider + '_options'];
-var store = require('./providers/' + _provider);
-var provider = new store.Provider(_provider_options);
-var app = express();
-
-var mailer = new Mailer(config);
-
-// -----------
-// --- app ---
-// -----------
+	parser = require('./parser');
 
 var re_uuid = /^[A-Za-z0-9-]+$/;
 var re_userdata = /^[A-Za-z0-9+/=]+$/;
 
-// return message and delete it
-app.get('/m/:id', function(req, res) {
-	var id = req.params.id;
-	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-	if (re_uuid.test(id) === false) {
-		res.statusCode = 404;
-		res.send('invalid id');
-	} else {
-		provider.get(id, function(err, data) {
-			if (err) {
-				res.statusCode = 404;
-				res.send('id not found');
-			} else {
-				res.send(prepare(data));
-				run_hooks(data);
-			}
+// Initial configuration
+// ---------------------
+
+var Server = function(config) {
+	this.config = config;
+
+	// set up 
+	var _provider = config.message_provider;
+	if (_provider == null) {
+		console.log('WARNING: unconfigured message provider, falling back to fs store.');
+		_provider = 'fs';
+	}
+	var _provider_options = config[_provider + '_options'];
+	var store = require('./providers/' + _provider);
+	var provider = new store.Provider(_provider_options);
+
+	this.app = express();
+
+	// ### set up hooks
+	var hooks = [];
+	if (config.enable_email_notification) {
+		var Mailer = require('./mailer').Mailer;
+		var mailer = new Mailer(config);
+		hooks.push(function(data) {
+			if (data.email) mailer.send_mail(data);
 		});
 	}
-});
 
-// set up hooks
-var hooks = [];
-if (config.enable_email_notification) {
-	hooks.push(function(data) {
-		if (data.email) mailer.send_mail(data);
-	});
-}
-
-// do proper hooks after having sent the data
-function run_hooks(data) {
-	hooks.forEach(function(hook) { hook(data); });
-}
-
-// parses the message removing the email address header 
-// if necessary and verifying if an email has to be sent
-function prepare(data) {
-	var clone = JSON.parse(JSON.stringify(data));
-	if (config.notification_options['hide_header'] === true)
-		delete clone.email;
-	return parser.message(clone);
-}
-
-var middleware = [];
-if (config.ratelimit) {
-	if (config.ratelimit.redis) {
-		var redis = require('redis');
-		var rediscfg = config.ratelimit.redis;
-		var client = redis.createClient(rediscfg.port, rediscfg.host, rediscfg.options);
-		var handler = new ratelimit.Redis.RedisRateHandler({client: client});
-	} else {
-		var handler = new ratelimit.Memory.MemoryRateHandler();
+	// parses the message removing the email address header 
+	// if necessary and verifying if an email has to be sent
+	function prepare(data) {
+		var clone = JSON.parse(JSON.stringify(data));
+		if (config.notification_options['hide_header'] === true)
+			delete clone.email;
+		return parser.message(clone);
 	}
-	var rate_middleware = ratelimit.middleware({
-		handler: handler,
-		limit: config.ratelimit.limit,
-		interval: config.ratelimit.interval,
-		getRemoteKey: function(req) {
-			return req.get('X-Forwarded-For') || req.connection.remoteAddress
-		},
-		onLimitReached: function(req, res, rate, limit, resetTime, next) {
-			console.log('rate limit exceeded');
-			res.statusCode = 429;
-			res.send('Rate limit exceeded. Check headers for limit information.');
-		},
-		setHeadersHandler: function(req, res, rate, limit, resetTime) {
-			var remaining = limit - rate;
-			if (remaining < 0) {
-				remaining = 0;
-			}
 
-			// follows Twitter's rate limiting scheme and header notation
-			// https://dev.twitter.com/docs/rate-limiting/faq#info
-			res.setHeader('X-RateLimit-Limit', limit);
-			res.setHeader('X-RateLimit-Remaining', remaining);
-			res.setHeader('X-RateLimit-Reset', resetTime);
-			
-			// This header allows the client to calculate the time they must 
-			// wait to save another message.
-			res.setHeader('X-RateLimit-CurrentTime', (new Date()).getTime());
+	// ### set up middlewares
+	var middleware = [];
+	if (config.ratelimit) {
+		var Ratelimit = require('./ratelimit').Ratelimit;
+		var ratelimit = new Ratelimit(config);
+		middleware.push(ratelimit.rate_middleware);
+	}
+
+	// ### getting a message
+	//
+	// return message and delete it
+	this.app.get('/m/:id', function(req, res) {
+		var id = req.params.id;
+		res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+		if (re_uuid.test(id) === false) {
+			res.statusCode = 404;
+			res.send('invalid id');
+		} else {
+			provider.get(id, function(err, data) {
+				if (err) {
+					res.statusCode = 404;
+					res.send('id not found');
+				} else {
+					res.send(prepare(data));
+					hooks.forEach(function(hook) { hook(data); });
+				}
+			});
 		}
 	});
-	middleware.push(rate_middleware);
-}
 
-// store new message
-app.post('/m/', middleware, function(req, res) {
-	var userdata = req.body.data;
-	if (re_userdata.test(userdata) === false) {
-		res.statusCode = 400;
-		res.send('invalid data');
-		return;
-	}
-	var ip = req.get('X-Forwarded-For');
-	if (ip === undefined) {
-		ip = req.connection.remoteAddress;
-	} else {
-		ip += ' (via ' + req.connection.remoteAddress + ')';
-	}
-	var message = {
-		version: version,
-		ip: ip,
-		date: new Date(),
-		notification: req.body.notify,
-		email: req.body.email,
-		data: userdata.match(/.{1,64}/g).join('\n'),
-		locale: i18n.message_locale(req)
-	};
-	// in theory it's almost impossible to get ONE collision
-	// but we're trying 10 times just in case
-	var attempts = 0, max_attempts = 10;
-	(function save() {
-		var id = uuid.v4();
-		provider.put(id, message, function(err) {
-			if (err) {
-				if (err == 'duplicate' && attempts < max_attempts) {
-					attempts += 1;
-					// recursion! limited to 10 times.
-					save();
+	// ### storing a messsage
+	//
+	this.app.post('/m/', middleware, function(req, res) {
+		var userdata = req.body.data;
+		if (re_userdata.test(userdata) === false) {
+			res.statusCode = 400;
+			res.send('invalid data');
+			return;
+		}
+		var ip = req.get('X-Forwarded-For');
+		if (ip === undefined) {
+			ip = req.connection.remoteAddress;
+		} else {
+			ip += ' (via ' + req.connection.remoteAddress + ')';
+		}
+		var message = {
+			version: version,
+			ip: ip,
+			date: new Date(),
+			notification: req.body.notify,
+			email: req.body.email,
+			data: userdata.match(/.{1,64}/g).join('\n'),
+			locale: i18n.message_locale(req)
+		};
+		// in theory it's almost impossible to get ONE collision
+		// but we're trying 10 times just in case
+		var attempts = 0, max_attempts = 10;
+		(function save() {
+			var id = uuid.v4();
+			provider.put(id, message, function(err) {
+				if (err) {
+					if (err == 'duplicate' && attempts < max_attempts) {
+						attempts += 1;
+						// recursion! limited to 10 times.
+						save();
+					} else {
+						res.statusCode = 500;
+						res.send('something wrong happened: ' + err);
+					}
 				} else {
-					res.statusCode = 500;
-					res.send('something wrong happened: ' + err);
+					res.send(JSON.stringify({ id: id }));
 				}
-			} else {
-				res.send(JSON.stringify({ id: id }));
-			}
-		});
-	})();
-});
-
-// ------------------
-// --- web server ---
-// ------------------
-
-log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
-
-var static_dir;
-if (config.serve_static) {
-    static_dir = config.static_dir;
-} else if (config.serve_static !== false) {
-	console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
-	static_dir = __dirname + '/static';
+			});
+		})();
+	});
 }
 
-var server = connect()
-	.use(connect.logger(log_fmt))
-	.use(connect.responseTime())
-	.use(i18n.localized_static(connect, static_dir, {maxAge: 10000}))
-	//.use(connect.static(static_dir, {maxAge: 10000}))
-	.use(connect.limit('10mb'))
-	.use(connect.bodyParser())
-	.use(app)
+// return a runnable
+Server.prototype.spawn = function() {
+	log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-server.run = function() {
-	console.log('Server running at ' + config.listen + ':' + config.port);
-	return this.listen(config.port, config.listen);
+	var static_dir;
+	if (this.config.serve_static) {
+	    static_dir = this.config.static_dir;
+	} else if (this.config.serve_static !== false) {
+		console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
+		static_dir = __dirname + '/static';
+	}
+
+	var server = connect()
+		.use(connect.logger(log_fmt))
+		.use(connect.responseTime())
+		.use(i18n.localized_static(connect, static_dir, {maxAge: 10000}))
+		//.use(connect.static(static_dir, {maxAge: 10000}))
+		.use(connect.limit('10mb'))
+		.use(connect.bodyParser())
+		.use(this.app)
+
+	var addr = this.config.listen;
+	var port = this.config.port;
+	server.run = function() {
+		console.log('Server running at ' + addr + ':' + port);
+		return this.listen(port, addr);
+	}
+
+	return server;
 }
 
-server.run();
+// this whill go away when this is no longer a script
+var server = new Server(require('./config'));
+server.spawn().run();
 
+module.exports.Server = Server;
