@@ -8,7 +8,7 @@
          url('fonts/teuton23pro-webfont.svg#teuton23pro') format('svg');
     font-weight: normal;
     font-style: normal;
-} 
+}
 body {
 	background:url(img/bg-geral.png) no-repeat 50% 100px;
 	font-family:Tahoma, Geneva, sans-serif;
@@ -171,7 +171,7 @@ textarea{
 .input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input, .input-append .dropdown-menu, .input-prepend .dropdown-menu{
 	font-size:12px;
 }
-textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+textarea:required:focus, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
 border-color: rgba(242, 101, 42, 0.8);
 outline: 0;
 outline: thin dotted \9;

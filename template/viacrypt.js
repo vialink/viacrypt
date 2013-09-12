@@ -106,7 +106,7 @@ $(function() {
 	//---------------------------------------------------------------------------------
 	// Save it!
 	//
-	$('#save').click(function() {
+	$('#main-form').submit(function() {
 		var message = $('#message').val();
 		var passphrase = generate_passphrase();
 		//console.log('message', message);
@@ -121,14 +121,13 @@ $(function() {
 		//console.log('decrypt_test', decrypt.toString(CryptoJS.enc.Utf8));
 		//return;
 
-        var mail = $('[name="notifyByEmail"]').val();
-        var nid = $('[name="notificationLabel"]').val();
-
 		var content = {
 			data: data.toString(),
-            notify: notifyByEmailCheckbox.is(':checked'),
-            email: (mail === undefined ? "" : mail.toString()),
-            label: (nid === undefined ? "" : nid.toString())
+			//{{#if enable_email_notification}}
+			notify: $('[name="messageNotify"]').is(':checked'),
+			email:  $('[name="messageNotifyEmail"]').val() || "",
+			label:  $('[name="messageNotifyLabel"]').val() || ""
+			//{{/if}}
 		};
 		$.ajax({
 			url: '/m/',
@@ -161,12 +160,15 @@ $(function() {
 				}
 			}
 		});
+		return false;
 	});
 
 	//---------------------------------------------------------------------------------
 	// Notify by e-mail.
 	//
-	var re_email = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+	// using official html5 pattern, should not be required with support for html5
+	// http://www.w3.org/TR/html-markup/input.email.html#input.email.attrs.value.single
+	var re_email = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 	var checkEmail = function() {
 		var email = notifyByEmailInput.val();
 		if (re_email.test(email)) {
@@ -178,14 +180,16 @@ $(function() {
 	var notifyByEmail = $('.notifyByEmail');
 	var notifyByEmailInput = notifyByEmail.find('input').keyup(checkEmail);
 	var notifyByEmailCheckbox = $('.notifyByEmailCheckbox').click(function() {
-		if(notifyByEmailCheckbox.is(':checked')) {
+		if (notifyByEmailCheckbox.is(':checked')) {
 			notifyByEmailInput.removeAttr('disabled');
 			notifyByEmail.show();
 			checkEmail();
 			notifyByEmailInput.focus();
+			$('[name="messageNotifyEmail"]').attr('required', true);
 		} else {
 			notifyByEmail.parent().removeClass('error success');
 			notifyByEmailInput.attr('disabled', 'disabled');
+			$('[name="messageNotifyEmail"]').attr('required', false);
 			notifyByEmail.hide();
 		}
 	});

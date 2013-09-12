@@ -29,31 +29,26 @@ function Mailer(config) {
 
 // sends an email message using nodemailer
 Mailer.prototype.send_mail = function(data) {
-	var now = new Date();
-	var old = data.date;
-	var email = data.email;
-	var locale = data.locale;
-    var label = data.label;
 	var sender = this.options.sender;
 	var backend = this.options.backend;
 	var context = {
-		now: dateformat(now, "mm-dd-yyyy HH:MM:ss"),
-		date: dateformat(old, "mm-dd-yyyy HH:MM:ss"),
-        label: label,
+		now:      dateformat(new Date(), "mm-dd-yyyy HH:MM:ss"),
+		date:     dateformat(data.old,   "mm-dd-yyyy HH:MM:ss"),
+		label:    data.label,
 		logo_src: __dirname + '/assets/img/logo.png',
-		siteurl: this.siteurl
+		siteurl:  this.siteurl
 	};
-	templating.changelang(locale);
-	fs.readFile(__dirname + '/template/_email.html', 'utf-8', function(err, data) {
+	templating.changelang(data.locale);
+	fs.readFile(__dirname + '/template/_email.html', 'utf-8', function(err, file_data) {
 		if(err) {
 			console.log(err);
 		} else {
-			var template = data.split('Subject:');
+			var template = file_data.split('Subject:');
 			var subj = template[1].split('\n')[0].trim();
 			var body = template[1].split('\n\n')[1].trim();
 			var mail = {
 				from: sender,
-				to: email,
+				to: data.email,
 				subject: templating.compile(subj)(context),
 				html: templating.compile(body)(context),
 				generateTextFromHTML: true,

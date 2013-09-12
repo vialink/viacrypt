@@ -120,7 +120,7 @@ var Server = function(config) {
 			notification: req.body.notify,
 			locale: i18n.message_locale(req),
 			email: req.body.email,
-            label: req.body.label,
+			label: req.body.label,
 			data: userdata.match(/.{1,64}/g).join('\n')
 		};
 		// in theory it's almost impossible to get ONE collision

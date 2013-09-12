@@ -26,7 +26,7 @@ var headers = {
 	'Submitted-date': 'date',
 	'Sender-locale': 'locale',
 	'Send-notification-to': 'email',
-    'Notification-id': 'label'
+	'Notification-id': 'label'
 }
 
 var parsers = {
@@ -43,7 +43,7 @@ function parse(string) {
 	if (lines.pop() != terminator) return null;
 	var line;
 	while ((line = lines.shift().trim()) != '') {
-		var match = line.match(/^([^:]+):\ (.+)$/);
+		var match = line.match(/^([^:]+):\ (.+)$/) || [];
 		if (match.length == 3) {
 			var header = match[1];
 			var value = match[2];
