@@ -17,7 +17,6 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var fs = require('fs');
 var config = require('./config');
 var i18n = require('./src/i18n');
 var templating = require('./src/templating');
@@ -39,7 +38,7 @@ module.exports = function(grunt) {
 				cwd: 'assets/',
 				src: ['**'],
 				dest: 'static/' + lang + '/',
-			}
+			};
 		}),
 		getassets: {
 			'static/': {
@@ -57,8 +56,8 @@ module.exports = function(grunt) {
 		},
 		xgettext: {
 			options: {
-				functionName: "_",
-				potFile: "locale/messages.pot",
+				functionName: '_',
+				potFile: 'locale/messages.pot',
 				//processMessage: function(message) { ... }
 			},
 			target: {
@@ -88,15 +87,15 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			src: {
-				src: [ "src/**/*.js" ],
+				src: [ 'src/**/*.js' ],
 				options: {
-					jshintrc: ".jshintrc"
+					jshintrc: '.jshintrc'
 				}
 			},
 			grunt: {
-				src: [ "Gruntfile.js", "build/tasks/*" ],
+				src: [ 'Gruntfile.js', 'build/tasks/*' ],
 				options: {
-					jshintrc: ".jshintrc"
+					jshintrc: '.jshintrc'
 				}
 			},
 		},
@@ -119,7 +118,9 @@ module.exports = function(grunt) {
 				context.lang = code;
 				context.languages = i18n.languages;
 				// ignoring hidden files for compilation
-				if (filename[0] == '.' || filename[0] == '_') return;
+				if (filename[0] === '.' || filename[0] === '_') {
+					return;
+				}
 				var data = grunt.file.read(filepath).toString();
 				var template = templating.compile(data);
 				var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
@@ -138,12 +139,14 @@ module.exports = function(grunt) {
 		i18n.languages.forEach(function (lang) {
 			var locale_dir = lang + '/';
 			var progress = grunt.log.write('getting assets for ' + lang + ' locale... ');
-			for (base in cfg)
-				for (dir in cfg[base])
+			for (var base in cfg) {
+				for (var dir in cfg[base]) {
 					curl_dir_cfg[base + locale_dir + dir] = cfg[base][dir];
+				}
+			}
 			progress.ok();
 		});
 		grunt.config('curl-dir', curl_dir_cfg);
 		grunt.task.run('curl-dir');
 	});
-}
+};

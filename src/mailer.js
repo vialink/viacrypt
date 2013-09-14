@@ -17,10 +17,10 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var nodemailer = require('nodemailer')
-	templating = require('./templating'),
-	dateformat = require('dateformat'),
-	fs = require('fs');
+var nodemailer = require('nodemailer');
+var templating = require('./templating');
+var dateformat = require('dateformat');
+var fs = require('fs');
 
 function Mailer(config) {
 	this.options = config.notification_options;
@@ -32,8 +32,8 @@ Mailer.prototype.send_mail = function(data) {
 	var sender = this.options.sender;
 	var backend = this.options.backend;
 	var context = {
-		now:      dateformat(new Date(), "mm-dd-yyyy HH:MM:ss"),
-		date:     dateformat(data.old,   "mm-dd-yyyy HH:MM:ss"),
+		now:      dateformat(new Date(), 'mm-dd-yyyy HH:MM:ss'),
+		date:     dateformat(data.old,   'mm-dd-yyyy HH:MM:ss'),
 		label:    data.label,
 		logo_src: __dirname + '/../assets/img/logo.png',
 		siteurl:  this.siteurl
@@ -53,20 +53,24 @@ Mailer.prototype.send_mail = function(data) {
 				html: templating.compile(body)(context),
 				generateTextFromHTML: true,
 				forceEmbeddedImages: true
-			}
-			function email_callback(err, data) {
-				if (err) console.log(err);
-				else console.log('Message sent: ' + JSON.stringify(data || 'OK'));
-			}
-			if (backend == null)
+			};
+			var email_callback = function(err, data) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log('Message sent: ' + JSON.stringify(data || 'OK'));
+				}
+			};
+			if (backend == null) {
 				console.log('WARNING: unconfigured email backend, the configuration format has changed.');
-			else switch (backend.type) {
+			} else {
+				switch (backend.type) {
 				case 'smtp':
 					if (!('auth' in backend)) {
 						console.log('WARNING: using outdated backend configuration, please update your config.js.');
 						backend.auth = { user: backend.username, pass: backend.password };
 					}
-					var transport = nodemailer.createTransport("SMTP", backend);
+					var transport = nodemailer.createTransport('SMTP', backend);
 					transport.sendMail(mail, email_callback);
 					transport.close();
 					break;
@@ -77,9 +81,10 @@ Mailer.prototype.send_mail = function(data) {
 				default:
 					console.log('WARNING: unrecognized backend type, email not sent!');
 					break;
+				}
 			}
 		}
 	});
-}
+};
 
 module.exports.Mailer = Mailer;

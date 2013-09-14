@@ -34,9 +34,9 @@ var Ratelimit = function(config) {
 		limit: config.ratelimit.limit,
 		interval: config.ratelimit.interval,
 		getRemoteKey: function(req) {
-			return req.get('X-Forwarded-For') || req.connection.remoteAddress
+			return req.get('X-Forwarded-For') || req.connection.remoteAddress;
 		},
-		onLimitReached: function(req, res, rate, limit, resetTime, next) {
+		onLimitReached: function(req, res/*, rate, limit, resetTime, next*/) {
 			console.log('rate limit exceeded');
 			res.statusCode = 429;
 			res.send('Rate limit exceeded. Check headers for limit information.');
@@ -58,6 +58,6 @@ var Ratelimit = function(config) {
 			res.setHeader('X-RateLimit-CurrentTime', (new Date()).getTime());
 		}
 	});
-}
+};
 
 module.exports.Ratelimit = Ratelimit;

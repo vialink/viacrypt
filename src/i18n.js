@@ -21,16 +21,16 @@ var locale = require('locale');
 var url = require('url');
 var i18n = {};
 
-locales = {
+var locales = {
 	en: ['en_US'],
 	br: ['pt_BR']
 	//<public shortname: ['<main locale>', '<alias locale>', '<alias locale'>, ...]
-}
+};
 
 // generate a list with elements of the format:
 // [<public shortname>, <main locale>, <alias locale>, ...]
-i18n.supported_locales = []
-for (key in locales) {
+i18n.supported_locales = [];
+for (var key in locales) {
 	var clone = locales[key].slice(0);
 	clone.unshift(key);
 	i18n.supported_locales.push(clone);
@@ -38,10 +38,10 @@ for (key in locales) {
 
 // generate locale codes from supported locales
 // {<locale>: <public shortname>, <locale>: <public shortname>, ...}
-i18n.locale_codes = {}
+i18n.locale_codes = {};
 i18n.supported_locales.forEach(function(locale_list) {
 	var name = locale_list[0];
-	for (i = 1; i < locale_list.length; i++) {
+	for (var i = 1; i < locale_list.length; i++) {
 		var code = locale_list[i];
 		i18n.locale_codes[code] = name;
 	}
@@ -60,9 +60,11 @@ i18n.languages = i18n.locales.map(function(k) { return i18n.locale_codes[k]; });
 // if not found will return null
 i18n.get_locale = function(path) {
 	var ref_lang = (url.parse(path || '').pathname || '').match(/\/?([^\/]*)\/?/)[1];
-	if (i18n.languages.indexOf(ref_lang) >= 0) return ref_lang;
+	if (i18n.languages.indexOf(ref_lang) >= 0) {
+		return ref_lang;
+	}
 	return null;
-}
+};
 
 // given a request `req`, will try to find the best locale to use
 // based soley on the Accept-Language header and local supported languages
@@ -71,7 +73,7 @@ i18n.best_locale = function(req) {
 	var supported = new locale.Locales(i18n.locales);
 	var best = langs.best(supported);
 	return i18n.locale_codes[best];
-}
+};
 
 // given the connect.js object, a root path and a set of options to pass
 // to each static middleware, this will create and static middleware that
@@ -90,15 +92,18 @@ i18n.localized_static = function(connect, root, options) {
 	var static_default = connect.static(root, options);
 
 	return function(req, res, next) {
-		if (i18n.get_locale(req.url)) return static_default(req, res, next);
-		else return statics[i18n.best_locale(req)](req, res, next);
+		if (i18n.get_locale(req.url)) {
+			return static_default(req, res, next);
+		} else {
+			return statics[i18n.best_locale(req)](req, res, next);
+		}
 	};
-}
+};
 
 // given a request `req` this will always return a locale, it's either one extracted
 // from the url or the best_locale
 i18n.message_locale = function(req) {
-	return i18n.get_locale(req.headers['referer']) || i18n.best_locale(req);
-}
+	return i18n.get_locale(req.headers.referer) || i18n.best_locale(req);
+};
 
 module.exports = i18n;

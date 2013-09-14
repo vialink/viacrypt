@@ -27,11 +27,11 @@ var headers = {
 	'Sender-locale': 'locale',
 	'Send-notification-to': 'email',
 	'Notification-id': 'label'
-}
+};
 
 var parsers = {
 	date: function (d) { return new Date(Date.parse(d)); }
-}
+};
 
 var initiator = '-----BEGIN USER MESSAGE-----';
 var terminator = '-----END USER MESSAGE-----';
@@ -39,18 +39,18 @@ var terminator = '-----END USER MESSAGE-----';
 function parse(string) {
 	var lines = string.trim().split('\n');
 	var parsed = {};
-	if (lines.shift() != initiator) return null;
-	if (lines.pop() != terminator) return null;
+	if ((lines.shift() !== initiator) || (lines.pop() !== terminator)) {
+		return null;
+	}
 	var line;
-	while ((line = lines.shift().trim()) != '') {
+	while ((line = lines.shift().trim()) !== '') {
 		var match = line.match(/^([^:]+):\ (.+)$/) || [];
-		if (match.length == 3) {
+		if (match.length === 3) {
 			var header = match[1];
 			var value = match[2];
 			if (header in headers) {
 				var key = headers[header];
-				if (key in parsers) parsed[key] = parsers[key](value);
-				else parsed[key] = value;
+				parsed[key] = (key in parsers) ? parsers[key](value) : value;
 			} else {
 				parsed._unknown = parsed._unknown || {};
 				parsed._unknown[header] = value;
@@ -68,4 +68,4 @@ function parse(string) {
 module.exports = {
 	parse: parse,
 	message: message
-}
+};

@@ -54,7 +54,9 @@ var Server = function(config) {
 		var Mailer = require('./mailer').Mailer;
 		var mailer = new Mailer(config);
 		hooks.push(function(data) {
-			if (data.email) mailer.send_mail(data);
+			if (data.email) {
+				mailer.send_mail(data);
+			}
 		});
 	}
 
@@ -62,8 +64,9 @@ var Server = function(config) {
 	// if necessary and verifying if an email has to be sent
 	function prepare(data) {
 		var clone = JSON.parse(JSON.stringify(data));
-		if (config.notification_options['hide_header'] === true)
+		if (config.notification_options.hide_header === true) {
 			delete clone.email;
+		}
 		return parser.message(clone);
 	}
 
@@ -129,7 +132,7 @@ var Server = function(config) {
 			var id = uuid.v4();
 			provider.put(id, message, function(err) {
 				if (err) {
-					if (err == 'duplicate' && attempts < max_attempts) {
+					if (err === 'duplicate' && attempts < max_attempts) {
 						attempts += 1;
 						// recursion! limited to 10 times.
 						save();
@@ -143,11 +146,11 @@ var Server = function(config) {
 			});
 		})();
 	});
-}
+};
 
 // return a runnable
 Server.prototype.spawn = function() {
-	log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+	var log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
 	var static_dir;
 	if (this.config.serve_static) {
@@ -164,16 +167,16 @@ Server.prototype.spawn = function() {
 		//.use(connect.static(static_dir, {maxAge: 10000}))
 		.use(connect.limit('10mb'))
 		.use(connect.bodyParser())
-		.use(this.app)
+		.use(this.app);
 
 	var addr = this.config.listen;
 	var port = this.config.port;
 	server.run = function() {
 		console.log('Server running at ' + addr + ':' + port);
 		return this.listen(port, addr);
-	}
+	};
 
 	return server;
-}
+};
 
 module.exports.Server = Server;

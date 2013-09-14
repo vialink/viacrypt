@@ -18,35 +18,35 @@
  */
 
 var fs = require('fs');
-var handlebars = require('handlebars');
 var message = require('../parser').message;
 var parse = require('../parser').parse;
 
 var Provider = function(options){
 	var messages_path = options.messages_path;
 	// ensure dir exists
-	if (!fs.existsSync(messages_path))
+	if (!fs.existsSync(messages_path)) {
 		fs.mkdirSync(messages_path);
+	}
 
 	if (messages_path == null) {
 		console.log('WARNING: implicit messages path is being deprecated, please configure one!');
-		messages_path = 'messages/'
+		messages_path = 'messages/';
 	}
 	// check if given path is absolute
-	if (messages_path.substr(0, 1) == '/') {
+	if (messages_path.substr(0, 1) === '/') {
 		this.messages_path = messages_path;
 	} else {
 		this.messages_path = __dirname + '/../' + messages_path;
 	}
 	// ensure path ends with '/'
-	if (this.messages_path.substr(-1, 1) != '/') {
+	if (this.messages_path.substr(-1, 1) !== '/') {
 		this.messages_path += '/';
 	}
-}
+};
 
 Provider.prototype.make_path = function(id) {
 	return this.messages_path + id;
-}
+};
 
 Provider.prototype.get = function (id, callback) {
 	var path = this.make_path(id);
@@ -59,11 +59,11 @@ Provider.prototype.get = function (id, callback) {
 			fs.unlink(path);
 		}
 	});
-}
+};
 
 Provider.prototype.put = function (id, data, callback) {
 	var path = this.make_path(id);
-	if (fs.exists(path, function(exists) {
+	fs.exists(path, function(exists) {
 		if (exists) {
 			callback('duplicate');
 		} else {
@@ -82,7 +82,7 @@ Provider.prototype.put = function (id, data, callback) {
 				}
 			});
 		}
-	}));
-}
+	});
+};
 
 exports.Provider = Provider;

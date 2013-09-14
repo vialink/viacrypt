@@ -48,4 +48,4 @@ handlebars.registerHelper('_', function (msgid) {
 module.exports = {
 	changelang: changelang,
 	compile: handlebars.compile
-}
+};
