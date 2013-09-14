@@ -29,6 +29,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 
 	grunt.initConfig({
 		clean: ['static'],
@@ -84,7 +85,21 @@ module.exports = function(grunt) {
 				tasks: ['copy', 'compile'],
 				options: { livereload: true },
 			}
-		}
+		},
+		jshint: {
+			src: {
+				src: [ "src/**/*.js" ],
+				options: {
+					jshintrc: ".jshintrc"
+				}
+			},
+			grunt: {
+				src: [ "Gruntfile.js", "build/tasks/*" ],
+				options: {
+					jshintrc: ".jshintrc"
+				}
+			},
+		},
 	});
 
 	// Default task is compiling
