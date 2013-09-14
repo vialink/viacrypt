@@ -18,7 +18,7 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var Server = require('../viacrypt/server').Server;
+var Server = require('../src/server').Server;
 var config = require('../config');
 
 // this whill go away when this is no longer a script

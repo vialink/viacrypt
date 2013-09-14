@@ -19,8 +19,8 @@
 
 var fs = require('fs');
 var config = require('./config');
-var i18n = require('./i18n');
-var templating = require('./templating');
+var i18n = require('./src/i18n');
+var templating = require('./src/templating');
 
 module.exports = function(grunt) {
 

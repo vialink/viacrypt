@@ -35,11 +35,11 @@ Mailer.prototype.send_mail = function(data) {
 		now:      dateformat(new Date(), "mm-dd-yyyy HH:MM:ss"),
 		date:     dateformat(data.old,   "mm-dd-yyyy HH:MM:ss"),
 		label:    data.label,
-		logo_src: __dirname + '/assets/img/logo.png',
+		logo_src: __dirname + '/../assets/img/logo.png',
 		siteurl:  this.siteurl
 	};
 	templating.changelang(data.locale);
-	fs.readFile(__dirname + '/template/_email.html', 'utf-8', function(err, file_data) {
+	fs.readFile(__dirname + '/../template/_email.html', 'utf-8', function(err, file_data) {
 		if(err) {
 			console.log(err);
 		} else {
