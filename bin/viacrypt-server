@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/*
+/* vim: filetype=javascript
  * Copyright (c) 2013, Vialink Informática. All rights reserved.
  *
  * This file is part of ViaCRYPT.
@@ -19,7 +19,32 @@
  */
 
 var Server = require('../src/server').Server;
-var config = require('../config');
+var version = require('../package').version;
+var ArgumentParser = require('argparse').ArgumentParser;
+
+// set up argument parser
+var parser = new ArgumentParser({
+	version: version,
+	description:  'Web server for ViaCRYPT.',
+	addHelp: true,
+});
+parser.addArgument(
+	['-c', '--config'],
+	{
+		required: true,
+		help: 'path to configuration file.'
+	}
+);
+
+// parse args
+var args = parser.parseArgs();
+
+// load given configuration file
+var config_file = args.config;
+if (config_file[0] !== '/') {
+	config_file = process.cwd() + '/' + config_file;
+}
+var config = require(config_file);
 
 // this whill go away when this is no longer a script
 var server = new Server(config);

@@ -1,8 +1,9 @@
 {
-  "name": "ViaCRYPT",
+  "name": "viacrypt",
   "version": "0.3.0-pre",
   "description": "One time read messaging system.",
-  "author": "Vialink",
+  "tags": ["viacrypt", "secret", "message", "cryptography", "web", "app"],
+  "author": "Vialink Team",
   "repository": {
     "type": "git",
     "url": "git://github.com/vialink/viacrypt.git"
@@ -10,12 +11,10 @@
   "bugs": {
     "url": "https://github.com/vialink/viacrypt/issues"
   },
-  "licenses": [
-    {
-      "type": "AGPL",
-      "url": "https://github.com/vialink/viacrypt/blob/master/COPYING"
-    }
-  ],
+  "license": {
+    "type": "AGPL",
+    "url": "https://github.com/vialink/viacrypt/blob/master/COPYING"
+  },
   "dependencies": {
     "connect": "~2.8.5",
     "express": "~3.3.5",
@@ -27,7 +26,8 @@
     "node-gettext": "~0.2.14",
     "nodemailer": "~0.5.2",
     "dateformat": "~1.0.6",
-    "locale": "0.0.10"
+    "locale": "0.0.10",
+    "argparse": "~0.1.15"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
