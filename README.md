@@ -72,15 +72,12 @@ package yield better results, as the current task will not extract source lines.
 
 To create a new translation one can use `locale/messages.pot` as a template.
 
-To update all existing translation the following is recommended.
+There is a script to update the current translations, it is the recommended way right now.
 
-    handlebars-xgettext -o locale/messages.pot -D template
-    sed -i.tmp 's/\/absolute\/path\/to\/viacrypt\///' locale/messages.pot
-    rm locale/messages.pot.tmp
-    for lang in en br; do
-    	msgmerge locale/$lang/messages.po locale/messages.pot > locale/$lang/messages.po.new
-    	mv locale/$lang/messages.po.new locale/$lang/messages.po
-    done
+    ./xgettext.sh
+
+We are aware that it only works on POSIX systems and `handlebars-xgettext` is a global requirement
+contributions to improve this subsystem are very welcome.
 
 
 Deploying
