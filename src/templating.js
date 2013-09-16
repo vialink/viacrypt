@@ -17,35 +17,21 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var fs = require('fs');
 var handlebars = require('handlebars');
-var gettext = require('node-gettext');
 var i18n = require('./i18n');
 
 var languages = i18n.languages;
 
-// more info on the current gettext implementation here:
-// https://github.com/andris9/node-gettext
-
-var gt = new gettext();
-languages.forEach(function (lang) {
-	gt.addTextdomain(lang, fs.readFileSync([__dirname, '/../locale', lang, 'messages.po'].join('/')));
-});
+// how to use http://slexaxton.github.io/Jed/
 
 // this is used like {{#_}}Some text to translate{{/_}}
 // as suggested here: https://github.com/janl/mustache.js/issues/216
-function changelang(lang) {
-	gt.textdomain(lang);
-	//handlebars.registerHelper('_', function (msgid) {
-	//	return gt.gettext(msgid);
-	//});
-}
-
 handlebars.registerHelper('_', function (msgid) {
-	return gt.gettext(msgid);
+	return i18n.jed().translate(msgid).fetch();
 });
 
 module.exports = {
-	changelang: changelang,
+	changelang: i18n.setcontext,
+	//changelang: function(l) { console.log(JSON.sei18n.jed().,
 	compile: handlebars.compile
 };

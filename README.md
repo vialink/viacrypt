@@ -76,8 +76,8 @@ There is a script to update the current translations, it is the recommended way 
 
     ./xgettext.sh
 
-We are aware that it only works on POSIX systems and `handlebars-xgettext` is a global requirement
-contributions to improve this subsystem are very welcome.
+We are aware that it only works on POSIX systems and `handlebars-xgettext` and `po2json` are
+required to be installed globaly contributions to improve this subsystem are very welcome.
 
 
 Deploying

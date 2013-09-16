@@ -84,7 +84,7 @@ module.exports = function(grunt) {
 				options: { nospawn: true }
 			},
 			templates: {
-				files: ['template/**/*'],
+				files: ['template/**/*', 'src/templating.js', 'src/i18n.js'],
 				tasks: ['compile'],
 				options: { livereload: true },
 			},

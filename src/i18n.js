@@ -20,6 +20,8 @@
 var locale = require('locale');
 var url = require('url');
 var i18n = {};
+var join = require('path').join;
+var Jed = require('jed').Jed;
 
 var locales = {
 	en: ['en_US'],
@@ -105,5 +107,21 @@ i18n.localized_static = function(connect, root, options) {
 i18n.message_locale = function(req) {
 	return i18n.get_locale(req.headers.referer) || i18n.best_locale(req);
 };
+
+i18n._jeds = {};
+i18n.languages.forEach(function (lang) {
+	i18n._jeds[lang] = new Jed({
+		locale_data: require(join(__dirname, '../locale', lang, 'messages.json'))
+	});
+	i18n._jed = i18n._jeds[lang];
+});
+
+i18n.setcontext = function(lang) {
+	i18n._jed = i18n._jeds[lang];
+}
+
+i18n.jed = function() {
+	return i18n._jed;
+}
 
 module.exports = i18n;
