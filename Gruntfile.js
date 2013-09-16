@@ -29,6 +29,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-develop');
 
 	grunt.initConfig({
 		clean: ['static'],
@@ -68,7 +69,20 @@ module.exports = function(grunt) {
 			}
 		},
 		// spawn=false was tried, didn't work as expected
+		develop: {
+			server: {
+				file: 'bin/viacrypt-server'
+			}
+		},
 		watch: {
+			js: {
+				files: [
+					'config.js',
+					'src/**/*.js'
+				],
+				tasks: ['develop'],
+				options: { nospawn: true }
+			},
 			templates: {
 				files: ['template/**/*'],
 				tasks: ['compile'],
@@ -103,6 +117,7 @@ module.exports = function(grunt) {
 
 	// Default task is compiling
 	grunt.registerTask('default', ['copy', 'getassets', 'compile']);
+	grunt.registerTask('run', ['develop', 'watch']);
 
 	// Will compile every file in the ./template dir to the ./static dir
 	// recursively with handlebars using the configured locale for translations

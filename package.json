@@ -2,8 +2,16 @@
   "name": "viacrypt",
   "version": "0.3.0-pre",
   "description": "One time read messaging system.",
-  "tags": ["viacrypt", "secret", "message", "cryptography", "web", "app"],
+  "tags": [
+    "viacrypt",
+    "secret",
+    "message",
+    "cryptography",
+    "web",
+    "app"
+  ],
   "author": "Vialink Team",
+  "home": "https://github.com/vialink/viacrypt",
   "repository": {
     "type": "git",
     "url": "git://github.com/vialink/viacrypt.git"
@@ -36,7 +44,8 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-watch": "~0.5.1",
-    "grunt-contrib-jshint": "~0.6.4"
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-develop": "~0.2.2"
   },
   "bin": {
     "viacrypt-server": "bin/viacrypt-server"
