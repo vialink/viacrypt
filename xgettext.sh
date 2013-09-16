@@ -10,4 +10,5 @@ rm locale/messages.pot.tmp
 for lang in en br; do
 msgmerge locale/$lang/messages.po locale/messages.pot > locale/$lang/messages.po.new
 mv locale/$lang/messages.po.new locale/$lang/messages.po
+po2json locale/$lang/messages.po locale/$lang/messages.json
 done

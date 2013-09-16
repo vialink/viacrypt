@@ -5,38 +5,28 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Segre <jan@vialink.com.br>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: template/._email.html.swp:7 template/_email.html:10
-msgid "The message"
-msgstr "A mensagem"
+#: template/.index.html.swp:6 template/.index.html.swp:41
+#: template/index.html:62 template/index.html:147
+msgid "Examples of use"
+msgstr "Exemplos de uso"
 
-#: template/._email.html.swp:7 template/_email.html:10
-msgid "identified as"
-msgstr "identificada por"
+#: template/.index.html.swp:6 template/.index.html.swp:28
+#: template/index.html:57 template/index.html:131
+msgid "What is it and how does it work?"
+msgstr "O que é e como funciona?"
 
-#: template/._email.html.swp:7 template/_email.html:10
-msgid "you wrote on"
-msgstr "que você escreveu em"
-
-#: template/._email.html.swp:7 template/_email.html:10
-msgid "was just read."
-msgstr "acabou de ser lida."
-
-#: template/._email.html.swp:7 template/_email.html:7
-msgid "ViaCRYPT - Message read on"
-msgstr "ViaCRYPT - Mensagem lida em"
-
-#: template/index.html:4 template/index.html:12 template/index.html:52
+#: template/.index.html.swp:6 template/_email.html:11 template/index.html:4
+#: template/index.html:12 template/index.html:52
 msgid "ViaCRYPT"
 msgstr "ViaCRYPT"
 
-#: template/index.html:13
+#: template/.index.html.swp:6 template/index.html:13
 msgid ""
 "This app is an encrypted messaging system where the recipient can read the "
 "message only once. After the reading, the message is deleted and cannot be "
@@ -48,80 +38,41 @@ msgstr ""
 "não pode mais ser recuperada. Nunca mais compartilhe suas senhas e segredos "
 "em claro por e-mail, Facebook Chat, Google Talk ou Skype."
 
-#: template/index.html:57 template/index.html:129
-msgid "What is it and how does it work?"
-msgstr "O que é e como funciona?"
+#: template/.index.html.swp:17 template/.index.html.swp:41
+#: template/index.html:140 template/index.html:187 template/index.html:201
+#: template/index.html:212 template/index.html:225
+msgid "Close"
+msgstr "Fechar"
 
-#: template/index.html:62 template/index.html:145
-msgid "Examples of use"
-msgstr "Exemplos de uso"
+#: template/.index.html.swp:17 template/index.html:222
+msgid "You can contact us by e-mail"
+msgstr "Você pode nos contactar por e-mail"
 
-#: template/index.html:67
-msgid "Explanation for nerds"
-msgstr "Explicação para nerds"
+#: template/.index.html.swp:17 template/index.html:219
+msgid "Contact Information"
+msgstr "Informações de contato"
 
-#: template/index.html:72
-msgid "Contact Us"
-msgstr "Entre em contato"
+#: template/.index.html.swp:17 template/index.html:198
+msgid "You should ask the sender to send it again."
+msgstr "Você deve pedir ao remetente para enviá-la novamente."
 
-#: template/index.html:81
-msgid "Type your secret message here..."
-msgstr "Digite sua mensagem secreta aqui..."
+#: template/.index.html.swp:17 template/index.html:197
+msgid "This message has already been read or has never been existed."
+msgstr "Essa mensagem já foi lida ou nunca existiu."
 
-#: template/index.html:87
-msgid "Please, notify me when my message is read."
-msgstr "Por favor, notifique-me quando minha mensagem for lida."
+#: template/.index.html.swp:17 template/index.html:194
+msgid "Message not found"
+msgstr "Mensagem não encontrada"
 
-#: template/index.html:88
-msgid "Your e-mail will be stored non-encrypted into our servers."
-msgstr "Seu e-mail será armazenado sem criptografia em nossos servidors."
+#: template/.index.html.swp:17 template/index.html:184
+msgid "REMEMBER"
+msgstr "LEMBRE-SE"
 
-#: template/index.html:91
-msgid "My e-mail address is:"
-msgstr "Meu endereço de e-mail é:"
+#: template/.index.html.swp:17 template/index.html:184
+msgid "This message has been deleted and cannot be read again."
+msgstr "Essa mensagem foi deletada e não pode ser lida novamente."
 
-#: template/index.html:93
-msgid "and the notification label is:"
-msgstr ""
-
-#: template/index.html:99
-msgid "Save it"
-msgstr "Salvar"
-
-#: template/index.html:103
-msgid "Single-use URL:"
-msgstr "URL de uso único:"
-
-#: template/index.html:104
-msgid "IMPORTANT"
-msgstr "IMPORTANTE"
-
-#: template/index.html:104
-msgid ""
-"This message can be read only once and will be deleted on the first read."
-msgstr ""
-"Essa mensagem pode ser lida apenas uma vez e será apagada depois da primeira "
-"leitura."
-
-#: template/index.html:113
-msgid "Developed by"
-msgstr "Desenvolvido por"
-
-#: template/index.html:113
-msgid "VIALINK"
-msgstr "VIALINK"
-
-#: template/index.html:132
-msgid ""
-"This app is an encrypted messaging system where the recipient can read the "
-"message only once. After the reading, the message is deleted and cannot be "
-"retrieved anymore."
-msgstr ""
-"Este aplicativo é um sistema de mensagens criptografadas onde o destinatário "
-"pode ler a mensagem apenas uma vez. Após a leitura, a mensagem é apagada e "
-"não pode mais ser recuperada."
-
-#: template/index.html:133
+#: template/.index.html.swp:28 template/index.html:135
 msgid ""
 "The message is encrypted in your browser and stored into our servers. The "
 "key to decrypt the message is inside the generated URL and no one, but you "
@@ -134,21 +85,76 @@ msgstr ""
 "qualquer pessoa, mesmo nós ou qualquer governo ler o conteúdo de sua "
 "mensagem."
 
-#: template/index.html:134
+#: template/.index.html.swp:28 template/index.html:134
 msgid ""
-"The encryption system is so strong that all computers in the world together "
-"would take much more than one trillion years to break it. You can have more "
-"information about it"
+"This app is an encrypted messaging system where the recipient can read the "
+"message only once. After the reading, the message is deleted and cannot be "
+"retrieved anymore."
 msgstr ""
-"O sistema de criptografia é tão forte que todos os computadores do mundo "
-"juntos levariam muito mais de um trilhão de anos para quebrá-la. Você pode "
-"ter mais informações sobre isso"
+"Este aplicativo é um sistema de mensagens criptografadas onde o destinatário "
+"pode ler a mensagem apenas uma vez. Após a leitura, a mensagem é apagada e "
+"não pode mais ser recuperada."
 
-#: template/index.html:134
-msgid "here"
-msgstr "aqui"
+#: template/.index.html.swp:28 template/index.html:116
+msgid "Developed by"
+msgstr "Desenvolvido por"
 
-#: template/index.html:135 template/index.html:168
+#: template/.index.html.swp:28 template/index.html:116
+msgid "VIALINK"
+msgstr "VIALINK"
+
+#: template/.index.html.swp:28 template/index.html:106
+msgid "IMPORTANT"
+msgstr "IMPORTANTE"
+
+#: template/.index.html.swp:28 template/index.html:106
+msgid ""
+"This message can be read only once and will be deleted on the first read."
+msgstr ""
+"Essa mensagem pode ser lida apenas uma vez e será apagada depois da primeira "
+"leitura."
+
+#: template/.index.html.swp:28 template/index.html:105
+msgid "Single-use URL:"
+msgstr "URL de uso único:"
+
+#: template/.index.html.swp:28 template/index.html:101
+msgid "Save it"
+msgstr "Salvar"
+
+#: template/.index.html.swp:28 template/index.html:95
+msgid "and the notification label is:"
+msgstr ""
+
+#: template/.index.html.swp:28 template/index.html:93
+msgid "My e-mail address is:"
+msgstr "Meu endereço de e-mail é:"
+
+#: template/.index.html.swp:28 template/index.html:90
+msgid "Your e-mail will be stored non-encrypted into our servers."
+msgstr "Seu e-mail será armazenado sem criptografia em nossos servidors."
+
+#: template/.index.html.swp:28 template/index.html:89
+msgid "Please, notify me when my message is read."
+msgstr "Por favor, notifique-me quando minha mensagem for lida."
+
+#: template/.index.html.swp:28 template/index.html:83
+msgid "Type your secret message here..."
+msgstr "Digite sua mensagem secreta aqui..."
+
+#: template/.index.html.swp:28 template/index.html:72
+msgid "Contact Us"
+msgstr "Entre em contato"
+
+#: template/.index.html.swp:28 template/index.html:67
+msgid "Explanation for nerds"
+msgstr "Explicação para nerds"
+
+#: template/.index.html.swp:41 template/index.html:180
+msgid "Your message is..."
+msgstr "Sua mensagem é…"
+
+#: template/.index.html.swp:41 template/index.html:137 template/index.html:170
 msgid ""
 "You can check the code yourself whether you're curious or just want to run "
 "it at home, it's available at"
@@ -156,71 +162,23 @@ msgstr ""
 "Você pode verificar o código por conta própria, esteja você curioso ou "
 "simplesmente queira executá-lo em casa, ele está disponível em"
 
-#: template/index.html:135 template/index.html:168
+#: template/.index.html.swp:41 template/index.html:137 template/index.html:170
 msgid "Github"
 msgstr "Github"
 
-#: template/index.html:138 template/index.html:185 template/index.html:199
-#: template/index.html:210 template/index.html:223
-msgid "Close"
-msgstr "Fechar"
-
-#: template/index.html:149
+#: template/.index.html.swp:41 template/index.html:169
 msgid ""
-"When you are sending any password to someone, it is more secure to generate "
-"an encrypted message and send only the URL. Thus, if you send by e-mail and "
-"someone in the future get access to the e-mail, the invader won't have the "
-"password. Or else, if you send it through GTalk, Facebook Chat or Skype, "
-"your password isn't stored in their databases."
+"One can argue that someone might retrieve your message and make it "
+"unavailable to you. Although it is possible, the unique identifiers are "
+"randomly generated using RFC4122 v4 UUID and the probability of a random hit "
+"is about 8.64E-78."
 msgstr ""
-"Ao enviar alguma senha para alguém, é mais seguro gerar uma mensagem "
-"criptografada e enviar apenas a URL. Assim, se você enviar por e-mail e "
-"alguém, no futuro, tiver acesso ao e-mail, o invasor não terá a senha. Ou "
-"então, se você enviá-la através GTalk, Facebook Chat ou Skype, a senha não é "
-"armazenada em seus bancos de dados."
+"Pode-se argumentar que alguém pode recuperar a sua mensagem e torná-la "
+"indisponível para você. Embora isso seja possível, os identificadores únicos "
+"são gerados aleatoriamente usando a RFC4122 UUID v4 e a probabilidade de "
+"colisão ao acaso é de cerca de 8.64E-78."
 
-#: template/index.html:150
-msgid ""
-"You can create a message with a single word and send the URL to many "
-"friends. The first to open the message gets the word and wins some prize."
-msgstr ""
-"Você pode criar uma mensagem com uma única palavra e enviar a URL para "
-"muitos amigos. O primeiro a abrir a mensagem obtém a palavra e ganha algum "
-"prêmio."
-
-#: template/index.html:152
-msgid "Be creative!"
-msgstr "Seja criativo!"
-
-#: template/index.html:152
-msgid ""
-"You can use it in many ways. Don't forget to let us know how you are using "
-"it :)"
-msgstr ""
-"Você pode usar de muitas maneiras. Não se esqueca de nos contar como você "
-"está usando :)"
-
-#: template/index.html:162
-msgid "For nerds.."
-msgstr "Para nerds..."
-
-#: template/index.html:165
-msgid ""
-"The message is encrypted using AES and has a 256-bit key as passphrase. The "
-"passphrase is randomly generated at your browser, then the message is "
-"encrypted and stored into our servers through an unique identifier. The "
-"generated URL is composed of two parts: the unique identified and the random "
-"passphrase. Both are in the fragment of the URL and are not sent to our "
-"webserver when the URL is opened."
-msgstr ""
-"A mensagem é criptografada usando AES e tem uma chave de 256 bits como "
-"senha. A senha é gerada aleatoriamente no seu navegador, em seguida, a "
-"mensagem é criptografada e armazenada em nossos servidores através de um "
-"identificador único. A URL gerada é composto de duas partes: o identificador "
-"único e a chave aleatória. Ambos estão no fragmento da URL e não são "
-"enviados para o nosso servidor quando a URL é aberta."
-
-#: template/index.html:166
+#: template/.index.html.swp:41 template/index.html:168
 msgid ""
 "When the generated URL is opened, a javascript code parses the URL and "
 "retrieve the message by its unique identifier. The servers return the "
@@ -236,49 +194,94 @@ msgstr ""
 "novamente, nossos servidores irão retornar um código de status 404 porque a "
 "mensagem não existe mais."
 
-#: template/index.html:167
+#: template/.index.html.swp:41 template/index.html:167
 msgid ""
-"One can argue that someone might retrieve your message and make it "
-"unavailable to you. Although it is possible, the unique identifiers are "
-"randomly generated using RFC4122 v4 UUID and the probability of a random hit "
-"is about 8.64E-78."
+"The message is encrypted using AES and has a 256-bit key as passphrase. The "
+"passphrase is randomly generated at your browser, then the message is "
+"encrypted and stored into our servers through an unique identifier. The "
+"generated URL is composed of two parts: the unique identified and the random "
+"passphrase. Both are in the fragment of the URL and are not sent to our "
+"webserver when the URL is opened."
 msgstr ""
-"Pode-se argumentar que alguém pode recuperar a sua mensagem e torná-la "
-"indisponível para você. Embora isso seja possível, os identificadores únicos "
-"são gerados aleatoriamente usando a RFC4122 UUID v4 e a probabilidade de "
-"colisão ao acaso é de cerca de 8.64E-78."
+"A mensagem é criptografada usando AES e tem uma chave de 256 bits como "
+"senha. A senha é gerada aleatoriamente no seu navegador, em seguida, a "
+"mensagem é criptografada e armazenada em nossos servidores através de um "
+"identificador único. A URL gerada é composto de duas partes: o identificador "
+"único e a chave aleatória. Ambos estão no fragmento da URL e não são "
+"enviados para o nosso servidor quando a URL é aberta."
 
-#: template/index.html:178
-msgid "Your message is..."
-msgstr "Sua mensagem é…"
+#: template/.index.html.swp:41 template/index.html:164
+msgid "For nerds.."
+msgstr "Para nerds..."
 
-#: template/index.html:182
-msgid "REMEMBER"
-msgstr "LEMBRE-SE"
+#: template/.index.html.swp:41 template/index.html:154
+msgid "Be creative!"
+msgstr "Seja criativo!"
 
-#: template/index.html:182
-msgid "This message has been deleted and cannot be read again."
-msgstr "Essa mensagem foi deletada e não pode ser lida novamente."
+#: template/.index.html.swp:41 template/index.html:154
+msgid ""
+"You can use it in many ways. Don't forget to let us know how you are using "
+"it :)"
+msgstr ""
+"Você pode usar de muitas maneiras. Não se esqueca de nos contar como você "
+"está usando :)"
 
-#: template/index.html:192
-msgid "Message not found"
-msgstr "Mensagem não encontrada"
+#: template/.index.html.swp:41 template/index.html:152
+msgid ""
+"You can create a message with a single word and send the URL to many "
+"friends. The first to open the message gets the word and wins some prize."
+msgstr ""
+"Você pode criar uma mensagem com uma única palavra e enviar a URL para "
+"muitos amigos. O primeiro a abrir a mensagem obtém a palavra e ganha algum "
+"prêmio."
 
-#: template/index.html:195
-msgid "This message has already been read or has never been existed."
-msgstr "Essa mensagem já foi lida ou nunca existiu."
+#: template/.index.html.swp:41 template/index.html:151
+msgid ""
+"When you are sending any password to someone, it is more secure to generate "
+"an encrypted message and send only the URL. Thus, if you send by e-mail and "
+"someone in the future get access to the e-mail, the invader won't have the "
+"password. Or else, if you send it through GTalk, Facebook Chat or Skype, "
+"your password isn't stored in their databases."
+msgstr ""
+"Ao enviar alguma senha para alguém, é mais seguro gerar uma mensagem "
+"criptografada e enviar apenas a URL. Assim, se você enviar por e-mail e "
+"alguém, no futuro, tiver acesso ao e-mail, o invasor não terá a senha. Ou "
+"então, se você enviá-la através GTalk, Facebook Chat ou Skype, a senha não é "
+"armazenada em seus bancos de dados."
 
-#: template/index.html:196
-msgid "You should ask the sender to send it again."
-msgstr "Você deve pedir ao remetente para enviá-la novamente."
+#: template/.index.html.swp:41 template/index.html:136
+msgid ""
+"The encryption system is so strong that all computers in the world together "
+"would take much more than one trillion years to break it. You can have more "
+"information about it"
+msgstr ""
+"O sistema de criptografia é tão forte que todos os computadores do mundo "
+"juntos levariam muito mais de um trilhão de anos para quebrá-la. Você pode "
+"ter mais informações sobre isso"
 
-#: template/index.html:217
-msgid "Contact Information"
-msgstr "Informações de contato"
+#: template/.index.html.swp:41 template/index.html:136
+msgid "here"
+msgstr "aqui"
 
-#: template/index.html:220
-msgid "You can contact us by e-mail"
-msgstr "Você pode nos contactar por e-mail"
+#: template/_email.html:7
+msgid "ViaCRYPT - Message read on"
+msgstr "ViaCRYPT - Mensagem lida em"
+
+#: template/_email.html:10
+msgid "The message"
+msgstr "A mensagem"
+
+#: template/_email.html:10
+msgid "identified as"
+msgstr "identificada por"
+
+#: template/_email.html:10
+msgid "you wrote on"
+msgstr "que você escreveu em"
+
+#: template/_email.html:10
+msgid "was just read."
+msgstr "acabou de ser lida."
 
 #: template/viacrypt.js:156
 msgid "Rate limit exceeded"
