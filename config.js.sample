@@ -25,7 +25,7 @@ cfg.siteurl = 'http:' + cfg.baseurl;
 cfg.enabled_langs = [
 	'en',
 	'br',
-]
+];
 
 // you might want to disable serving static files on production to avoid
 // unecessary hassles that may come with it. (set to false to disable)
@@ -41,7 +41,7 @@ cfg.message_provider = 'fs';
 // used with fs store
 cfg.fs_options = {
 	messages_path: __dirname + '/messages'
-}
+};
 
 // used with mongo store
 cfg.mongo_options = {
@@ -49,7 +49,7 @@ cfg.mongo_options = {
 	port: '27017',
 	database: 'viacrypt',
 	collection: 'messages'
-}
+};
 
 
 // ## Email notification configuration
@@ -90,7 +90,7 @@ cfg.notification_options = {
 	//		pass: "mysecretpassword"
 	//	}
 	//}
-}
+};
 
 
 // ## Rate limit
