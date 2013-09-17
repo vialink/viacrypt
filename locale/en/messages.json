@@ -12,163 +12,15 @@
          "Content-Transfer-Encoding": "8bit",
          "Plural-Forms": "nplurals=2; plural=(n > 1);"
       },
-      "Examples of use": [
+      "Rate limit exceeded": [
          null,
          ""
       ],
-      "What is it and how does it work?": [
+      "Too many messages. Try again in": [
          null,
          ""
       ],
-      "ViaCRYPT": [
-         null,
-         ""
-      ],
-      "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype.": [
-         null,
-         ""
-      ],
-      "Close": [
-         null,
-         ""
-      ],
-      "You can contact us by e-mail": [
-         null,
-         ""
-      ],
-      "Contact Information": [
-         null,
-         ""
-      ],
-      "You should ask the sender to send it again.": [
-         null,
-         ""
-      ],
-      "This message has already been read or has never been existed.": [
-         null,
-         ""
-      ],
-      "Message not found": [
-         null,
-         ""
-      ],
-      "REMEMBER": [
-         null,
-         ""
-      ],
-      "This message has been deleted and cannot be read again.": [
-         null,
-         ""
-      ],
-      "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message.": [
-         null,
-         ""
-      ],
-      "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore.": [
-         null,
-         ""
-      ],
-      "Developed by": [
-         null,
-         ""
-      ],
-      "VIALINK": [
-         null,
-         ""
-      ],
-      "IMPORTANT": [
-         null,
-         ""
-      ],
-      "This message can be read only once and will be deleted on the first read.": [
-         null,
-         ""
-      ],
-      "Single-use URL:": [
-         null,
-         ""
-      ],
-      "Save it": [
-         null,
-         ""
-      ],
-      "and the notification label is:": [
-         null,
-         ""
-      ],
-      "My e-mail address is:": [
-         null,
-         ""
-      ],
-      "Your e-mail will be stored non-encrypted into our servers.": [
-         null,
-         ""
-      ],
-      "Please, notify me when my message is read.": [
-         null,
-         ""
-      ],
-      "Type your secret message here...": [
-         null,
-         ""
-      ],
-      "Contact Us": [
-         null,
-         ""
-      ],
-      "Explanation for nerds": [
-         null,
-         ""
-      ],
-      "Your message is...": [
-         null,
-         ""
-      ],
-      "You can check the code yourself whether you're curious or just want to run it at home, it's available at": [
-         null,
-         ""
-      ],
-      "Github": [
-         null,
-         ""
-      ],
-      "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.": [
-         null,
-         ""
-      ],
-      "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists.": [
-         null,
-         ""
-      ],
-      "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened.": [
-         null,
-         ""
-      ],
-      "For nerds..": [
-         null,
-         ""
-      ],
-      "Be creative!": [
-         null,
-         ""
-      ],
-      "You can use it in many ways. Don't forget to let us know how you are using it :)": [
-         null,
-         ""
-      ],
-      "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize.": [
-         null,
-         ""
-      ],
-      "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases.": [
-         null,
-         ""
-      ],
-      "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it": [
-         null,
-         ""
-      ],
-      "here": [
+      "minute": [
          null,
          ""
       ],
@@ -192,15 +44,163 @@
          null,
          ""
       ],
-      "Rate limit exceeded": [
+      "ViaCRYPT": [
          null,
          ""
       ],
-      "Too many messages. Try again in": [
+      "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype.": [
          null,
          ""
       ],
-      "minute": [
+      "What is it and how does it work?": [
+         null,
+         ""
+      ],
+      "Examples of use": [
+         null,
+         ""
+      ],
+      "Explanation for nerds": [
+         null,
+         ""
+      ],
+      "Contact Us": [
+         null,
+         ""
+      ],
+      "Type your secret message here...": [
+         null,
+         ""
+      ],
+      "Please, notify me when my message is read.": [
+         null,
+         ""
+      ],
+      "Note that your email address will be stored unencrypted in our servers until the notification is sent.": [
+         null,
+         ""
+      ],
+      "Your email address:": [
+         null,
+         ""
+      ],
+      "and optional label:": [
+         null,
+         ""
+      ],
+      "Save it": [
+         null,
+         ""
+      ],
+      "Single-use URL:": [
+         null,
+         ""
+      ],
+      "IMPORTANT": [
+         null,
+         ""
+      ],
+      "This message can be read only once and will be deleted on the first read.": [
+         null,
+         ""
+      ],
+      "Developed by": [
+         null,
+         ""
+      ],
+      "VIALINK": [
+         null,
+         ""
+      ],
+      "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore.": [
+         null,
+         ""
+      ],
+      "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message.": [
+         null,
+         ""
+      ],
+      "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it": [
+         null,
+         ""
+      ],
+      "here": [
+         null,
+         ""
+      ],
+      "You can check the code yourself whether you're curious or just want to run it at home, it's available at": [
+         null,
+         ""
+      ],
+      "Github": [
+         null,
+         ""
+      ],
+      "Close": [
+         null,
+         ""
+      ],
+      "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases.": [
+         null,
+         ""
+      ],
+      "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize.": [
+         null,
+         ""
+      ],
+      "Be creative!": [
+         null,
+         ""
+      ],
+      "You can use it in many ways. Don't forget to let us know how you are using it :)": [
+         null,
+         ""
+      ],
+      "For nerds..": [
+         null,
+         ""
+      ],
+      "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened.": [
+         null,
+         ""
+      ],
+      "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists.": [
+         null,
+         ""
+      ],
+      "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.": [
+         null,
+         ""
+      ],
+      "Your message is...": [
+         null,
+         ""
+      ],
+      "REMEMBER": [
+         null,
+         ""
+      ],
+      "This message has been deleted and cannot be read again.": [
+         null,
+         ""
+      ],
+      "Message not found": [
+         null,
+         ""
+      ],
+      "This message has already been read or has never been existed.": [
+         null,
+         ""
+      ],
+      "You should ask the sender to send it again.": [
+         null,
+         ""
+      ],
+      "Contact Information": [
+         null,
+         ""
+      ],
+      "You can contact us by e-mail": [
          null,
          ""
       ]

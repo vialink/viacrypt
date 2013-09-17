@@ -78,7 +78,7 @@
     </div>
 
     <form id="main-form">
-        <div class="form-horizontal">
+        <div class="form-horizontal form-inline">
             <div class="control-group">
                 <textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%; box-sizing: border-box;" class="input-xxlarge" rows="20" placeholder="{{_ "Type your secret message here..."}}"></textarea>
             </div>
@@ -87,13 +87,17 @@
                 <label class="checkbox">
                     <input type="checkbox" class="notifyByEmailCheckbox" name="messageNotify">
                     {{_ "Please, notify me when my message is read." }}
-                    <a href="#" data-toggle="tooltip" title="{{_ "Your e-mail will be stored non-encrypted into our servers."}}"><i class="icon icon-info-sign"></i></a>
+                    <a data-toggle="tooltip" title="{{_ "Note that your email address will be stored unencrypted in our servers until the notification is sent."}}"><i class="icon icon-info-sign"></i></a>
                 </label>
                 <div class="notifyByEmail hide">
-                    {{_ "My e-mail address is:" }}
-                    <input type="email" name="messageNotifyEmail" class="input-xlarge">
-                    {{_ "and the notification label is:" }}
-                    <input type="text" name="messageNotifyLabel" class="input-xdefault">
+                    <label>
+                        {{_ "Your email address:" }}
+                        <input type="text" name="messageNotifyEmail" class="input-xlarge">
+                    </label>
+                    <label>
+                        {{_ "and optional label:" }}
+                        <input type="text" name="messageNotifyLabel" class="input-medium">
+                    </label>
                 </div>
             </div>
             {{/if}}
@@ -117,7 +121,7 @@
             </div>
             <div class="locale">
                 <ul>
-                    {{#each languages}}<li> <a href="/{{this}}/"><img src="img/flags/{{this}}.png"></a></li>
+                    {{#each languages}}<li> <a href="/{{this}}/"><img src="img/flags/{{this}}.png" alt="{{this}} flag"></a></li>
                     {{/each}}
                 </ul>
             </div>

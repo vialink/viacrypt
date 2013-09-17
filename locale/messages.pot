@@ -6,228 +6,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: template/.index.html.swp:6
-#: template/.index.html.swp:41
-#: template/index.html:62
-#: template/index.html:147
-msgid "Examples of use"
+#: template/.viacrypt.js.swp:35
+#: template/viacrypt.js:156
+msgid "Rate limit exceeded"
 msgstr ""
 
-#: template/.index.html.swp:6
-#: template/.index.html.swp:28
-#: template/index.html:57
-#: template/index.html:131
-msgid "What is it and how does it work?"
+#: template/.viacrypt.js.swp:35
+#: template/viacrypt.js:156
+msgid "Too many messages. Try again in"
 msgstr ""
 
-#: template/.index.html.swp:6
-#: template/.index.html.swp:6
-#: template/.index.html.swp:6
-#: template/.index.html.swp:6
-#: template/_email.html:11
-#: template/_email.html:11
-#: template/index.html:4
-#: template/index.html:12
-#: template/index.html:52
-#: template/index.html:52
-msgid "ViaCRYPT"
-msgstr ""
-
-#: template/.index.html.swp:6
-#: template/index.html:13
-msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/.index.html.swp:17
-#: template/.index.html.swp:17
-#: template/.index.html.swp:17
-#: template/.index.html.swp:41
-#: template/index.html:140
-#: template/index.html:187
-#: template/index.html:201
-#: template/index.html:212
-#: template/index.html:225
-msgid "Close"
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/index.html:222
-msgid "You can contact us by e-mail"
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/index.html:219
-msgid "Contact Information"
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/index.html:198
-msgid "You should ask the sender to send it again."
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/index.html:197
-msgid "This message has already been read or has never been existed."
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/index.html:194
-msgid "Message not found"
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/index.html:184
-msgid "REMEMBER"
-msgstr ""
-
-#: template/.index.html.swp:17
-#: template/index.html:184
-msgid "This message has been deleted and cannot be read again."
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:135
-msgid "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:134
-msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:116
-msgid "Developed by"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:116
-msgid "VIALINK"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:106
-msgid "IMPORTANT"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:106
-msgid "This message can be read only once and will be deleted on the first read."
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:105
-msgid "Single-use URL:"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:101
-msgid "Save it"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:95
-msgid "and the notification label is:"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:93
-msgid "My e-mail address is:"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:90
-msgid "Your e-mail will be stored non-encrypted into our servers."
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:89
-msgid "Please, notify me when my message is read."
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:83
-msgid "Type your secret message here..."
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:72
-msgid "Contact Us"
-msgstr ""
-
-#: template/.index.html.swp:28
-#: template/index.html:67
-msgid "Explanation for nerds"
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:180
-msgid "Your message is..."
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/.index.html.swp:41
-#: template/index.html:137
-#: template/index.html:170
-msgid "You can check the code yourself whether you're curious or just want to run it at home, it's available at"
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/.index.html.swp:41
-#: template/index.html:137
-#: template/index.html:170
-msgid "Github"
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:169
-msgid "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:168
-msgid "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:167
-msgid "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:164
-msgid "For nerds.."
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:154
-msgid "Be creative!"
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:154
-msgid "You can use it in many ways. Don't forget to let us know how you are using it :)"
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:152
-msgid "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:151
-msgid "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases."
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:136
-msgid "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"
-msgstr ""
-
-#: template/.index.html.swp:41
-#: template/index.html:136
-msgid "here"
+#: template/.viacrypt.js.swp:35
+#: template/viacrypt.js:156
+msgid "minute"
 msgstr ""
 
 #: template/_email.html:7
@@ -250,14 +41,175 @@ msgstr ""
 msgid "was just read."
 msgstr ""
 
-#: template/viacrypt.js:156
-msgid "Rate limit exceeded"
+#: template/_email.html:11
+#: template/_email.html:11
+#: template/index.html:4
+#: template/index.html:12
+#: template/index.html:52
+#: template/index.html:52
+msgid "ViaCRYPT"
 msgstr ""
 
-#: template/viacrypt.js:156
-msgid "Too many messages. Try again in"
+#: template/index.html:13
+msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."
 msgstr ""
 
-#: template/viacrypt.js:156
-msgid "minute"
+#: template/index.html:57
+#: template/index.html:131
+msgid "What is it and how does it work?"
+msgstr ""
+
+#: template/index.html:62
+#: template/index.html:147
+msgid "Examples of use"
+msgstr ""
+
+#: template/index.html:67
+msgid "Explanation for nerds"
+msgstr ""
+
+#: template/index.html:72
+msgid "Contact Us"
+msgstr ""
+
+#: template/index.html:83
+msgid "Type your secret message here..."
+msgstr ""
+
+#: template/index.html:89
+msgid "Please, notify me when my message is read."
+msgstr ""
+
+#: template/index.html:90
+msgid "Note that your email address will be stored unencrypted in our servers until the notification is sent."
+msgstr ""
+
+#: template/index.html:93
+msgid "Your email address:"
+msgstr ""
+
+#: template/index.html:95
+msgid "and optional label:"
+msgstr ""
+
+#: template/index.html:101
+msgid "Save it"
+msgstr ""
+
+#: template/index.html:105
+msgid "Single-use URL:"
+msgstr ""
+
+#: template/index.html:106
+msgid "IMPORTANT"
+msgstr ""
+
+#: template/index.html:106
+msgid "This message can be read only once and will be deleted on the first read."
+msgstr ""
+
+#: template/index.html:116
+msgid "Developed by"
+msgstr ""
+
+#: template/index.html:116
+msgid "VIALINK"
+msgstr ""
+
+#: template/index.html:134
+msgid "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."
+msgstr ""
+
+#: template/index.html:135
+msgid "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."
+msgstr ""
+
+#: template/index.html:136
+msgid "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"
+msgstr ""
+
+#: template/index.html:136
+msgid "here"
+msgstr ""
+
+#: template/index.html:137
+#: template/index.html:170
+msgid "You can check the code yourself whether you're curious or just want to run it at home, it's available at"
+msgstr ""
+
+#: template/index.html:137
+#: template/index.html:170
+msgid "Github"
+msgstr ""
+
+#: template/index.html:140
+#: template/index.html:187
+#: template/index.html:201
+#: template/index.html:212
+#: template/index.html:225
+msgid "Close"
+msgstr ""
+
+#: template/index.html:151
+msgid "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases."
+msgstr ""
+
+#: template/index.html:152
+msgid "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."
+msgstr ""
+
+#: template/index.html:154
+msgid "Be creative!"
+msgstr ""
+
+#: template/index.html:154
+msgid "You can use it in many ways. Don't forget to let us know how you are using it :)"
+msgstr ""
+
+#: template/index.html:164
+msgid "For nerds.."
+msgstr ""
+
+#: template/index.html:167
+msgid "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."
+msgstr ""
+
+#: template/index.html:168
+msgid "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."
+msgstr ""
+
+#: template/index.html:169
+msgid "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."
+msgstr ""
+
+#: template/index.html:180
+msgid "Your message is..."
+msgstr ""
+
+#: template/index.html:184
+msgid "REMEMBER"
+msgstr ""
+
+#: template/index.html:184
+msgid "This message has been deleted and cannot be read again."
+msgstr ""
+
+#: template/index.html:194
+msgid "Message not found"
+msgstr ""
+
+#: template/index.html:197
+msgid "This message has already been read or has never been existed."
+msgstr ""
+
+#: template/index.html:198
+msgid "You should ask the sender to send it again."
+msgstr ""
+
+#: template/index.html:219
+msgid "Contact Information"
+msgstr ""
+
+#: template/index.html:222
+msgid "You can contact us by e-mail"
 msgstr ""

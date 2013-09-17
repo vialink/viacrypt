@@ -170,27 +170,28 @@ $(function() {
 	// http://www.w3.org/TR/html-markup/input.email.html#input.email.attrs.value.single
 	var re_email = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 	var checkEmail = function() {
-		var email = notifyByEmailInput.val();
+		var email = notifyEmail.val();
 		if (re_email.test(email)) {
-			notifyByEmail.parent().removeClass('error').addClass('success');
+			notifyContainer.removeClass('error').addClass('success');
 		} else {
-			notifyByEmail.parent().removeClass('success').addClass('error');
+			notifyContainer.removeClass('success').addClass('error');
 		}
 	};
-	var notifyByEmail = $('.notifyByEmail');
-	var notifyByEmailInput = notifyByEmail.find('input').keyup(checkEmail);
-	var notifyByEmailCheckbox = $('.notifyByEmailCheckbox').click(function() {
-		if (notifyByEmailCheckbox.is(':checked')) {
-			notifyByEmailInput.removeAttr('disabled');
-			notifyByEmail.show();
+	var notify = $('.notifyByEmail');
+	var notifyContainer = notify.parent();
+	var notifyEmail = notify.find('[name="messageNotifyEmail"]').keyup(checkEmail);
+	var notifyCheckbox = $('.notifyByEmailCheckbox').click(function() {
+		if (notifyCheckbox.is(':checked')) {
+			notify.show();
 			checkEmail();
-			$('[name="messageNotifyEmail"]').attr('required', true);
-			$('[name="messageNotifyEmail"]').focus();
+			notifyEmail.removeAttr('disabled');
+			notifyEmail.attr('required', true);
+			notifyEmail.focus();
 		} else {
-			notifyByEmail.parent().removeClass('error success');
-			notifyByEmailInput.attr('disabled', 'disabled');
-			$('[name="messageNotifyEmail"]').attr('required', false);
-			notifyByEmail.hide();
+			notify.hide();
+			notifyContainer.removeClass('error success');
+			notifyEmail.attr('disabled', 'disabled');
+			notifyEmail.attr('required', false);
 		}
 	});
 });
