@@ -163,8 +163,14 @@ Server.prototype.spawn = function() {
 	var server = connect()
 		.use(connect.logger(log_fmt))
 		.use(connect.responseTime())
-		.use(i18n.localized_static(connect, static_dir, {maxAge: 10000}))
-		//.use(connect.static(static_dir, {maxAge: 10000}))
+
+	if (this.config.serve_static === true) {
+		server = server
+			.use(i18n.localized_static(connect, static_dir, {maxAge: 10000}))
+			//.use(connect.static(static_dir, {maxAge: 10000}))
+	}
+
+	server = server
 		.use(connect.limit('10mb'))
 		.use(connect.bodyParser())
 		.use(this.app);
