@@ -18,7 +18,7 @@
  */
 
 var handlebars = require('handlebars');
-var I18n = require('./i18n').I18n;
+var i18n = require('./i18n');
 
 // how to use http://slexaxton.github.io/Jed/
 
@@ -26,19 +26,10 @@ var I18n = require('./i18n').I18n;
 // as suggested here: https://github.com/janl/mustache.js/issues/216
 // and here: https://gist.github.com/mashpie/5246334
 
-handlebars.registerHelper('_', function (msgid) {
-	var args = Array.prototype.slice.call(arguments, 1);
-	var tr8n = I18n().translate(msgid);
-	return tr8n.fetch.apply(tr8n, args);
-});
-
-handlebars.registerHelper('_n', function (msgid, msgidn, n) {
-	var args = Array.prototype.slice.call(arguments, 2);
-	var tr8n = I18n().translate(msgid).ifPlural(n, msgidn);
-	return tr8n.fetch.apply(tr8n, args);
-});
+handlebars.registerHelper('_', i18n.translate);
+handlebars.registerHelper('_n', i18n.ntranslate);
 
 module.exports = {
-	changelang: I18n.changelang,
+	changelang: i18n.changelang,
 	compile: handlebars.compile
 };

@@ -113,15 +113,23 @@ i18n.languages.forEach(function (lang) {
 	i18n._jeds[lang] = new Jed({
 		locale_data: require(join(__dirname, '../locale', lang, 'messages.json'))
 	});
-	i18n._jed = i18n._jeds[lang];
+	i18n.jed = i18n._jeds[lang];
 });
 
-i18n.I18n = function() {
-	return i18n._jed;
+i18n.changelang = function(lang) {
+	i18n.jed = i18n._jeds[lang];
 };
 
-i18n.I18n.changelang = function(lang) {
-	i18n._jed = i18n._jeds[lang];
-};
+i18n.translate = function(id) {
+	var args = Array.prototype.slice.call(arguments, 1);
+	var tran = i18n.jed.translate(id);
+	return tran.fetch.apply(tran, args.map(function(a){ return i18n.jed.translate(a).fetch() }));
+}
+
+i18n.ntranslate = function(id, nid, n) {
+	var args = Array.prototype.slice.call(arguments, 1);
+	var tran = i18n.jed.translate(id).ifPlural(n, nid);
+	return tran.fetch.apply(tran, args.map(function(a){ return i18n.jed.translate(a).fetch() }));
+}
 
 module.exports = i18n;
