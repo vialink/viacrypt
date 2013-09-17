@@ -45,10 +45,10 @@ have to do this manually if you alter these dependencies.
 
     grunt curl-dir
 
-For easing development there is a `watch` task to automatically rerun a task above when one of
-its input files are altered.
+For easing development there is a `run` task to automatically rerun a task above when one of
+its input files are altered and also run a development server that will restart when needed.
 
-    grunt watch
+    grunt run
 
 
 Running
@@ -56,7 +56,13 @@ Running
 
 Should be as simple as
 
-    ./server.js
+    ./bin/viacrypt-server.js
+
+or
+
+    grunt run
+
+for development.
 
 Then checkout `localhost:8001` to see the app.
 
@@ -88,7 +94,7 @@ Deploying
 Put the following typically on `/etc/supervisor/conf.d/viacrypt.conf`.
 
     [program:viacrypt]
-    command=/path/to/viacrypt/server.js
+    command=/path/to/viacrypt/bin/viacrypt-server.js
     stdout_logfile=/path/to/viacrypt/logs/viacrypt.log
 
 To start it:
@@ -104,7 +110,7 @@ Put the following typically on `/etc/init/viacrypt.conf`.
     description "ViaCRYPT node.js server"
     start on startup
     stop on shutdown
-    exec /path/to/viacrypt/server.js >> /path/to/viacrypt/logs/viacrypt.log
+    exec /path/to/viacrypt/bin/viacrypt-server.js >> /path/to/viacrypt/logs/viacrypt.log
 
 To start it:
 
