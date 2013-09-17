@@ -17,6 +17,7 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var join = require('path').join;
 var config = require('./config');
 var i18n = require('./src/i18n');
 var templating = require('./src/templating');
@@ -75,7 +76,7 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
-			js: {
+			develop: {
 				files: [
 					'config.js',
 					'src/**/*.js'
@@ -84,7 +85,7 @@ module.exports = function(grunt) {
 				options: { nospawn: true }
 			},
 			templates: {
-				files: ['template/**/*', 'src/templating.js', 'src/i18n.js'],
+				files: ['template/**/*'],
 				tasks: ['compile'],
 				options: { livereload: true },
 			},
@@ -101,13 +102,13 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			src: {
-				src: [ 'src/**/*.js' ],
+				src: ['src/**/*.js', 'config.js.sample'],
 				options: {
 					jshintrc: '.jshintrc'
 				}
 			},
 			grunt: {
-				src: [ 'Gruntfile.js', 'build/tasks/*' ],
+				src: ['Gruntfile.js', 'build/tasks/*'],
 				options: {
 					jshintrc: '.jshintrc'
 				}
@@ -129,20 +130,26 @@ module.exports = function(grunt) {
 			var code = locale_list[1].replace('_', '-');
 			templating.changelang(lang);
 			grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
+				// copy config and set some customs
 				var context = JSON.parse(JSON.stringify(config));
 				context.lang = code;
 				context.languages = i18n.languages;
+
 				// ignoring hidden files for compilation
 				if (filename[0] === '.' || filename[0] === '_') {
 					return;
 				}
+
 				var data = grunt.file.read(filepath).toString();
 				var template = templating.compile(data);
-				var base_filepath = subdir == null ? filename : [subdir, filename].join('/');
-				var locale_dir = lang + '/';
-				var progress = grunt.log.write('compiling: ' + locale_dir + base_filepath + '... ');
-				grunt.file.write(output_dir + locale_dir + base_filepath, template(context));
-				progress.ok();
+				var output_path = join(output_dir, lang, subdir || '', filename);
+				try {
+					grunt.file.write(output_path, template(context));
+				} catch(e) {
+					grunt.log.error(output_path + ': ' + e);
+					return;
+				}
+				grunt.log.ok(output_path);
 			});
 		});
 	});
