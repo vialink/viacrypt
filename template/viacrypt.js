@@ -184,8 +184,8 @@ $(function() {
 			notifyByEmailInput.removeAttr('disabled');
 			notifyByEmail.show();
 			checkEmail();
-			notifyByEmailInput.focus();
 			$('[name="messageNotifyEmail"]').attr('required', true);
+			$('[name="messageNotifyEmail"]').focus();
 		} else {
 			notifyByEmail.parent().removeClass('error success');
 			notifyByEmailInput.attr('disabled', 'disabled');
