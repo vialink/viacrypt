@@ -9,6 +9,12 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Droid Sans Mono';
+    src: url('fonts/DroidSansMono.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
 	background:url(img/bg-geral.png) no-repeat 50% 100px;
 	font-family:Tahoma, Geneva, sans-serif;
@@ -165,8 +171,15 @@ input, button, select, textarea{
 	font-family:Tahoma, Geneva, sans-serif;
 	font-size:12px;
 }
-textarea{
-	resize:none;
+.message {
+	font-family: "Droid Sans Mono", monospace;
+	font-size: 18px;
+}
+textarea.message {
+	resize: none;
+	background-color: rgba(255, 255, 255, 0.4);
+	box-sizing: border-box;
+	width: 100%;
 }
 .input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input, .input-append .dropdown-menu, .input-prepend .dropdown-menu{
 	font-size:12px;
