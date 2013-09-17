@@ -18,20 +18,27 @@
  */
 
 var handlebars = require('handlebars');
-var i18n = require('./i18n');
-
-var languages = i18n.languages;
+var I18n = require('./i18n').I18n;
 
 // how to use http://slexaxton.github.io/Jed/
 
 // this is used like {{#_}}Some text to translate{{/_}}
 // as suggested here: https://github.com/janl/mustache.js/issues/216
+// and here: https://gist.github.com/mashpie/5246334
+
 handlebars.registerHelper('_', function (msgid) {
-	return i18n.jed().translate(msgid).fetch();
+	var args = Array.prototype.slice.call(arguments, 1);
+	var tr8n = I18n().translate(msgid);
+	return tr8n.fetch.apply(tr8n, args);
+});
+
+handlebars.registerHelper('_n', function (msgid, msgidn, n) {
+	var args = Array.prototype.slice.call(arguments, 2);
+	var tr8n = I18n().translate(msgid).ifPlural(n, msgidn);
+	return tr8n.fetch.apply(tr8n, args);
 });
 
 module.exports = {
-	changelang: i18n.setcontext,
-	//changelang: function(l) { console.log(JSON.sei18n.jed().,
+	changelang: I18n.changelang,
 	compile: handlebars.compile
 };

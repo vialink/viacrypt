@@ -116,12 +116,12 @@ i18n.languages.forEach(function (lang) {
 	i18n._jed = i18n._jeds[lang];
 });
 
-i18n.setcontext = function(lang) {
-	i18n._jed = i18n._jeds[lang];
-}
-
-i18n.jed = function() {
+i18n.I18n = function() {
 	return i18n._jed;
-}
+};
+
+i18n.I18n.changelang = function(lang) {
+	i18n._jed = i18n._jeds[lang];
+};
 
 module.exports = i18n;
