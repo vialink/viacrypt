@@ -94,7 +94,7 @@ Deploying
 Put the following typically on `/etc/supervisor/conf.d/viacrypt.conf`.
 
     [program:viacrypt]
-    command=/path/to/viacrypt/bin/viacrypt-server.js
+    command=/path/to/viacrypt/bin/viacrypt-server
     stdout_logfile=/path/to/viacrypt/logs/viacrypt.log
 
 To start it:
@@ -110,7 +110,7 @@ Put the following typically on `/etc/init/viacrypt.conf`.
     description "ViaCRYPT node.js server"
     start on startup
     stop on shutdown
-    exec /path/to/viacrypt/bin/viacrypt-server.js >> /path/to/viacrypt/logs/viacrypt.log
+    exec /path/to/viacrypt/bin/viacrypt-server >> /path/to/viacrypt/logs/viacrypt.log
 
 To start it:
 
