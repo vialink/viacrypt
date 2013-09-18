@@ -62,7 +62,7 @@ cfg.mongo_options = {
 // See [here](http://www.nodemailer.com/#well-known-services-for-smtp) for
 // more examples. When the backend is `smtp` it is passed directly to
 // nodemailer options on `createTransport`.
-cfg.enable_email_notification = false;
+cfg.enable_email_notification = true;
 cfg.notification_options = {
 	hide_header: false,
 	sender: 'ViaCRYPT Notifications <viacrypt@localhost>',
