@@ -10,9 +10,16 @@
          "MIME-Version": "1.0",
          "Content-Type": "text/plain; charset=UTF-8",
          "Content-Transfer-Encoding": "8bit",
-         "Plural-Forms": "nplurals=2; plural=(n > 1);",
-         "X-Generator": "Poedit 1.5.7"
+         "Plural-Forms": "nplurals=2; plural=(n > 1);"
       },
+      "Something went wrong": [
+         null,
+         "Algo errado ocorreu"
+      ],
+      "Sorry but something went wrong. Please try again.": [
+         null,
+         "Desculpe mas algo errado ocorreu. Por favor tente novamente."
+      ],
       "Rate limit exceeded": [
          null,
          "Taxa limite excedida"
@@ -113,6 +120,34 @@
          null,
          "VIALINK"
       ],
+      "Your message is...": [
+         null,
+         "Sua mensagem é…"
+      ],
+      "REMEMBER": [
+         null,
+         "LEMBRE-SE"
+      ],
+      "This message has been deleted and cannot be read again.": [
+         null,
+         "Essa mensagem foi deletada e não pode ser lida novamente."
+      ],
+      "Close": [
+         null,
+         "Fechar"
+      ],
+      "Message not found": [
+         null,
+         "Mensagem não encontrada"
+      ],
+      "This message has already been read or has never been existed.": [
+         null,
+         "Essa mensagem já foi lida ou nunca existiu."
+      ],
+      "You should ask the sender to send it again.": [
+         null,
+         "Você deve pedir ao remetente para enviá-la novamente."
+      ],
       "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore.": [
          null,
          "Este aplicativo é um sistema de mensagens criptografadas onde o destinatário pode ler a mensagem apenas uma vez. Após a leitura, a mensagem é apagada e não pode mais ser recuperada."
@@ -136,10 +171,6 @@
       "Github": [
          null,
          "Github"
-      ],
-      "Close": [
-         null,
-         "Fechar"
       ],
       "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases.": [
          null,
@@ -172,30 +203,6 @@
       "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.": [
          null,
          "Pode-se argumentar que alguém pode recuperar a sua mensagem e torná-la indisponível para você. Embora isso seja possível, os identificadores únicos são gerados aleatoriamente usando a RFC4122 UUID v4 e a probabilidade de colisão ao acaso é de cerca de 8.64E-78."
-      ],
-      "Your message is...": [
-         null,
-         "Sua mensagem é…"
-      ],
-      "REMEMBER": [
-         null,
-         "LEMBRE-SE"
-      ],
-      "This message has been deleted and cannot be read again.": [
-         null,
-         "Essa mensagem foi deletada e não pode ser lida novamente."
-      ],
-      "Message not found": [
-         null,
-         "Mensagem não encontrada"
-      ],
-      "This message has already been read or has never been existed.": [
-         null,
-         "Essa mensagem já foi lida ou nunca existiu."
-      ],
-      "You should ask the sender to send it again.": [
-         null,
-         "Você deve pedir ao remetente para enviá-la novamente."
       ],
       "Contact Information": [
          null,

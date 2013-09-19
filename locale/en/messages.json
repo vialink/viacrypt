@@ -12,6 +12,14 @@
          "Content-Transfer-Encoding": "8bit",
          "Plural-Forms": "nplurals=2; plural=(n > 1);"
       },
+      "Something went wrong": [
+         null,
+         ""
+      ],
+      "Sorry but something went wrong. Please try again.": [
+         null,
+         ""
+      ],
       "Rate limit exceeded": [
          null,
          ""
@@ -112,6 +120,34 @@
          null,
          ""
       ],
+      "Your message is...": [
+         null,
+         ""
+      ],
+      "REMEMBER": [
+         null,
+         ""
+      ],
+      "This message has been deleted and cannot be read again.": [
+         null,
+         ""
+      ],
+      "Close": [
+         null,
+         ""
+      ],
+      "Message not found": [
+         null,
+         ""
+      ],
+      "This message has already been read or has never been existed.": [
+         null,
+         ""
+      ],
+      "You should ask the sender to send it again.": [
+         null,
+         ""
+      ],
       "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore.": [
          null,
          ""
@@ -133,10 +169,6 @@
          ""
       ],
       "Github": [
-         null,
-         ""
-      ],
-      "Close": [
          null,
          ""
       ],
@@ -169,30 +201,6 @@
          ""
       ],
       "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.": [
-         null,
-         ""
-      ],
-      "Your message is...": [
-         null,
-         ""
-      ],
-      "REMEMBER": [
-         null,
-         ""
-      ],
-      "This message has been deleted and cannot be read again.": [
-         null,
-         ""
-      ],
-      "Message not found": [
-         null,
-         ""
-      ],
-      "This message has already been read or has never been existed.": [
-         null,
-         ""
-      ],
-      "You should ask the sender to send it again.": [
          null,
          ""
       ],
