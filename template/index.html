@@ -14,8 +14,8 @@
 <meta property="og:description" content="{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."}}">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 
-<link href="lib/css/bootstrap-combined.min.css" rel="stylesheet">
-<link href="vialink.css" rel="stylesheet">
+<link href="{{static "lib/css/bootstrap.css"}}" rel="stylesheet">
+<link href="{{static "vialink.css"}}" rel="stylesheet">
 
 <!-- IOS startup image -->
 <link rel="apple-touch-startup-image" href="img/logo-big.jpg">
@@ -37,10 +37,10 @@
 	</style>
 <![endif]-->
 
-<script src="lib/aes.js"></script>
-<script src="lib/jquery-1.10.2.min.js"></script>
-<script src="lib/touchscroll.js"></script>
-<script src="lib/bootstrap.min.js"></script>
+<script src="{{static "lib/js/aes.js"}}"></script>
+<script src="{{static "lib/js/jquery.min.js"}}"></script>
+<script src="{{static "lib/js/touchscroll.min.js"}}"></script>
+<script src="{{static "lib/js/bootstrap.min.js"}}"></script>
 <script src="viacrypt.js"></script>
 {{#if enable_livereload}}<script src="http://localhost:35729/livereload.js"></script>{{/if}}
 </head>
@@ -122,7 +122,7 @@
             </div>
             <div class="locale">
                 <ul>
-                    {{#each languages}}<li> <a href="/{{this}}/"><img src="img/flags/{{this}}.png" alt="{{this}} flag"></a></li>
+                    {{#each languages}}<li> <a href="/{{this}}/"><img src="{{static "img/flags/" this ".png"}}" alt="{{this}} flag"></a></li>
                     {{/each}}
                 </ul>
             </div>

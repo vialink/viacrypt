@@ -123,13 +123,13 @@ i18n.changelang = function(lang) {
 i18n.translate = function(id) {
 	var args = Array.prototype.slice.call(arguments, 1);
 	var tran = i18n.jed.translate(id);
-	return tran.fetch.apply(tran, args.map(function(a){ return i18n.jed.translate(a).fetch() }));
-}
+	return tran.fetch.apply(tran, args.map(function(a){ return i18n.jed.translate(a).fetch(); }));
+};
 
 i18n.ntranslate = function(id, nid, n) {
 	var args = Array.prototype.slice.call(arguments, 1);
 	var tran = i18n.jed.translate(id).ifPlural(n, nid);
-	return tran.fetch.apply(tran, args.map(function(a){ return i18n.jed.translate(a).fetch() }));
-}
+	return tran.fetch.apply(tran, args.map(function(a){ return i18n.jed.translate(a).fetch(); }));
+};
 
 module.exports = i18n;

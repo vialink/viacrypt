@@ -18,43 +18,38 @@
  */
 
 var fs = require('fs');
-var message = require('../parser').message;
-var parse = require('../parser').parse;
+var join = require('path').join;
+var Message = require('../message').Message;
 
-var Provider = function(options){
-	var messages_path = options.messages_path;
+// This provider expects a configuration with a provider property like the
+// following, and also the path is expected to be absolute.
+// {
+//   type: 'fs',
+//   path: __dirname + '/messages/'
+// }
+var Provider = function(config) {
+	this.config = config;
+	this.message = new Message(config);
+	this.path = config.provider.path;
+
 	// ensure dir exists
-	if (!fs.existsSync(messages_path)) {
-		fs.mkdirSync(messages_path);
-	}
-
-	if (messages_path == null) {
-		console.log('WARNING: implicit messages path is being deprecated, please configure one!');
-		messages_path = 'messages/';
-	}
-	// check if given path is absolute
-	if (messages_path.substr(0, 1) === '/') {
-		this.messages_path = messages_path;
-	} else {
-		this.messages_path = __dirname + '/../' + messages_path;
-	}
-	// ensure path ends with '/'
-	if (this.messages_path.substr(-1, 1) !== '/') {
-		this.messages_path += '/';
+	if (!fs.existsSync(this.path)) {
+		fs.mkdirSync(this.path);
 	}
 };
 
 Provider.prototype.make_path = function(id) {
-	return this.messages_path + id;
+	return join(this.path, id.toString());
 };
 
 Provider.prototype.get = function (id, callback) {
 	var path = this.make_path(id);
+	var message = this.message;
 	fs.readFile(path, function(err, data) {
 		if (err) {
 			callback(err);
 		} else {
-			callback(err, parse(data.toString()));
+			callback(err, message.parse(data.toString()));
 			// delete the file
 			fs.unlink(path);
 		}
@@ -63,11 +58,12 @@ Provider.prototype.get = function (id, callback) {
 
 Provider.prototype.put = function (id, data, callback) {
 	var path = this.make_path(id);
+	var message = this.message;
 	fs.exists(path, function(exists) {
 		if (exists) {
 			callback('duplicate');
 		} else {
-			var raw_data = message(data);
+			var raw_data = message.compile(data);
 			fs.writeFile(path, raw_data, function(err) {
 				if (err) {
 					var error = (function () {

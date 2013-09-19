@@ -18,13 +18,14 @@
  */
 
 var nodemailer = require('nodemailer');
-var templating = require('./templating');
 var dateformat = require('dateformat');
+var Compiler = require('./templating').Compiler;
 var fs = require('fs');
 
 function Mailer(config) {
 	this.options = config.notification_options;
 	this.siteurl = config.siteurl || 'http:' + config.baseurl;
+	this.compiler = new Compiler(config);
 }
 
 // sends an email message using nodemailer
@@ -38,7 +39,8 @@ Mailer.prototype.send_mail = function(data) {
 		logo_src: __dirname + '/../assets/img/logo.png',
 		siteurl:  this.siteurl
 	};
-	templating.changelang(data.locale);
+	this.compiler.changelang(data.locale);
+	var compiler = this.compiler;
 	fs.readFile(__dirname + '/../template/_email.html', 'utf-8', function(err, file_data) {
 		if(err) {
 			console.log(err);
@@ -49,8 +51,8 @@ Mailer.prototype.send_mail = function(data) {
 			var mail = {
 				from: sender,
 				to: data.email,
-				subject: templating.compile(subj)(context),
-				html: templating.compile(body)(context),
+				subject: compiler.compile(subj)(context),
+				html: compiler.compile(body)(context),
 				generateTextFromHTML: true,
 				forceEmbeddedImages: true
 			};

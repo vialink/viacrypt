@@ -19,17 +19,34 @@
 
 var handlebars = require('handlebars');
 var i18n = require('./i18n');
+var join = require('path').join;
 
-// how to use http://slexaxton.github.io/Jed/
+var Compiler = function(config, lang) {
+	this.config = config;
+	this.handlebars = handlebars;
 
-// this is used like {{#_}}Some text to translate{{/_}}
-// as suggested here: https://github.com/janl/mustache.js/issues/216
-// and here: https://gist.github.com/mashpie/5246334
+	if (lang) {
+		this.changelang(lang);
+	}
 
-handlebars.registerHelper('_', i18n.translate);
-handlebars.registerHelper('_n', i18n.ntranslate);
-
-module.exports = {
-	changelang: i18n.changelang,
-	compile: handlebars.compile
+	// this is used like {{#_ "Some text to translate"}}
+	// as suggested here: https://github.com/janl/mustache.js/issues/216
+	// and here: https://gist.github.com/mashpie/5246334
+	this.handlebars.registerHelper('_', i18n.translate);
+	this.handlebars.registerHelper('_n', i18n.ntranslate);
+	this.handlebars.registerHelper('static', function() {
+		var args = Array.prototype.slice.call(arguments, 0, -1);
+		var relative_path = args.join('');
+		return join(config.assets_url, relative_path);
+	});
 };
+
+Compiler.prototype.changelang = function(lang) {
+	i18n.changelang(lang);
+};
+
+Compiler.prototype.compile = function(template) {
+	return this.handlebars.compile(template);
+};
+
+module.exports.Compiler = Compiler;

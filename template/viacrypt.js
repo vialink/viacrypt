@@ -106,7 +106,8 @@ $(function() {
 	//---------------------------------------------------------------------------------
 	// Save it!
 	//
-	$('#main-form').submit(function() {
+	$('#main-form').submit(function(event) {
+		event.preventDefault();
 		var message = $('#message').val();
 		var passphrase = generate_passphrase();
 		//console.log('message', message);
@@ -156,6 +157,7 @@ $(function() {
 					show_message('{{_ "Rate limit exceeded"}}', '{{_ "Too many messages. Try again in"}} ' + tryagain + ' {{_ "minute"}}' + plural + '.');
 					ga('send', 'event', 'post message ratelimit exceeded', 'post', 'exceeded');
 				} else {
+					show_message('{{_ "Something went wrong"}}', '{{_ "Sorry but something went wrong. Please try again."}}');
 					ga('send', 'event', 'post message error', 'post', 'unknown error');
 				}
 			}

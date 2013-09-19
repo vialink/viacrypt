@@ -17,29 +17,35 @@
  * along with ViaCRYPT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var message = require('./templating').compile(require('fs').readFileSync(__dirname + '/../template/_message.txt').toString());
+var Compiler = require('./templating').Compiler;
 
-// known headers and they're mappings:
-var headers = {
-	'ViaCRYPT-Version': 'version',
-	'Submitted-by': 'ip',
-	'Submitted-date': 'date',
-	'Sender-locale': 'locale',
-	'Send-notification-to': 'email',
-	'Notification-id': 'label'
+var Message = function(config) {
+	this.config = config;
+	this.compiler = new Compiler(this.config);
+	this.message = this.compiler.compile(require('fs').readFileSync(__dirname + '/../template/_message.txt').toString());
+
+	// known headers and they're mappings:
+	this.headers = {
+		'ViaCRYPT-Version': 'version',
+		'Submitted-by': 'ip',
+		'Submitted-date': 'date',
+		'Sender-locale': 'locale',
+		'Send-notification-to': 'email',
+		'Notification-id': 'label'
+	};
+
+	this.parsers = {
+		date: function (d) { return new Date(Date.parse(d)); }
+	};
+
+	this.initiator = '-----BEGIN USER MESSAGE-----';
+	this.terminator = '-----END USER MESSAGE-----';
 };
 
-var parsers = {
-	date: function (d) { return new Date(Date.parse(d)); }
-};
-
-var initiator = '-----BEGIN USER MESSAGE-----';
-var terminator = '-----END USER MESSAGE-----';
-
-function parse(string) {
+Message.prototype.parse = function(string) {
 	var lines = string.trim().split('\n');
 	var parsed = {};
-	if ((lines.shift() !== initiator) || (lines.pop() !== terminator)) {
+	if ((lines.shift() !== this.initiator) || (lines.pop() !== this.terminator)) {
 		return null;
 	}
 	var line;
@@ -48,9 +54,9 @@ function parse(string) {
 		if (match.length === 3) {
 			var header = match[1];
 			var value = match[2];
-			if (header in headers) {
-				var key = headers[header];
-				parsed[key] = (key in parsers) ? parsers[key](value) : value;
+			if (header in this.headers) {
+				var key = this.headers[header];
+				parsed[key] = (key in this.parsers) ? this.parsers[key](value) : value;
 			} else {
 				parsed._unknown = parsed._unknown || {};
 				parsed._unknown[header] = value;
@@ -63,9 +69,10 @@ function parse(string) {
 	// remaining is data
 	parsed.data = lines.join('\n');
 	return parsed;
-}
-
-module.exports = {
-	parse: parse,
-	message: message
 };
+
+Message.prototype.compile = function(data) {
+	return this.message(data);
+};
+
+module.exports.Message = Message;

@@ -25,7 +25,7 @@ var connect = require('connect'),
 	uuid = require('node-uuid'),
 	version = require('../package').version,
 	i18n = require('./i18n'),
-	parser = require('./parser');
+	Message = require('./message').Message;
 
 var re_uuid = /^[A-Za-z0-9-]+$/;
 var re_userdata = /^[A-Za-z0-9+/=]+$/;
@@ -37,14 +37,9 @@ var Server = function(config) {
 	this.config = config;
 
 	// set up 
-	var _provider = config.message_provider;
-	if (_provider == null) {
-		console.log('WARNING: unconfigured message provider, falling back to fs store.');
-		_provider = 'fs';
-	}
-	var _provider_options = config[_provider + '_options'];
-	var store = require('./providers/' + _provider);
-	var provider = new store.Provider(_provider_options);
+	var Provider = require('./providers/' + config.provider.type).Provider;
+	var provider = this.provider = new Provider(config);
+	var message = this.message = new Message(config);
 
 	this.app = express();
 
@@ -67,7 +62,7 @@ var Server = function(config) {
 		if (config.notification_options.hide_header === true) {
 			delete clone.email;
 		}
-		return parser.message(clone);
+		return message.compile(clone);
 	}
 
 	// ### set up middlewares
@@ -152,22 +147,14 @@ var Server = function(config) {
 Server.prototype.spawn = function() {
 	var log_fmt = ':remote-addr :req[X-Forwarded-For] - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 
-	var static_dir;
-	if (this.config.serve_static) {
-	    static_dir = this.config.static_dir;
-	} else if (this.config.serve_static !== false) {
-		console.log('WARNING: unconfigured parameter serve_static. Implicit "true" will be deprecated, update your config.js');
-		static_dir = __dirname + '/static';
-	}
-
 	var server = connect()
 		.use(connect.logger(log_fmt))
-		.use(connect.responseTime())
+		.use(connect.responseTime());
 
 	if (this.config.serve_static === true) {
 		server = server
-			.use(i18n.localized_static(connect, static_dir, {maxAge: 10000}))
-			//.use(connect.static(static_dir, {maxAge: 10000}))
+			.use(i18n.localized_static(connect, this.config.static_dir, {maxAge: 10000}))
+			.use(connect.static(this.config.assets_dir, {maxAge: 10000}));
 	}
 
 	server = server

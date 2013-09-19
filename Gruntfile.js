@@ -20,40 +20,26 @@
 var join = require('path').join;
 var config = require('./config');
 var i18n = require('./src/i18n');
-var templating = require('./src/templating');
+var Compiler = require('./src/templating').Compiler;
 
 module.exports = function(grunt) {
 
-	grunt.loadNpmTasks('grunt-curl');
 	grunt.loadNpmTasks('grunt-gettext');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-develop');
+	grunt.loadNpmTasks('grunt-bower-task');
 
 	grunt.initConfig({
 		clean: ['static'],
-		copy: i18n.languages.map(function (lang) {
-			return {
+		copy: {
+			assets: {
 				expand: true,
 				cwd: 'assets/',
 				src: ['**'],
-				dest: 'static/' + lang + '/',
-			};
-		}),
-		getassets: {
-			'static/': {
-				'lib/': [
-					'http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js',
-					'http://code.jquery.com/jquery-1.10.2.min.js',
-					'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js',
-					'http://www.seabreezecomputers.com/tips/touchscroll.js',
-					'http://code.jquery.com/jquery-1.10.2.min.map'
-				],
-				'lib/css/': [
-					'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css',
-				]
+				dest: 'static/assets/',
 			}
 		},
 		xgettext: {
@@ -77,47 +63,45 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			develop: {
-				files: [
-					'config.js',
-					'src/**/*.js'
-				],
+				files: ['src/**/*.js'],
 				tasks: ['develop'],
-				options: { nospawn: true }
+				options: {nospawn: true}
 			},
 			templates: {
 				files: ['template/**/*', 'locale/**/*.json'],
 				tasks: ['compile'],
-				options: { livereload: true },
+				options: {livereload: true},
 			},
 			assets: {
 				files: ['assets/**/*'],
 				tasks: ['copy'],
-				options: { livereload: true },
+				options: {livereload: true},
 			},
-			config: {
-				files: ['config.js'],
-				tasks: ['copy', 'compile'],
-				options: { livereload: true },
-			}
 		},
 		jshint: {
-			src: {
-				src: ['src/**/*.js', 'config.js.sample'],
+			all: {
+				src: ['src/**/*.js', 'config.js.sample', 'Gruntfile.js'],
 				options: {
 					jshintrc: '.jshintrc'
 				}
-			},
-			grunt: {
-				src: ['Gruntfile.js', 'build/tasks/*'],
-				options: {
-					jshintrc: '.jshintrc'
-				}
-			},
+			}
 		},
+		bower: {
+			install: {
+				options: {
+					targetDir: 'static/assets/lib',
+					layout: function(type) { return type; },
+					install: true,
+					verbose: false,
+					cleanTargetDir: true,
+					cleanBowerDir: false
+				}
+			}
+		}
 	});
 
 	// Default task is compiling
-	grunt.registerTask('default', ['copy', 'getassets', 'compile']);
+	grunt.registerTask('default', ['bower', 'compile', 'copy']);
 	grunt.registerTask('run', ['develop', 'watch']);
 
 	// Will compile every file in the ./template dir to the ./static dir
@@ -128,7 +112,7 @@ module.exports = function(grunt) {
 		i18n.supported_locales.forEach(function(locale_list) {
 			var lang = locale_list[0];
 			var code = locale_list[1].replace('_', '-');
-			templating.changelang(lang);
+			var compiler = new Compiler(config, lang);
 			grunt.file.recurse(input_dir, function(filepath, rootdir, subdir, filename) {
 				// copy config and set some customs
 				var context = JSON.parse(JSON.stringify(config));
@@ -141,7 +125,7 @@ module.exports = function(grunt) {
 				}
 
 				var data = grunt.file.read(filepath).toString();
-				var template = templating.compile(data);
+				var template = compiler.compile(data);
 				var output_path = join(output_dir, lang, subdir || '', filename);
 				try {
 					grunt.file.write(output_path, template(context));
