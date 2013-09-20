@@ -8,6 +8,8 @@ locale/**/*.mo
 
 static/*
 
-config.js
+config/*
+!config/default.js
+!config/examples/
 
 *.swp

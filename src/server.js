@@ -45,7 +45,7 @@ var Server = function(config) {
 
 	// ### set up hooks
 	var hooks = [];
-	if (config.enable_email_notification) {
+	if (config.notifications) {
 		var Mailer = require('./mailer').Mailer;
 		var mailer = new Mailer(config);
 		hooks.push(function(data) {
@@ -59,7 +59,7 @@ var Server = function(config) {
 	// if necessary and verifying if an email has to be sent
 	function prepare(data) {
 		var clone = JSON.parse(JSON.stringify(data));
-		if (config.notification_options.hide_header === true) {
+		if (config.notifications.hide_header !== false) {
 			delete clone.email;
 		}
 		return message.compile(clone);
@@ -162,8 +162,8 @@ Server.prototype.spawn = function() {
 		.use(connect.bodyParser())
 		.use(this.app);
 
-	var addr = this.config.listen;
-	var port = this.config.port;
+	var addr = this.config.http.listen;
+	var port = this.config.http.port;
 	server.run = function() {
 		console.log('Server running at ' + addr + ':' + port);
 		return this.listen(port, addr);

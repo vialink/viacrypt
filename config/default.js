@@ -1,22 +1,36 @@
-// vim: filetype=javascript
+var join = require('path').join;
 var cfg = {};
 
-// Sample Configuration
-// ====================
+var __basedir = join(__dirname, '..');
 
+// Default Configuration
+// =====================
 
 // ## Primary Settings
 //
-cfg.listen = '127.0.0.1';
-cfg.port = 8001;
+cfg.http = {
+	listen: '127.0.0.1',
+	port: 8001
+};
 
 // URL used when generating URL client-side and when retrieving a message.
 // Never prefix the protocol (http or https). It is generated according to
 // the access.
-cfg.baseurl = '//127.0.0.1:8001';
+cfg.baseurl = '//' + cfg.http.listen + ':' + cfg.http.port;
 
-// this URL will be used on the footer links on mails
+// cfg URL will be used on the footer links on mails
 cfg.siteurl = 'http:' + cfg.baseurl;
+
+// you might want to disable serving static files on production to avoid
+// unecessary hassles that may come with it. (set to false to disable)
+cfg.serve_static = true;
+cfg.static_dir = join(__basedir, 'static');
+cfg.assets_dir = join(__basedir,'static/assets');
+
+// base url to serve static assets
+// must configure even if not serving static files
+//cfg.assets_url = '/assets';
+cfg.assets_url = '/';
 
 
 // ## Internationalization Options
@@ -27,29 +41,21 @@ cfg.enabled_langs = [
 	'br',
 ];
 
-// you might want to disable serving static files on production to avoid
-// unecessary hassles that may come with it. (set to false to disable)
-cfg.serve_static = true;
-cfg.static_dir = __dirname + '/static';
-
 
 // ## Message Provider Backend
 //
 // available options are 'fs' and 'mongo'
-cfg.message_provider = 'fs';
-
-// used with fs store
-cfg.fs_options = {
-	messages_path: __dirname + '/messages'
+cfg.provider = {
+	type: 'fs',
+	path: join(__basedir, 'messages')
 };
-
-// used with mongo store
-cfg.mongo_options = {
-	host: 'localhost',
-	port: '27017',
-	database: 'viacrypt',
-	collection: 'messages'
-};
+//cfg.provider = {
+//	type: 'mongo',
+//	host: 'localhost',
+//	port: '27017',
+//	database: 'viacrypt',
+//	collection: 'messages'
+//};
 
 
 // ## Email notification configuration
@@ -62,14 +68,14 @@ cfg.mongo_options = {
 // See [here](http://www.nodemailer.com/#well-known-services-for-smtp) for
 // more examples. When the backend is `smtp` it is passed directly to
 // nodemailer options on `createTransport`.
-cfg.enable_email_notification = true;
-cfg.notification_options = {
+//cfg.notifications = null;
+cfg.notifications = {
 	hide_header: false,
 	sender: 'ViaCRYPT Notifications <viacrypt@localhost>',
 	// file backend
 	backend: {
 		type: 'file',
-		filepath: __dirname + '/mail.log'
+		filepath: join(__basedir, 'mail.log')
 	}
 	// smtp backend with custom server
 	//backend: {
@@ -97,31 +103,36 @@ cfg.notification_options = {
 //
 // The interval must be in seconds.
 // Defaults to 75 messages every 30 minutes.
-// Uncomment to enable.
-//cfg.ratelimit = {};
-//cfg.ratelimit.limit = 75
-//cfg.ratelimit.interval = 60 * 30
 //
-// You can use redis to rate limit.
-// Uncomment the follow lines to enable it.
-//cfg.ratelimit.redis = {}
-//cfg.ratelimit.redis.port = 6379;
-//cfg.ratelimit.redis.host = '127.0.0.1'
-//cfg.ratelimit.redis.options = {};
+cfg.ratelimit = null;
+//cfg.ratelimit = {
+//	limit: 75,
+//	interval: 60 * 30,
+//	// You can use redis to rate limit.
+//	// Uncomment the follow lines to enable it.
+//	//redis: {
+//	//	host: '127.0.0.1',
+//	//	port: 6379,
+//	//	options: {}
+//	//}
+//};
 
 
 // ## LiveReload
 //
-// this option will enable livereload script to be rendered on the index.html page
+// cfg option will enable livereload script to be rendered on the index.html page
 // which is loaded when `grunt watch` is running and makes the page reload every
 // time a source file is changed.
-cfg.enable_livereload = false;
+//
+cfg.livereload = false;
+//cfg.livereload = "localhost:35729";
 
 
 // ## Google Analytics
 //
-cfg.enable_ga = false;
-cfg.ga_tracking_code = 'UA-XXXXX-Y';
-
+// Uncomment to enable.
+//
+cfg.ga_tracking_code = null;
+//cfg.ga_tracking_code = 'UA-XXXXX-Y';
 
 module.exports = cfg;

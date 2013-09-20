@@ -2,13 +2,34 @@
 
 One time read messaging system. You can try it at [http://viacry.pt/](http://viacry.pt/).
 
+Quick Start
+-----------
+
+Assuming you have `nodejs` and global `grunt-cli` and just cloned the project.
+
+Development:
+
+    npm install
+    grunt run
+    # go to localhost:8001 and have fun developing
+
+Production:
+
+    npm install
+    # configure config/server.js
+    grunt
+    # automate the following with supervisor/upstart/...
+    ./bin/viacrypt-server
+    # go to yourserver.com if you either have configured port 80
+    # or proxied it to 8001 and enjoy your deployment
+
 Requirements
 ------------
 
-* [Node.js](http://nodejs.org/)
+- [node.js](http://nodejs.org/)
 
-Install
--------
+Installing
+----------
 
 Dependencies are handled by npm and installed like this:
 
@@ -21,7 +42,13 @@ You will also need to install the grunt-cli globally if you don't already have i
 Configuring
 -----------
 
-Configurations are found on config.js, copy and adapt yours from the config.js.sample
+Currently we're using [node-config](http://lorenwest.github.io/node-config/latest/) to manage
+configurations.
+
+Typically you should `config/development.js` (or `.json`, `.yaml`, `.yml`) to set your specific
+preferences. It is also possible to create multiple configuration environments and also custom
+configs to a machine hostname. You should read [the node-config documentation](http://lorenwest.github.io/node-config/latest/)
+for more information on that regard.
 
 An `static` directory is generated from the `assets` and `templates` dirs, and some dependencies
 that need to be downloaded. Those tasks are automated with grunt.
@@ -30,41 +57,24 @@ To generate the static dir, simply run `grunt` on the project root:
 
     grunt
 
-The files in `template` are passed through handlebars and given the config.js module as input.
-You'll have to run this every time the configuration or templates are altered.
-
-    grunt compile
-
-The files in `assets` are simply copied to `static`. You'll have to run this every time a file
-in `assets` is altered or added.
-
-    grunt copy
-
-Some depenencies are downloaded, those are specified on the Gruntfile.js. You'll probably only
-have to do this manually if you alter these dependencies.
-
-    grunt curl-dir
-
-For easing development there is a `run` task to automatically rerun a task above when one of
-its input files are altered and also run a development server that will restart when needed.
-
-    grunt run
-
+That step is needed when using `./bin/viacrypt-server` to update the files it will serve, or when
+serving the files with your http server (nginx, varnish, apache, ...).
 
 Running
 -------
 
 Should be as simple as
 
-    ./bin/viacrypt-server.js
+    ./bin/viacrypt-server
 
 or
 
     grunt run
 
-for development.
+for development, this one will recompile and reload on demand as sources change, more a less like
+django's `./manage runserver`.
 
-Then checkout `localhost:8001` to see the app.
+Then checkout `localhost:8001` (or whatever you have configured) to see the app.
 
 Translating
 -----------

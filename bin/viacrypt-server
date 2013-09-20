@@ -22,6 +22,7 @@ var fs = require('fs');
 var Server = require('../src/server').Server;
 var version = require('../package').version;
 var ArgumentParser = require('argparse').ArgumentParser;
+var config = require('config');
 
 // set up argument parser
 var parser = new ArgumentParser({
@@ -30,28 +31,22 @@ var parser = new ArgumentParser({
 	addHelp: true,
 });
 
-var config_file = __dirname + '/../config.js';
-var has_config_file = false;
-if (fs.existsSync(config_file))
-	has_config_file = true;
-
-parser.addArgument(
-	['-c', '--config'],
-	{
-		required: !has_config_file,
-		help: 'path to configuration file.'
-	}
-);
+//parser.addArgument(
+//	['-c', '--config'],
+//	{
+//		help: 'path to configuration file.'
+//	}
+//);
 
 // parse args
 var args = parser.parseArgs();
 
 // load given configuration file
-config_file = args.config || config_file;
-if (config_file[0] !== '/') {
-	config_file = process.cwd() + '/' + config_file;
-}
-var config = require(config_file);
+//var config_file = args.config || (__dirname + '/../config.js');
+//if (config_file[0] !== '/') {
+//	config_file = process.cwd() + '/' + config_file;
+//}
+//var config = new Configuration(require(config_file));
 
 // this whill go away when this is no longer a script
 var server = new Server(config);

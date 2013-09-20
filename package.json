@@ -35,7 +35,8 @@
     "dateformat": "~1.0.6",
     "locale": "0.0.10",
     "argparse": "~0.1.15",
-    "jed": "~0.5.4"
+    "jed": "~0.5.4",
+    "config": "~0.4.30"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

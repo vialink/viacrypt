@@ -124,7 +124,7 @@ $(function() {
 
 		var content = {
 			data: data.toString(),
-			//{{#if enable_email_notification}}
+			//{{#if notifications}}
 			notify: $('[name="messageNotify"]').is(':checked'),
 			email:  $('[name="messageNotifyEmail"]').val() || "",
 			label:  $('[name="messageNotifyLabel"]').val() || ""

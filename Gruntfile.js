@@ -18,9 +18,9 @@
  */
 
 var join = require('path').join;
-var config = require('./config');
 var i18n = require('./src/i18n');
 var Compiler = require('./src/templating').Compiler;
+var config = require('config');
 
 module.exports = function(grunt) {
 
@@ -102,7 +102,7 @@ module.exports = function(grunt) {
 
 	// Default task is compiling
 	grunt.registerTask('default', ['bower', 'compile', 'copy']);
-	grunt.registerTask('run', ['develop', 'watch']);
+	grunt.registerTask('run', ['default', 'develop', 'watch']);
 
 	// Will compile every file in the ./template dir to the ./static dir
 	// recursively with handlebars using the configured locale for translations
@@ -136,23 +136,5 @@ module.exports = function(grunt) {
 				grunt.log.ok(output_path);
 			});
 		});
-	});
-
-	grunt.registerTask('getassets', function() {
-		this.requiresConfig('getassets');
-		var cfg = grunt.config('getassets');
-		var curl_dir_cfg = {};
-		i18n.languages.forEach(function (lang) {
-			var locale_dir = lang + '/';
-			var progress = grunt.log.write('getting assets for ' + lang + ' locale... ');
-			for (var base in cfg) {
-				for (var dir in cfg[base]) {
-					curl_dir_cfg[base + locale_dir + dir] = cfg[base][dir];
-				}
-			}
-			progress.ok();
-		});
-		grunt.config('curl-dir', curl_dir_cfg);
-		grunt.task.run('curl-dir');
 	});
 };

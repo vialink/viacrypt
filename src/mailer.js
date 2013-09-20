@@ -23,7 +23,7 @@ var Compiler = require('./templating').Compiler;
 var fs = require('fs');
 
 function Mailer(config) {
-	this.options = config.notification_options;
+	this.options = config.notifications;
 	this.siteurl = config.siteurl || 'http:' + config.baseurl;
 	this.compiler = new Compiler(config);
 }
