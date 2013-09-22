@@ -2,18 +2,17 @@
 
 One time read messaging system. You can try it at [http://viacry.pt/](http://viacry.pt/).
 
-Quick Start
------------
+## Quick Start
 
 Assuming you have `node.js` and `grunt-cli` and just cloned the project.
 
-Development:
+### Development
 
     npm install
     grunt run
     # go to localhost:8001 and have fun developing
 
-Production:
+### Production
 
     npm install
     # configure config/server.js
@@ -23,14 +22,12 @@ Production:
     # go to yourserver.com if you either have configured port 80
     # or proxied it to 8001 and enjoy your deployment
 
-Requirements
-------------
+## Getting Started
+
+### Requirements
 
 - [node.js](http://nodejs.org/)
 - [grunt-cli](http://gruntjs.com/getting-started)
-
-Installing
-----------
 
 Dependencies are handled by npm and installed like this:
 
@@ -40,8 +37,7 @@ You will also need to install the grunt-cli globally if you don't already have i
 
     npm install -g grunt-cli
 
-Configuring
------------
+### Configuring
 
 Currently we're using [node-config](http://lorenwest.github.io/node-config/latest/) to manage
 configurations.
@@ -61,8 +57,7 @@ To generate the static dir, simply run `grunt` on the project root:
 That step is needed when using `./bin/viacrypt-server` to update the files it will serve, or when
 serving the files with your http server (nginx, varnish, apache, ...).
 
-Running
--------
+### Running
 
 Should be as simple as
 
@@ -77,8 +72,7 @@ django's `./manage runserver`.
 
 Then checkout `localhost:8001` (or whatever you have configured) to see the app.
 
-Translating
------------
+## Translating
 
 Translations are being done with gettext and translation files should be located on `locale/<LANG>/messages.po`.
 
@@ -97,8 +91,7 @@ We are aware that it only works on POSIX systems and `handlebars-xgettext` and `
 required to be installed globaly contributions to improve this subsystem are very welcome.
 
 
-Deploying
----------
+## Deploying
 
 ### Supervisor
 
