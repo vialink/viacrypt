@@ -1,4 +1,4 @@
-# ![ViaCRYPT](assets/img/logo.png)
+# [![ViaCRYPT](assets/img/logo.png)](https://viacry.pt/)
 
 One time read messaging system. You can try it at [viacry.pt](https://viacry.pt/).
 
