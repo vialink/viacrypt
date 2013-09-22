@@ -5,7 +5,7 @@ One time read messaging system. You can try it at [http://viacry.pt/](http://via
 Quick Start
 -----------
 
-Assuming you have `nodejs` and global `grunt-cli` and just cloned the project.
+Assuming you have `node.js` and `grunt-cli` and just cloned the project.
 
 Development:
 
@@ -27,6 +27,7 @@ Requirements
 ------------
 
 - [node.js](http://nodejs.org/)
+- [grunt-cli](http://gruntjs.com/getting-started)
 
 Installing
 ----------
