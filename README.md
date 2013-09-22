@@ -79,8 +79,6 @@ translation files should be located on `locale/<LANG>/messages.po` with their re
 `locale/<LANG>/messages.json` used by Jed, don't worry `po2json` can make that conversion, used on
 a handy script: `./xgettext.sh`.
 
-The current scheme still needs some polishing, we could compile the .po to .mo and ease the extraction.
-
 To create a new translation one can use `locale/messages.pot` as a template.
 
 There is a script to update the current translations, it is the recommended way right now.
