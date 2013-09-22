@@ -74,12 +74,12 @@ Then checkout `localhost:8001` (or whatever you have configured) to see the app.
 
 ## Translating
 
-Translations are being done with gettext and translation files should be located on `locale/<LANG>/messages.po`.
+Translations are being done with [Jed](http://slexaxton.github.io/Jed/) in a gettext compatible way,
+translation files should be located on `locale/<LANG>/messages.po` with their respective
+`locale/<LANG>/messages.json` used by Jed, don't worry `po2json` can make that conversion, used on
+a handy script: `./xgettext.sh`.
 
 The current scheme still needs some polishing, we could compile the .po to .mo and ease the extraction.
-
-Although there is an `xgettext` task, using [handlebars-xgettext](https://github.com/gmarty/handlebars-xgettext)
-package yield better results, as the current task will not extract source lines.
 
 To create a new translation one can use `locale/messages.pot` as a template.
 
@@ -87,9 +87,11 @@ There is a script to update the current translations, it is the recommended way 
 
     ./xgettext.sh
 
-We are aware that it only works on POSIX systems and `handlebars-xgettext` and `po2json` are
-required to be installed globaly contributions to improve this subsystem are very welcome.
+That script depends on a global modified version of `handlebars-xgettext`
+(available [here](https://github.com/vialink/handlebars-xgettext) installable like `npm install vialink/handlebars-xgettext`)
+and `po2json` also installed globally.
 
+We are aware that it only works on POSIX systems contributions to improve this subsystem are very welcome.
 
 ## Deploying
 

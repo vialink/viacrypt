@@ -24,7 +24,6 @@ var config = require('config');
 
 module.exports = function(grunt) {
 
-	grunt.loadNpmTasks('grunt-gettext');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
@@ -40,19 +39,6 @@ module.exports = function(grunt) {
 				cwd: 'assets/',
 				src: ['**'],
 				dest: 'static/assets/',
-			}
-		},
-		xgettext: {
-			options: {
-				functionName: '_',
-				potFile: 'locale/messages.pot',
-				//processMessage: function(message) { ... }
-			},
-			target: {
-				files: {
-					handlebars: ['template/*'],
-					javascript: []
-				}
 			}
 		},
 		// spawn=false was tried, didn't work as expected
