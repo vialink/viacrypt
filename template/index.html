@@ -42,6 +42,24 @@
 <script src="lib/bootstrap.min.js"></script>
 <script src="viacrypt.js"></script>
 {{#if enable_livereload}}<script src="http://localhost:35729/livereload.js"></script>{{/if}}
+
+{{#if enable_ga}}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{{ga_tracking_code}}', 'viacry.pt');
+  ga('send', 'pageview');
+</script>
+{{else}}
+<script>
+	// Prevents error if Google Analytics is disabled.
+	ga = function() {}
+</script>
+{{/if}}
+
 </head>
 
 <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'banner');"><img id="git-ribbon" style="position: absolute; top: 0; right: 0; border: 0; z-index: 1031" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
@@ -221,23 +239,6 @@
 		<button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
 	</div>
 </div>
-
-{{#if enable_ga}}
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', '{{ga_tracking_code}}', 'viacry.pt');
-  ga('send', 'pageview');
-</script>
-{{else}}
-<script>
-	// Prevents error if Google Analytics is disabled.
-	ga = function() {}
-</script>
-{{/if}}
 
 </body>
 </html>
