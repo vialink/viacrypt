@@ -2,20 +2,26 @@
 <html lang="{{lang}}">
 <head>
 <meta charset="utf-8">
-<title>{{_ "ViaCRYPT"}}</title>
+<title>{{_ "ViaCRYPT by Vialink"}}</title>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no">
 
-<meta property="og:image" content="http://viacry.pt/img/logo-big.jpg">
-<meta property='og:type' content='website'>
+<link href="{{static "lib/css/bootstrap.css"}}" rel="stylesheet">
+<link href="{{static "vialink.css"}}" rel="stylesheet">
+
+<meta property="og:image" content="img/logo-big.jpg">
+<meta property="og:type" content="website">
 <meta property="og:url" content="http://viacry.pt/">
 <meta property="og:site_name" content="ViaCRYPT">
 <meta property="og:title" content="{{_ "ViaCRYPT"}}">
-<meta property="og:description" content="{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."}}">
+<meta property="og:description" content="{{_ "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market."}}">
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="description" content="{{_ "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market."}}" />
 
-<link href="{{static "lib/css/bootstrap.css"}}" rel="stylesheet">
-<link href="{{static "vialink.css"}}" rel="stylesheet">
+<!-- Google Plus -->
+<meta itemprop="name" content="{{_ "Vialink"}}">
+<meta itemprop="description" content="{{_ "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market."}}">
+<meta itemprop="image" content="ico/tileicon.png" /><!--144x144px -->
 
 <!-- IOS startup image -->
 <link rel="apple-touch-startup-image" href="img/logo-big.jpg">
@@ -167,7 +173,7 @@
         <p>{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."}}</p>
         <p>{{_ "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."}}</p>
         <p>{{_ "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"}} <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">{{_ "here"}}</a>.</p>
-        <p>{{_ "You can check the code yourself whether you're curious or just want to run it at home, it's available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'what it is');">{{_ "Github"}}</a>.</p>
+        <p>{{_ "You can check the code yourself whether you`re curious or just want to run it at home, it`s available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'what it is');">{{_ "Github"}}</a>.</p>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
@@ -181,10 +187,10 @@
     </div>
     <div class="modal-body" id="examplesOfUseText">
         <ol>
-            <li>{{_ "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases."}}</li>
+            <li>{{_ "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won`t have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn`t stored in their databases."}}</li>
             <li>{{_ "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."}}</li>
         </ol>
-        <strong>{{_ "Be creative!"}}</strong> {{_ "You can use it in many ways. Don't forget to let us know how you are using it :)"}}
+        <strong>{{_ "Be creative!"}}</strong> {{_ "You can use it in many ways. Don`t forget to let us know how you are using it :)"}}
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
@@ -200,7 +206,7 @@
         <p>{{_ "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."}}</p>
         <p>{{_ "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."}}</p>
         <p>{{_ "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."}}</p>
-        <p>{{_ "You can check the code yourself whether you're curious or just want to run it at home, it's available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'for nerds');">{{_ "Github"}}</a>.</p>
+        <p>{{_ "You can check the code yourself whether you`re curious or just want to run it at home, it`s available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'for nerds');">{{_ "Github"}}</a>.</p>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
