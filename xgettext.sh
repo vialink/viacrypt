@@ -16,7 +16,7 @@ rm locale/messages.pot.tmp
 for lang in en br; do
 	msgmerge -q locale/$lang/messages.po locale/messages.pot > locale/$lang/messages.po.new || fail msgmerge
 	mv locale/$lang/messages.po.new locale/$lang/messages.po
-	po2json locale/$lang/messages.po locale/$lang/messages.json || fail po2json
+	po2json --pretty --domain=messages locale/$lang/messages.po locale/$lang/messages.json || fail po2json
 done
 
 echo 'Done!'
