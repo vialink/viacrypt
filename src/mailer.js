@@ -74,7 +74,7 @@ Mailer.prototype.send_mail = function(data) {
 					}
 					var transport = nodemailer.createTransport('SMTP', backend);
 					transport.sendMail(mail, email_callback);
-					transport.close();
+					//transport.close();
 					break;
 				case 'file':
 					var out = JSON.stringify(mail) + '\n';

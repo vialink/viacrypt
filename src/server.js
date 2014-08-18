@@ -38,7 +38,7 @@ var Server = function(config) {
 
 	// set up 
 	var Provider = require('./providers/' + config.provider.type).Provider;
-	var provider = this.provider = new Provider(config);
+	var provider = this.provider = new Provider(config.provider);
 	var message = this.message = new Message(config);
 
 	this.app = express();
