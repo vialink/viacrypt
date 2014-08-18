@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="{{lang}}">
 <head>
-<title>{{_ "ViaCRYPT"}}</title>
+<meta charset="utf-8">
+<title>{{_ "ViaCRYPT by Vialink"}}</title>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no">
 
-<meta property="og:image" content="http://viacry.pt/img/logo-big.jpg">
-<meta property='og:type' content='website'>
+<link href="{{static "lib/css/bootstrap.css"}}" rel="stylesheet">
+<link href="{{static "vialink.css"}}" rel="stylesheet">
+
+<meta property="og:image" content="img/logo-big.jpg">
+<meta property="og:type" content="website">
 <meta property="og:url" content="http://viacry.pt/">
 <meta property="og:site_name" content="ViaCRYPT">
 <meta property="og:title" content="{{_ "ViaCRYPT"}}">
-<meta property="og:description" content="{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore. Never again share your passwords and secrets using plain-text e-mail, Facebook Chat, Google Talk or Skype."}}">
+<meta property="og:description" content="{{_ "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market."}}">
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="description" content="{{_ "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market."}}" />
 
-<link href="lib/css/bootstrap-combined.min.css" rel="stylesheet">
-<link href="vialink.css" rel="stylesheet">
+<!-- Google Plus -->
+<meta itemprop="name" content="{{_ "Vialink"}}">
+<meta itemprop="description" content="{{_ "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market."}}">
+<meta itemprop="image" content="ico/tileicon.png" /><!--144x144px -->
 
 <!-- IOS startup image -->
 <link rel="apple-touch-startup-image" href="img/logo-big.jpg">
@@ -36,38 +43,20 @@
 	</style>
 <![endif]-->
 
-<script src="lib/aes.js"></script>
-<script src="lib/jquery-1.10.2.min.js"></script>
-<script src="lib/touchscroll.js"></script>
-<script src="lib/bootstrap.min.js"></script>
+<script src="{{static "lib/js/aes.js"}}"></script>
+<script src="{{static "lib/js/jquery.min.js"}}"></script>
+<script src="{{static "lib/js/touchscroll.min.js"}}"></script>
+<script src="{{static "lib/js/bootstrap.min.js"}}"></script>
 <script src="viacrypt.js"></script>
-{{#if enable_livereload}}<script src="http://localhost:35729/livereload.js"></script>{{/if}}
-
-{{#if enable_ga}}
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', '{{ga_tracking_code}}', 'viacry.pt');
-  ga('send', 'pageview');
-</script>
-{{else}}
-<script>
-	// Prevents error if Google Analytics is disabled.
-	ga = function() {}
-</script>
-{{/if}}
-
+{{#if livereload}}<script src="http://{{livereload}}/livereload.js"></script>{{/if}}
 </head>
 
 <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'banner');"><img id="git-ribbon" style="position: absolute; top: 0; right: 0; border: 0; z-index: 1031" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
 <div class="container">
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<a class="brand" href="/" title="{{_ "ViaCRYPT"}}">{{_ "ViaCRYPT"}}</a>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <a class="brand" href="/" title="{{_ "ViaCRYPT"}}">{{_ "ViaCRYPT"}}</a>
             <div id="topmenu">
                 <ul class="nav pull-right-nav">
                     <li><a href="#whatIsIt" role="button" data-toggle="modal" onclick="ga('send', 'event', 'what it is', 'click', 'modal', 1);">
@@ -92,153 +81,178 @@
                     </a></li>
                 </ul>
             </div>
-		</div>
-	</div>
-	<div class="form-horizontal">
-		<div class="control-group">
-			<textarea id="message" style="background-color: rgba(255, 255, 255, 0.4); font-size: 16px; font-family: monospace; width: 100%; box-sizing: border-box;" class="input-xxlarge" rows="20" placeholder="{{_ "Type your secret message here..."}}"></textarea>
-		</div>
-        {{#if enable_email_notification}}
-		<div class="control-group">
-			<label class="checkbox">
-				<input type="checkbox" class="notifyByEmailCheckbox" name="isNotifyByEmailEnabled">
-				{{_ "Please, notify me when my message is read." }}
-                <a href="#" data-toggle="tooltip" title="{{_ "Your e-mail will be stored non-encrypted into our servers."}}"><i class="icon icon-info-sign"></i></a>
-			</label>
-			<div class="notifyByEmail hide">
-				{{_ "My e-mail address is:" }}
-				<input type="text" name="notifyByEmail" class="input-xlarge">
-			</div>
-		</div>
-        {{/if}}
-		<div class="control-group">
-			<button id="save" type="button" class="btn btn-primary" onclick="ga('send', 'event', 'save it', 'click', 'generate url', 1);">{{_ "Save it"}}</button>
-		</div>
-	</div>
-	<div id="showUrl" class="well hide">
-		<p>{{_ "Single-use URL:"}} <span class="url"></span></p>
-		<p><span class="label label-important">{{_ "IMPORTANT"}}</span> {{_ "This message can be read only once and will be deleted on the first read."}}</p>
-	</div>
-
-    <div id="iosmenu">
+        </div>
     </div>
 
-	<div id="footer">
-		<div class="container">
-			<div class="desenv">
-				<span>{{_ "Developed by"}}</span> <a href="http://www.vialink.com.br" target="_blank" title="Vialink" class="logo-vialink" onclick="ga('send', 'event', 'vialink', 'click', 'footer');">{{_ "VIALINK"}}</a>
-			</div>
+    <form id="main-form">
+        <div class="form-horizontal form-inline">
+            <div class="control-group">
+                <textarea id="message" class="message input-xxlarge" rows="20" placeholder="{{_ "Type your secret message here..."}}"></textarea>
+            </div>
+            {{#if notifications}}
+            <div class="control-group">
+                <label class="checkbox">
+                    <input type="checkbox" class="notifyByEmailCheckbox" name="messageNotify">
+                    {{_ "Please, notify me when my message is read." }}
+                    <a data-toggle="tooltip" title="{{_ "Note that your email address will be stored unencrypted in our servers until the notification is sent."}}"><i class="icon icon-info-sign"></i></a>
+                </label>
+                <div class="notifyByEmail hide">
+                    <label>
+                        {{_ "Your email address:" }}
+                        <input type="text" name="messageNotifyEmail" class="input-xlarge">
+                    </label>
+                    <label>
+                        {{_ "and optional label:" }}
+                        <input type="text" name="messageNotifyLabel" class="input-medium">
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+            <div class="control-group">
+                <button type="submit" class="btn btn-primary" onclick="ga('send', 'event', 'save it', 'click', 'generate url', 1);">{{_ "Save it"}}</button>
+            </div>
+        </div>
+        <div id="showUrl" class="well hide">
+            <p>{{_ "Single-use URL:"}} <span class="url"></span></p>
+            <p><span class="label label-important">{{_ "IMPORTANT"}}</span> {{_ "This message can be read only once and will be deleted on the first read."}}</p>
+        </div>
+
+        <div id="iosmenu">
+        </div>
+    </form>
+
+    <div id="footer">
+        <div class="container">
+            <div class="desenv">
+                <span>{{_ "Developed by"}}</span> <a href="http://www.vialink.com.br" target="_blank" title="Vialink" class="logo-vialink" onclick="ga('send', 'event', 'vialink', 'click', 'footer');">{{_ "VIALINK"}}</a>
+            </div>
             <div class="locale">
                 <ul>
-                    {{#each languages}}
-                    <li> <a href="/{{this}}/"><img src="img/flags/{{this}}.png"></a></li>
+                    {{#each languages}}<li> <a href="/{{this}}/"><img src="{{static "img/flags/" this ".png"}}" alt="{{this}} flag"></a></li>
                     {{/each}}
                 </ul>
             </div>
-		</div>
+        </div>
+    </div>
+</div>
+
+<div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{_ "Your message is..."}}</h3>
+    </div>
+    <div class="modal-body" id="messageText">
+        <pre class="message"></pre>
+        <span class="label label-important">{{_ "REMEMBER"}}</span> {{_ "This message has been deleted and cannot be read again."}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
+    </div>
+</div>
+
+<div id="messageNotFound" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{_ "Message not found"}}</h3>
+    </div>
+    <div class="modal-body" id="messageNotFoundText">
+        <p>{{_ "This message has already been read or has never been existed."}}</p>
+        <p>{{_ "You should ask the sender to send it again."}}</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
     </div>
 </div>
 
 <div id="whatIsIt" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3>{{_ "What is it and how does it work?"}}</h3>
-	</div>
-	<div class="modal-body" id="whatIsItText">
-		<p>{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."}}</p>
-		<p>{{_ "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."}}</p>
-		<p>{{_ "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"}} <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">{{_ "here"}}</a>.</p>
-		<p>{{_ "You can check the code yourself whether you're curious or just want to run it at home, it's available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'what it is');">{{_ "Github"}}</a>.</p>
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
-	</div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{_ "What is it and how does it work?"}}</h3>
+    </div>
+    <div class="modal-body" id="whatIsItText">
+        <p>{{_ "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."}}</p>
+        <p>{{_ "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."}}</p>
+        <p>{{_ "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"}} <a href="http://www.eetimes.com/document.asp?doc_id=1279619" target="_blank">{{_ "here"}}</a>.</p>
+        <p>{{_ "You can check the code yourself whether you`re curious or just want to run it at home, it`s available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'what it is');">{{_ "Github"}}</a>.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
+    </div>
 </div>
 
 <div id="examplesOfUse" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3>{{_ "Examples of use"}}</h3>
-	</div>
-	<div class="modal-body" id="examplesOfUseText">
-		<ol>
-			<li>{{_ "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases."}}</li>
-			<li>{{_ "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."}}</li>
-		</ol>
-		<strong>{{_ "Be creative!"}}</strong> {{_ "You can use it in many ways. Don't forget to let us know how you are using it :)"}}
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	</div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{_ "Examples of use"}}</h3>
+    </div>
+    <div class="modal-body" id="examplesOfUseText">
+        <ol>
+            <li>{{_ "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won`t have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn`t stored in their databases."}}</li>
+            <li>{{_ "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."}}</li>
+        </ol>
+        <strong>{{_ "Be creative!"}}</strong> {{_ "You can use it in many ways. Don`t forget to let us know how you are using it :)"}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
+    </div>
 </div>
 
 <div id="forNerds" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3>{{_ "For nerds.."}}</h3>
-	</div>
-	<div class="modal-body" id="forNerdsText">
-		<p>{{_ "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."}}</p>
-		<p>{{_ "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."}}</p>
-		<p>{{_ "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."}}</p>
-		<p>{{_ "You can check the code yourself whether you're curious or just want to run it at home, it's available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'for nerds');">{{_ "Github"}}</a>.</p>
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	</div>
-</div>
-
-<div id="messageModal" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3>{{_ "Your message is..."}}</h3>
-	</div>
-	<div class="modal-body" id="messageText">
-		<pre class="message"></pre>
-        <span class="label label-important">{{_ "REMEMBER"}}</span> {{_ "This message has been deleted and cannot be read again."}}
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
-	</div>
-</div>
-
-<div id="messageNotFound" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3>{{_ "Message not found"}}</h3>
-	</div>
-	<div class="modal-body" id="messageNotFoundText">
-		<p>{{_ "This message has already been read or has never been existed."}}</p>
-		<p>{{_ "You should ask the sender to send it again."}}</p>
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
-	</div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{_ "For nerds.."}}</h3>
+    </div>
+    <div class="modal-body" id="forNerdsText">
+        <p>{{_ "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."}}</p>
+        <p>{{_ "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."}}</p>
+        <p>{{_ "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."}}</p>
+        <p>{{_ "You can check the code yourself whether you`re curious or just want to run it at home, it`s available at"}} <a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'for nerds');">{{_ "Github"}}</a>.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
+    </div>
 </div>
 
 <div id="messageBox" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3></h3>
-	</div>
-	<div class="modal-body" id="messageBoxText"></div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
-	</div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3></h3>
+    </div>
+    <div class="modal-body" id="messageBoxText"></div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
+    </div>
 </div>
 
 <div id="contactUs" class="modal hide fade" tabindex="-1" role="dialog">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3>{{_ "Contact Information"}}</h3>
-	</div>
-	<div class="modal-body" id="contactUsText">
-		<p>{{_ "You can contact us by e-mail"}} <a href="&#109;&#97;&#105;l&#116;&#111;&#58;&#118;&#105;&#97;&#99;&#114;&#121;&#112;t&#64;&#118;ialin&#107;&#46;c&#111;&#109;.b&#114;" onclick="ga('send', 'event', 'send mail', 'click', 'contact us');">&#118;iac&#114;&#121;&#112;&#116;&#64;&#118;ial&#105;&#110;k.co&#109;.&#98;r</a>.</p>
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
-	</div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{_ "Contact Information"}}</h3>
+    </div>
+    <div class="modal-body" id="contactUsText">
+        <p>{{_ "You can contact us by e-mail"}} <a href="&#109;&#97;&#105;l&#116;&#111;&#58;&#118;&#105;&#97;&#99;&#114;&#121;&#112;t&#64;&#118;ialin&#107;&#46;c&#111;&#109;.b&#114;" onclick="ga('send', 'event', 'send mail', 'click', 'contact us');">&#118;iac&#114;&#121;&#112;&#116;&#64;&#118;ial&#105;&#110;k.co&#109;.&#98;r</a>.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{{_ "Close"}}</button>
+    </div>
 </div>
+
+{{#if ga_tracking_code}}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{{ga_tracking_code}}', 'viacry.pt');
+  ga('send', 'pageview');
+</script>
+{{else}}
+<script>
+    // Prevents error if Google Analytics is disabled.
+    ga = function() {}
+</script>
+{{/if}}
 
 </body>
 </html>

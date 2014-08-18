@@ -1,11 +1,12 @@
 # This file is used to generate the email notification message.
 # The first part is the message subject and must be pure text.
-# The subject MUST be on the first line after the comments and 
+# The subject MUST be on the first line after the comments and
 # should be preceded by the "Subject" keyword.
 # The second part (after the newline) is the body of the message.
 # The second part can be a html (or not).
-Subject:{{_ "ViaCRYPT - Message read on"}} {{ now }}.
+Subject: {{_ "ViaCRYPT - Message read on"}} {{now}}.
 
 <div id="body"> 
-    {{_ "The message you wrote on"}} {{ date }} {{_ "was just read."}}
+    <p>{{_ "The message" }} {{#if label}}{{_ "identified as" }} "{{ label }}"{{/if}} {{_ "you wrote on"}} <time>{{ date }}</time> {{_ "was just read."}}</p>
+    <a href="{{siteurl}}" target="_blank"><img src="{{logo_src}}" height="25px" width="120px" title="{{_ "ViaCRYPT"}}"/><span style="display:none !important">{{_ "ViaCRYPT"}}</span></a>
 </div>

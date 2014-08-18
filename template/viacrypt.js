@@ -75,15 +75,16 @@ $(function() {
 		$.ajax({
 			url: url,
 			success: function(res) {
-				var msg = res.split('\n\n')[1];
-                var lines = msg.split('\n');
-				var data = lines.slice(0, lines.length-2).join('');
-				console.log(data);
+				var lines = res.trim().split('\n');
+				while (lines.shift() !== '');
+				lines.pop();
+				var data = lines.join('');
+				//console.log(data);
 
 				var decrypted = CryptoJS.AES.decrypt(data, passphrase);
 				var message = decrypted.toString(CryptoJS.enc.Utf8);
-				console.log(decrypted);
-				console.log(message);
+				//console.log(decrypted);
+				//console.log(message);
 
 				ga('send', 'event', 'view message', 'view', 'success');
 
@@ -105,7 +106,8 @@ $(function() {
 	//---------------------------------------------------------------------------------
 	// Save it!
 	//
-	$('#save').click(function() {
+	$('#main-form').submit(function(event) {
+		event.preventDefault();
 		var message = $('#message').val();
 		var passphrase = generate_passphrase();
 		//console.log('message', message);
@@ -120,12 +122,13 @@ $(function() {
 		//console.log('decrypt_test', decrypt.toString(CryptoJS.enc.Utf8));
 		//return;
 
-        var mail = $(".notifyByEmail").find("input").val();
-
 		var content = {
 			data: data.toString(),
-            notify: notifyByEmailCheckbox.is(':checked'),
-            email: (mail === undefined ? "" : mail.toString())
+			//{{#if notifications}}
+			notify: $('[name="messageNotify"]').is(':checked'),
+			email:  $('[name="messageNotifyEmail"]').val() || "",
+			label:  $('[name="messageNotifyLabel"]').val() || ""
+			//{{/if}}
 		};
 		$.ajax({
 			url: '/m/',
@@ -154,36 +157,43 @@ $(function() {
 					show_message('{{_ "Rate limit exceeded"}}', '{{_ "Too many messages. Try again in"}} ' + tryagain + ' {{_ "minute"}}' + plural + '.');
 					ga('send', 'event', 'post message ratelimit exceeded', 'post', 'exceeded');
 				} else {
+					show_message('{{_ "Something went wrong"}}', '{{_ "Sorry but something went wrong. Please try again."}}');
 					ga('send', 'event', 'post message error', 'post', 'unknown error');
 				}
 			}
 		});
+		return false;
 	});
 
 	//---------------------------------------------------------------------------------
 	// Notify by e-mail.
 	//
-	var re_email = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+	// using official html5 pattern, should not be required with support for html5
+	// http://www.w3.org/TR/html-markup/input.email.html#input.email.attrs.value.single
+	var re_email = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 	var checkEmail = function() {
-		var email = notifyByEmailInput.val();
+		var email = notifyEmail.val();
 		if (re_email.test(email)) {
-			notifyByEmail.parent().removeClass('error').addClass('success');
+			notifyContainer.removeClass('error').addClass('success');
 		} else {
-			notifyByEmail.parent().removeClass('success').addClass('error');
+			notifyContainer.removeClass('success').addClass('error');
 		}
 	};
-	var notifyByEmail = $('.notifyByEmail');
-	var notifyByEmailInput = notifyByEmail.find('input').keyup(checkEmail);
-	var notifyByEmailCheckbox = $('.notifyByEmailCheckbox').click(function() {
-		if(notifyByEmailCheckbox.is(':checked')) {
-			notifyByEmailInput.removeAttr('disabled');
-			notifyByEmail.show();
+	var notify = $('.notifyByEmail');
+	var notifyContainer = notify.parent();
+	var notifyEmail = notify.find('[name="messageNotifyEmail"]').keyup(checkEmail);
+	var notifyCheckbox = $('.notifyByEmailCheckbox').click(function() {
+		if (notifyCheckbox.is(':checked')) {
+			notify.show();
 			checkEmail();
-			notifyByEmailInput.focus();
+			notifyEmail.removeAttr('disabled');
+			notifyEmail.attr('required', true);
+			notifyEmail.focus();
 		} else {
-			notifyByEmail.parent().removeClass('error success');
-			notifyByEmailInput.attr('disabled', 'disabled');
-			notifyByEmail.hide();
+			notify.hide();
+			notifyContainer.removeClass('error success');
+			notifyEmail.attr('disabled', 'disabled');
+			notifyEmail.attr('required', false);
 		}
 	});
 });

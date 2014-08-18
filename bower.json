@@ -1,0 +1,29 @@
+{
+  "name": "viacrypt",
+  "dist": ["./assets/vialink.css"],
+  "ignore": [
+      "**/.*"
+  ],
+  "dependencies": {
+    "touchscroll": "https://raw.github.com/davidaurelio/TouchScroll/master/dist/touchscroll.zip",
+    "crypto-js": "https://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip",
+    "jquery": "~ 1.9.0",
+    "bootstrap": "~ 2.3.2"
+  },
+  "exportsOverride": {
+    "touchscroll": {
+      "js": "touchscroll.min.js"
+    },
+    "crypto-js": {
+      "js": "rollups/aes.js "
+    },
+    "jquery": {
+      "js": "jquery.min.*"
+    },
+    "bootstrap": {
+      "js": "docs/assets/js/bootstrap.*js",
+      "css": "docs/assets/css/bootstrap.css",
+      "img": "docs/assets/img/glyphicons-halflings.png"
+    }
+  }
+}

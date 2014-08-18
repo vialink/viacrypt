@@ -1,0 +1,223 @@
+{"messages": {
+   "": {
+      "project-id-version": "node-gettext",
+      "pot-creation-date": "",
+      "po-revision-date": "",
+      "last-translator": "Jan Segre <jan@vialink.com.br>",
+      "language-team": "",
+      "language": "en",
+      "mime-version": "1.0",
+      "content-type": "text/plain; charset=UTF-8",
+      "content-transfer-encoding": "8bit",
+      "plural-forms": "nplurals=2; plural=(n > 1);",
+      "x-generator": "Poedit 1.6.7"
+   },
+   "ViaCRYPT - Message read on": [
+      null,
+      "ViaCRYPT - Message read on"
+   ],
+   "The message": [
+      null,
+      "The message"
+   ],
+   "identified as": [
+      null,
+      "identified as"
+   ],
+   "you wrote on": [
+      null,
+      "you wrote on"
+   ],
+   "was just read.": [
+      null,
+      "was just read."
+   ],
+   "ViaCRYPT": [
+      null,
+      "ViaCRYPT"
+   ],
+   "ViaCRYPT by Vialink": [
+      null,
+      "ViaCRYPT by Vialink"
+   ],
+   "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market.": [
+      null,
+      "ViaCRYPT is a free system of exchange of encrypted messages, developed by Vialink, a brazilian benchmark company in the IT market."
+   ],
+   "Vialink": [
+      null,
+      "Vialink"
+   ],
+   "What is it and how does it work?": [
+      null,
+      "What is it and how does it work?"
+   ],
+   "Examples of use": [
+      null,
+      "Examples of use"
+   ],
+   "Explanation for nerds": [
+      null,
+      "Explanation for nerds"
+   ],
+   "Contact Us": [
+      null,
+      "Contact Us"
+   ],
+   "Type your secret message here...": [
+      null,
+      "Type your secret message here..."
+   ],
+   "Please, notify me when my message is read.": [
+      null,
+      "Please, notify me when my message is read."
+   ],
+   "Note that your email address will be stored unencrypted in our servers until the notification is sent.": [
+      null,
+      "Note that your email address will be stored unencrypted in our servers until the notification is sent."
+   ],
+   "Your email address:": [
+      null,
+      "Your email address:"
+   ],
+   "and optional label:": [
+      null,
+      "and optional label:"
+   ],
+   "Save it": [
+      null,
+      "Save it"
+   ],
+   "Single-use URL:": [
+      null,
+      "Single-use URL:"
+   ],
+   "IMPORTANT": [
+      null,
+      "IMPORTANT"
+   ],
+   "This message can be read only once and will be deleted on the first read.": [
+      null,
+      "This message can be read only once and will be deleted on the first read."
+   ],
+   "Developed by": [
+      null,
+      "Developed by"
+   ],
+   "VIALINK": [
+      null,
+      "VIALINK"
+   ],
+   "Your message is...": [
+      null,
+      "Your message is..."
+   ],
+   "REMEMBER": [
+      null,
+      "REMEMBER"
+   ],
+   "This message has been deleted and cannot be read again.": [
+      null,
+      "This message has been deleted and cannot be read again."
+   ],
+   "Close": [
+      null,
+      "Close"
+   ],
+   "Message not found": [
+      null,
+      "Message not found"
+   ],
+   "This message has already been read or has never been existed.": [
+      null,
+      "This message has already been read or has never been existed."
+   ],
+   "You should ask the sender to send it again.": [
+      null,
+      "You should ask the sender to send it again."
+   ],
+   "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore.": [
+      null,
+      "This app is an encrypted messaging system where the recipient can read the message only once. After the reading, the message is deleted and cannot be retrieved anymore."
+   ],
+   "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message.": [
+      null,
+      "The message is encrypted in your browser and stored into our servers. The key to decrypt the message is inside the generated URL and no one, but you and the recipient, has it. Thus, it is impossible to anyone, even us or any government to read the content of your message."
+   ],
+   "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it": [
+      null,
+      "The encryption system is so strong that all computers in the world together would take much more than one trillion years to break it. You can have more information about it"
+   ],
+   "here": [
+      null,
+      "here"
+   ],
+   "You can check the code yourself whether you`re curious or just want to run it at home, it`s available at": [
+      null,
+      "You can check the code yourself whether you're curious or just want to run it at home, it's available at"
+   ],
+   "Github": [
+      null,
+      "Github"
+   ],
+   "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won`t have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn`t stored in their databases.": [
+      null,
+      "When you are sending any password to someone, it is more secure to generate an encrypted message and send only the URL. Thus, if you send by e-mail and someone in the future get access to the e-mail, the invader won't have the password. Or else, if you send it through GTalk, Facebook Chat or Skype, your password isn't stored in their databases."
+   ],
+   "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize.": [
+      null,
+      "You can create a message with a single word and send the URL to many friends. The first to open the message gets the word and wins some prize."
+   ],
+   "Be creative!": [
+      null,
+      "Be creative!"
+   ],
+   "You can use it in many ways. Don`t forget to let us know how you are using it :)": [
+      null,
+      "You can use it in many ways. Don't forget to let us know how you are using it :)"
+   ],
+   "For nerds..": [
+      null,
+      "For nerds.."
+   ],
+   "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened.": [
+      null,
+      "The message is encrypted using AES and has a 256-bit key as passphrase. The passphrase is randomly generated at your browser, then the message is encrypted and stored into our servers through an unique identifier. The generated URL is composed of two parts: the unique identified and the random passphrase. Both are in the fragment of the URL and are not sent to our webserver when the URL is opened."
+   ],
+   "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists.": [
+      null,
+      "When the generated URL is opened, a javascript code parses the URL and retrieve the message by its unique identifier. The servers return the message and delete it at once. Then, the message is decrypted in your browser using the passphrase and is presented to you. If you try to open the same message again, our servers will return a 404 status code because the message no longer exists."
+   ],
+   "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78.": [
+      null,
+      "One can argue that someone might retrieve your message and make it unavailable to you. Although it is possible, the unique identifiers are randomly generated using RFC4122 v4 UUID and the probability of a random hit is about 8.64E-78."
+   ],
+   "Contact Information": [
+      null,
+      "Contact Information"
+   ],
+   "You can contact us by e-mail": [
+      null,
+      "You can contact us by e-mail"
+   ],
+   "Rate limit exceeded": [
+      null,
+      "Rate limit exceeded"
+   ],
+   "Too many messages. Try again in": [
+      null,
+      "Too many messages. Try again in"
+   ],
+   "minute": [
+      null,
+      "minute"
+   ],
+   "Something went wrong": [
+      null,
+      "Something went wrong"
+   ],
+   "Sorry but something went wrong. Please try again.": [
+      null,
+      "Sorry but something went wrong. Please try again."
+   ]
+}}

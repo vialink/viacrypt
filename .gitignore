@@ -1,4 +1,5 @@
 node_modules/
+bower_components/
 messages/
 logs/
 *.log
@@ -7,6 +8,8 @@ locale/**/*.mo
 
 static/*
 
-config.js
+config/*
+!config/default.js
+!config/examples/
 
 *.swp
