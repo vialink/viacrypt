@@ -12,33 +12,53 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.6.7\n"
 
-#: template/_email.html:7
+#: template/_email.html:8
 msgid "ViaCRYPT - Message read on"
 msgstr "ViaCRYPT - Mensagem lida em"
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "The message"
 msgstr "A mensagem"
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "identified as"
 msgstr "identificada por"
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "you wrote on"
 msgstr "que você escreveu em"
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "was just read."
 msgstr "acabou de ser lida."
 
-#: template/_email.html:11 template/index.html:16 template/index.html:59
-msgid "ViaCRYPT"
-msgstr "ViaCRYPT"
+#: template/_email.html:19
+msgid "ViaCRYPT Team"
+msgstr "Equipe ViaCRYPT"
+
+#: template/_email.html:28
+msgid "+55 21 3294-2900"
+msgstr "+55 21 3294-2900"
+
+#: template/_email.html:71
+msgid "40 Dr. Anibal Moreira Street, Tijuca"
+msgstr "Rua Dr. Aníbal Moreira, 40 - Tijuca"
+
+#: template/_email.html:72
+msgid "Rio de Janeiro, RJ | Brazil"
+msgstr "Rio de Janeiro, RJ | Brasil"
+
+#: template/_email.html:73
+msgid "Zip Code: 20510-110"
+msgstr "CEP: 20510-110"
 
 #: template/index.html:5
 msgid "ViaCRYPT by Vialink"
 msgstr "ViaCRYPT by Vialink"
+
+#: template/index.html:16 template/index.html:59
+msgid "ViaCRYPT"
+msgstr "ViaCRYPT"
 
 #: template/index.html:17 template/index.html:19 template/index.html:23
 msgid ""
@@ -308,6 +328,9 @@ msgstr "Algo errado ocorreu"
 #: template/viacrypt.js:160
 msgid "Sorry but something went wrong. Please try again."
 msgstr "Desculpe mas algo errado ocorreu. Por favor tente novamente."
+
+#~ msgid "Team ViaCRYPT"
+#~ msgstr "Equipe ViaCRYPT"
 
 #~ msgid ""
 #~ "This app is an encrypted messaging system where the recipient can read "

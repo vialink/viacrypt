@@ -36,7 +36,7 @@ Mailer.prototype.send_mail = function(data) {
 		now:      dateformat(new Date(), 'mm-dd-yyyy HH:MM:ss'),
 		date:     dateformat(data.old,   'mm-dd-yyyy HH:MM:ss'),
 		label:    data.label,
-		logo_src: __dirname + '/../assets/img/logo.png',
+		imgdir: __dirname + '/../assets/img',
 		siteurl:  this.siteurl
 	};
 	this.compiler.changelang(data.locale);

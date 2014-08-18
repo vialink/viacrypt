@@ -1,36 +1,54 @@
 msgid ""
 msgstr "Content-Type: text/plain;\n"
 
-#: template/_email.html:7
+#: template/_email.html:8
 msgid "ViaCRYPT - Message read on"
 msgstr ""
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "The message"
 msgstr ""
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "identified as"
 msgstr ""
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "you wrote on"
 msgstr ""
 
-#: template/_email.html:10
+#: template/_email.html:11
 msgid "was just read."
 msgstr ""
 
-#: template/_email.html:11
-#: template/_email.html:11
-#: template/index.html:16
-#: template/index.html:59
-#: template/index.html:59
-msgid "ViaCRYPT"
+#: template/_email.html:19
+msgid "ViaCRYPT Team"
+msgstr ""
+
+#: template/_email.html:28
+msgid "+55 21 3294-2900"
+msgstr ""
+
+#: template/_email.html:71
+msgid "40 Dr. Anibal Moreira Street, Tijuca"
+msgstr ""
+
+#: template/_email.html:72
+msgid "Rio de Janeiro, RJ | Brazil"
+msgstr ""
+
+#: template/_email.html:73
+msgid "Zip Code: 20510-110"
 msgstr ""
 
 #: template/index.html:5
 msgid "ViaCRYPT by Vialink"
+msgstr ""
+
+#: template/index.html:16
+#: template/index.html:59
+#: template/index.html:59
+msgid "ViaCRYPT"
 msgstr ""
 
 #: template/index.html:17

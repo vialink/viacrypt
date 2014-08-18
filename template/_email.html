@@ -1,3 +1,4 @@
+# vim: et sw=2 ts=2 sts=2
 # This file is used to generate the email notification message.
 # The first part is the message subject and must be pure text.
 # The subject MUST be on the first line after the comments and
@@ -6,7 +7,73 @@
 # The second part can be a html (or not).
 Subject: {{_ "ViaCRYPT - Message read on"}} {{now}}.
 
-<div id="body"> 
-    <p>{{_ "The message" }} {{#if label}}{{_ "identified as" }} "{{ label }}"{{/if}} {{_ "you wrote on"}} <time>{{ date }}</time> {{_ "was just read."}}</p>
-    <a href="{{siteurl}}" target="_blank"><img src="{{logo_src}}" height="25px" width="120px" title="{{_ "ViaCRYPT"}}"/><span style="display:none !important">{{_ "ViaCRYPT"}}</span></a>
+<div id="body">
+  <p>{{_ "The message" }} {{#if label}}{{_ "identified as" }} "{{ label }}"{{/if}} {{_ "you wrote on"}} <time>{{ date }}</time> {{_ "was just read."}}</p>
+  <table width="480" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+    <tr>
+        <td width="180" height="39" valign="bottom"><a href="https://viacry.pt/" target="_blank" style="display:block;" title="https://viacry.pt"><img src="{{ imgdir }}/logo-viacrypt.gif" border="0" width="180" height="39" alt="VIALINK"></a></td>
+      <td width="39" height="98" rowspan="2" style="background-image: url({{ imgdir }}/div.gif); background-repeat: no-repeat; background-position: top center; width:39px; height:98px;">&nbsp;</td>
+      <td width="261" height="98" rowspan="2" valign="top">
+        <table width="261" height="98" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border-spacing:0;">
+          <tr>
+            <td width="261" height="20" valign="top"><font size="4" color="black" face="Tahoma, sans-serif"><strong><span style="font-size:18px;">{{_ "ViaCRYPT Team" }}</span></strong></font></td>
+          </tr>
+          <tr>
+            <td height="18" valign="bottom" style="background-image: url({{ imgdir }}/tel-icon.gif); background-repeat: no-repeat; background-position:bottom left; padding-left:22px;">
+              <!--[if gte mso 9]>
+              <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display: inline-block; position: absolute; width: 200px; height: 18px; top: 0; left: 0; border: 0; z-index: 1;' src="{{ imgdir }}/tel-icon.gif" />
+              <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display: inline-block; position: absolute; width: 178px; height: 18px; top: 0; left: 22px; border: 0; z-index: 2;'>
+              <div>
+              <![endif]-->
+              <font size="1" color="black" face="Tahoma, sans-serif"><span style="font-size:11px;">{{_ "+55 21 3294-2900" }}</span></font>
+              <!--[if gte mso 9]>
+              </div>
+              </v:shape>
+              <![endif]-->
+            </td>
+          </tr>
+          <tr>
+            <td height="18" valign="bottom" style=" background-image: url({{ imgdir }}/email-icon.gif); background-repeat: no-repeat;background-position:bottom left; padding-left:22px;">
+              <!--[if gte mso 9]>
+              <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display: inline-block; position: absolute; width: 200px; height: 18px; top: 0; left: 0; border: 0; z-index: 1;' src="{{ imgdir }}/email-icon.gif" />
+              <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display: inline-block; position: absolute; width: 178px; height: 18px; top: 0; left: 22px; border: 0; z-index: 2;'>
+              <div>
+              <![endif]-->
+              <font size="1" face="Tahoma, sans-serif"><span style="font-size:11px;"><a href="mailto:viacrypt@vialink.com.br">viacrypt@vialink.com.br</a></span></font>
+              <!--[if gte mso 9]>
+              </div>
+              </v:shape>
+              <![endif]-->
+            </td>
+          </tr>
+          <tr>
+            <td height="18" valign="bottom" style="background-image: url({{ imgdir }}/link-icon.gif); background-repeat: no-repeat;background-position:bottom left; padding-left:22px;">
+              <!--[if gte mso 9]>
+              <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display: inline-block; position: absolute; width: 200px; height: 18px; top: 0; left: 0; border: 0; z-index: 1;' src="{{ imgdir }}/link-icon.gif" />
+              <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display: inline-block; position: absolute; width: 178px; height: 18px; top: 0; left: 22px; border: 0; z-index: 2;'>
+              <div>
+              <![endif]-->
+              <font size="1" face="Tahoma, sans-serif"><span style="font-size:11px;"><a href="https://viacry.pt/">viacry.pt</a></span></font>
+              <!--[if gte mso 9]>
+              </div>
+              </v:shape>
+              <![endif]-->
+            </td>
+          </tr>
+          <tr><td height="11" width="180" valign="bottom"><img src="{{ imgdir }}/spacer.gif" border="0" width="180" height="11" alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="55" valign="top">
+        <table width="180" height="55" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+          <tr><td height="10" width="180" valign="bottom"><img src="{{ imgdir }}/spacer.gif" border="0" width="180" height="10" alt=""></td></tr>
+          <tr><td height="15" width="180" valign="bottom"><font size="1" color="black" face="Tahoma, sans-serif"><span style="font-size:11px;">{{_ "40 Dr. Anibal Moreira Street, Tijuca" }}</span></font></td></tr>
+          <tr><td height="15" width="180" valign="bottom"><font size="1" color="black" face="Tahoma, sans-serif"><span style="font-size:11px;">{{_ "Rio de Janeiro, RJ | Brazil" }}</span></font></td></tr>
+          <tr><td height="15" width="180" valign="bottom"><font size="1" color="black" face="Tahoma, sans-serif"><span style="font-size:11px;">{{_ "Zip Code: 20510-110" }}</span></font></td></tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </div>
