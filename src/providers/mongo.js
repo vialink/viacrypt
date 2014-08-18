@@ -19,7 +19,8 @@
 // based on http://howtonode.org/express-mongodb
 var mongodb = require('mongodb');
 
-var Provider = function(options) {
+var Provider = function(config) {
+	var options = config.provider;
 	//TODO maybe check if options are ok
 	this._collection = options.collection;
 	var server = new mongodb.Server(options.host, options.port, {auto_reconnect: true});

@@ -28,7 +28,6 @@ var Message = require('../message').Message;
 //   path: __dirname + '/messages/'
 // }
 var Provider = function(config) {
-	this.config = config;
 	this.message = new Message(config);
 	this.path = config.provider.path;
 
