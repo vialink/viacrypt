@@ -1,6 +1,6 @@
 {
   "name": "viacrypt",
-  "version": "0.3.0-pre",
+  "version": "0.3.0",
   "description": "One time read messaging system.",
   "tags": [
     "viacrypt",
