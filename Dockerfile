@@ -1,11 +1,9 @@
 FROM node
-MAINTAINER bn0ir <gblacknoir@gmail.com>
 
 RUN apt-get update \
     && apt-get install -y \
        git \
        sudo \
-       rsync \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
