@@ -9,7 +9,7 @@ var __basedir = join(__dirname, '..');
 // ## Primary Settings
 //
 cfg.http = {
-	listen: '127.0.0.1',
+	listen: '0.0.0.0',
 	port: 8001
 };
 
