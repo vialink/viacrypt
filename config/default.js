@@ -10,7 +10,7 @@ var __basedir = join(__dirname, '..');
 //
 cfg.http = {
 	listen: '0.0.0.0',
-	port: 8001
+	port: 80
 };
 
 // URL used when generating URL client-side and when retrieving a message.
