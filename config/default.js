@@ -78,10 +78,10 @@ cfg.notifications = {
 		filepath: join(__basedir, 'mail.log')
 	}
 	// smtp backend with custom server
-	backend: {
-		type: 'smtp',
-		host: '10.1.1.99',
-		port: '587', // not needed if 25
+	// backend: {
+	//	type: 'smtp',
+	//host: '10.1.1.99',
+	//	port: '587', // not needed if 25
 	//	auth: {
 	//		user: 'darthvader',
 	//		pass: 'd4rkf0rc3'
