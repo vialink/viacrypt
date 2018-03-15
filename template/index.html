@@ -51,7 +51,7 @@
 {{#if livereload}}<script src="http://{{livereload}}/livereload.js"></script>{{/if}}
 </head>
 
-<a href="https://github.com/vialink/viacrypt" target="_blank" onclick="ga('send', 'event', 'github', 'click', 'banner');"><img id="git-ribbon" style="position: absolute; top: 0; right: 0; border: 0; z-index: 1031" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+
 
 <div class="container">
     <div class="navbar navbar-fixed-top">
@@ -126,13 +126,7 @@
             <div class="desenv">
                 <span>{{_ "Developed by"}}</span> <a href="http://www.vialink.com.br" target="_blank" title="Vialink" class="logo-vialink" onclick="ga('send', 'event', 'vialink', 'click', 'footer');">{{_ "VIALINK"}}</a>
             </div>
-            <div class="locale">
-                <ul>
-                    {{#each languages}}<li> <a href="/{{this}}/"><img src="{{static "img/flags/" this ".png"}}" alt="{{this}} flag"></a></li>
-                    {{/each}}
-                </ul>
             </div>
-        </div>
     </div>
 </div>
 
