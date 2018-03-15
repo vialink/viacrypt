@@ -9,7 +9,7 @@ var __basedir = join(__dirname, '..');
 // ## Primary Settings
 //
 cfg.http = {
-	listen: '127.0.0.1',
+	listen: 'otp.turnkey.ch',
 	port: 8001
 };
 
@@ -78,10 +78,10 @@ cfg.notifications = {
 		filepath: join(__basedir, 'mail.log')
 	}
 	// smtp backend with custom server
-	//backend: {
+	// backend: {
 	//	type: 'smtp',
-	//	host: 'smtp.star.wars',
-	//	port: '465', // not needed if 25
+	//host: '10.1.1.99',
+	//	port: '587', // not needed if 25
 	//	auth: {
 	//		user: 'darthvader',
 	//		pass: 'd4rkf0rc3'
