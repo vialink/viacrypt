@@ -6,7 +6,7 @@
   ],
   "dependencies": {
     "touchscroll": "https://raw.github.com/davidaurelio/TouchScroll/master/dist/touchscroll.zip",
-    "crypto-js": "https://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip",
+    "crypto-js": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/crypto-js/CryptoJS%20v3.1.2.zip",
     "jquery": "~ 1.9.0",
     "bootstrap": "~ 2.3.2"
   },
